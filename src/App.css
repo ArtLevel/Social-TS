@@ -4,6 +4,9 @@ ul li {
 
 .app-wrapper {
   display: grid;
+  width: 1480px;
+  margin: 0 auto;
+  padding: 0 20px;
 
   grid-template-areas:
   'header header header'
@@ -17,12 +20,22 @@ ul li {
 
 .header {
   grid-area: header;
+
+  background-color: green;
+}
+
+.header img {
+  width: 20px;
 }
 
 .nav {
   grid-area: nav;
+
+  background-color: burlywood;
 }
 
 .content {
   grid-area: content;
+
+  background-color: cornflowerblue;
 }
