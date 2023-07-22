@@ -2,6 +2,8 @@ import React from 'react';
 
 import s from './Post.module.css';
 
+// Theme props theory
+
 const Post = () => {
 	return (
 		<div className={s.item}>
