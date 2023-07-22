@@ -1,18 +1,29 @@
 import React from 'react';
-import Header from './Header';
-import Technologies from './Header';
-import Footer from './Footer';
 
 import './App.css';
 
-// Import and Export lesson !!!
-
 const App = () => {
 	return (
-		<div className="App">
-			<Header/>
-			<Technologies/>
-			<Footer/>
+		<div className="app-wrapper">
+			<header className='header'>
+				<img src='https://cdn.logo.com/hotlink-ok/logo-social.png'/>
+			</header>
+
+			<nav className='nav'>
+				<ul>
+					<li>
+						Profile
+					</li>
+					<li>
+						Messages
+					</li>
+				</ul>
+			</nav>
+
+			<div className='content'>
+				Main content
+			</div>
+
 		</div>
 	)
 }
