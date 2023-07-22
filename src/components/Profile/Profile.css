@@ -1,5 +1,9 @@
 .content {
-	grid-area: content;
+    grid-area: content;
 
-	background-color: cornflowerblue;
+    background-color: cornflowerblue;
+}
+
+.item {
+    color: tan;
 }
