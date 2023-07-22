@@ -1,7 +1,6 @@
 import React from 'react';
 
 import s from './NavBar.module.css'
-console.log(s)
 
 const NavBar = () => {
 	return (
