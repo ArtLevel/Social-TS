@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from './components/Header';
 import './App.css';
-import Navbar from './components/NavBar';
+import NavBar from './components/NavBar';
 import Profile from './components/Profile';
 
 // Lesson of Git
@@ -16,7 +16,7 @@ const App = () => {
 		<div className="app-wrapper">
 
 			<Header />
-			<Navbar />
+			<NavBar />
 			<Profile />
 
 		</div>
