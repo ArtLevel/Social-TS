@@ -34,3 +34,5 @@ export default App;
 // symbol
 // null
 
+// Глубокое клонирование объекта
+// structuredClone()
