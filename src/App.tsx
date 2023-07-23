@@ -9,12 +9,28 @@ const App = () => {
 	return (
 		<div className="app-wrapper">
 
-			<Header />
-			<NavBar />
-			<Profile />
+			<Header/>
+			<NavBar/>
+			<Profile/>
 
 		</div>
 	)
 }
 
 export default App;
+
+// Ссылочный тип данных
+// Область памяти hip
+// Object
+// Array
+// Function
+
+// Примитив
+// Область памяти stack
+// string
+// number
+// boolean
+// bigint
+// symbol
+// null
+
