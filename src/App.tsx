@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Header from './components/Header/Header';
-import NavBar from './components/NavBar/NavBar';
-import Profile from './components/Profile/Profile';
-import './App.css';
+import {Header} from './components/Header/Header';
+import {NavBar} from './components/NavBar/NavBar';
+import {Profile} from './components/Profile/Profile';
+import {Dialogs} from './components/Dialogs/Dialogs';
 
-// Lesson 17 complete
+import './App.css';
 
 const App = () => {
 	return (
@@ -13,7 +13,8 @@ const App = () => {
 
 			<Header/>
 			<NavBar/>
-			<Profile/>
+			{/*<Profile/>*/}
+			<Dialogs/>
 
 		</div>
 	)

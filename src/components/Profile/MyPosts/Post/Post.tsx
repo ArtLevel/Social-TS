@@ -7,7 +7,7 @@ interface IPost {
 	countLike: number
 }
 
-const Post: FC<IPost> = ({message, countLike}) => {
+export const Post: FC<IPost> = ({message, countLike}) => {
 	return (
 		<div className={s.item}>
 			<img
@@ -18,4 +18,3 @@ const Post: FC<IPost> = ({message, countLike}) => {
 	)
 }
 
-export default Post
