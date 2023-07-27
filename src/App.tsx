@@ -5,6 +5,8 @@ import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
 import './App.css';
 
+// Lesson 17 complete
+
 const App = () => {
 	return (
 		<div className="app-wrapper">
