@@ -1,19 +1,23 @@
 ul li {
-  list-style: none;
+    list-style: none;
 }
 
 .app-wrapper {
-  display: grid;
-  width: 1480px;
-  margin: 0 auto;
-  padding: 0 20px;
+    display: grid;
+    width: 1480px;
+    margin: 0 auto;
+    padding: 0 20px;
 
-  grid-template-areas:
+    grid-template-areas:
   'header header header'
-  'nav content content'
-  ;
+  'nav content content';
 
-  grid-template-rows: 60px 1fr;
-  grid-auto-columns: 2fr 10fr;
-  /*grid-gap: 10px;*/
+    grid-template-rows: 60px 1fr;
+    grid-auto-columns: 2fr 10fr;
+    /*grid-gap: 10px;*/
+}
+
+.app-wrapper-content {
+    grid-area: content;
+    background-color: cornflowerblue;
 }

@@ -13,47 +13,16 @@ const App = () => {
 
 			<Header/>
 			<NavBar/>
+			<div className='app-wrapper-content'>
+				<Dialogs/>
+			</div>
 			{/*<Profile/>*/}
-			<Dialogs/>
 
 		</div>
 	)
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Ссылочный тип данных
