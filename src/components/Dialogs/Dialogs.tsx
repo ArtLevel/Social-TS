@@ -1,6 +1,7 @@
 import s from './Dialogs.module.css'
 import {NavLink} from 'react-router-dom';
 import {DialogItem} from './DialogItem/DialogItem';
+import {Message} from './Message/Message';
 
 export const Dialogs = () => {
 	return (
@@ -11,9 +12,9 @@ export const Dialogs = () => {
 				<DialogItem id={3} name='Viktor'/>
 			</div>
 			<div className={s.messages}>
-				<div className={s.message}>Hi</div>
-				<div className={s.message}>Yo</div>
-				<div className={s.message}>Hello !!!</div>
+				<Message message='Hi !'/>
+				<Message message='Yo !'/>
+				<Message message='How are you ?'/>
 			</div>
 		</div>
 	)
