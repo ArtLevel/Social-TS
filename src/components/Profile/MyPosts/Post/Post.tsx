@@ -1,13 +1,9 @@
 import React, {FC} from 'react';
 
 import s from './Post.module.css';
+import {PostDataType} from '../../../../types/PostDataType';
 
-interface IPost {
-	message: string
-	likesCount: number
-}
-
-export const Post: FC<IPost> = ({message, likesCount}) => {
+export const Post: FC<PostDataType> = ({message, likesCount}) => {
 	return (
 		<div className={s.item}>
 			<img

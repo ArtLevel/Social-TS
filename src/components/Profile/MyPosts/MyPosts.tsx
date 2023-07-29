@@ -1,20 +1,16 @@
 import React, {FC} from 'react';
 
-import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
+import {PostDataType} from '../../../types/PostDataType';
 
-type PostDataType = {
-	id: number
-	message: string
-	likesCount: number
-}
+import s from './MyPosts.module.css';
 
 interface IMyPostsProps {
 	postData: PostDataType[]
 }
 
 export const MyPosts: FC<IMyPostsProps> = ({postData}) => {
-	const postEl = postData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+	const postEl = postData.map(p => <Post key={p.id} {...p}/>)
 
 	return (
 		<div className={s.postsBlock}>
