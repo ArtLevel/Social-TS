@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 import {Header} from './components/Header/Header';
@@ -7,8 +7,15 @@ import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 
 import './App.css';
+import {DialogType, MessageType, PostType} from './types/types';
 
-const App = () => {
+interface IApp {
+	posts: PostType[]
+	dialogs: DialogType[]
+	messages: MessageType[]
+}
+
+const App: FC<IApp> = ({posts, dialogs, messages}) => {
 	return (
 		<BrowserRouter>
 			<div className="app-wrapper">
@@ -17,8 +24,8 @@ const App = () => {
 				<NavBar/>
 
 				<div className='app-wrapper-content'>
-					<Route path='/dialogs' component={Dialogs}/>
-					<Route path='/profile' component={Profile}/>
+					<Route path='/dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages}/>}/>
+					<Route path='/profile' render={() => <Profile posts={posts}/>}/>
 				</div>
 
 			</div>

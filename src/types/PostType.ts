@@ -1,4 +1,4 @@
-export type PostDataType = {
+export type PostType = {
 	id: number
 	message: string
 	likesCount: number

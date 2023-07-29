@@ -1,9 +1,11 @@
 import React, {FC} from 'react';
 
 import s from './Post.module.css';
-import {PostDataType} from '../../../../types/PostDataType';
+import {PostType} from '../../../../types/types';
 
-export const Post: FC<PostDataType> = ({message, likesCount}) => {
+interface IPost extends PostType {}
+
+export const Post: FC<IPost> = ({message, likesCount}) => {
 	return (
 		<div className={s.item}>
 			<img
