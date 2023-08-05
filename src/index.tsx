@@ -3,8 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import {PostType, DialogType, MessageType} from './types/types';
 
-const posts = [
+const posts: PostType[] = [
 	{
 		id: 1,
 		message: 'Hi, how are you ?',
@@ -22,7 +23,7 @@ const posts = [
 	}
 ]
 
-const dialogs = [
+const dialogs: DialogType[] = [
 	{
 		id: 1,
 		name: 'Dimych'
@@ -37,7 +38,7 @@ const dialogs = [
 	}
 ]
 
-const messages = [
+const messages: MessageType[] = [
 	{
 		id: 1,
 		message: 'Hi !'
@@ -53,6 +54,7 @@ const messages = [
 ]
 
 ReactDOM.render(
-    <App posts={posts} dialogs={dialogs} messages={messages}/>,
-  document.getElementById('root')
+	<App posts={posts} dialogs={dialogs} messages={messages}/>,
+	document.getElementById('root')
 )
+
