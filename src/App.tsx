@@ -33,7 +33,7 @@ const App: FC<IApp> = ({appState}) => {
 
 export default App;
 
-// 28 2/2 complete
+// 29 2/2 complete
 
 // Ссылочный тип данных
 // Область памяти hip
