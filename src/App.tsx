@@ -35,7 +35,7 @@ const App: FC<IApp> = ({posts, dialogs, messages}) => {
 
 export default App;
 
-// Exam 3 complete
+// 28 2/2 complete
 
 // Ссылочный тип данных
 // Область памяти hip
