@@ -49,5 +49,21 @@ export const state: StateType = {
 				name: 'Maria'
 			}
 		],
+	},
+	sidebar: {
+		sidebar: [
+			{
+				id: 1,
+				name: 'Igor'
+			},
+			{
+				id: 2,
+				name: 'Viktor'
+			},
+			{
+				id: 3,
+				name: 'Dimych'
+			},
+		]
 	}
 }

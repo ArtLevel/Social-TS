@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {NavLink} from 'react-router-dom'
 
 import s from './NavBar.module.css'
+import {SidebarType} from '../../types/types';
 
-export const NavBar = () => {
+interface INavBar {
+	sidebar: SidebarType[]
+}
+
+export const NavBar: FC<INavBar> = ({sidebar}) => {
 	return (
 		<nav className={s.nav}>
 			<ul>
@@ -18,6 +23,10 @@ export const NavBar = () => {
 				</li>
 				<li className={s.item}>
 					<NavLink to='/music' activeClassName={s.activeLink}>Music</NavLink>
+				</li>
+				<li className={s.item}>
+					<NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink>
+					{sidebar.map(el => <div key={el.id}>{el.name}</div>)}
 				</li>
 			</ul>
 		</nav>

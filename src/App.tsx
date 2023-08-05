@@ -6,7 +6,7 @@ import {NavBar} from './components/NavBar/NavBar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 
-import {DialogType, MessageType, PostType, StateType} from './types/types';
+import {StateType} from './types/types';
 import './App.css';
 
 interface IApp {
@@ -19,7 +19,7 @@ const App: FC<IApp> = ({appState}) => {
 			<div className="app-wrapper">
 
 				<Header/>
-				<NavBar/>
+				<NavBar {...appState.sidebar}/>
 
 				<div className='app-wrapper-content'>
 					<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
