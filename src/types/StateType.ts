@@ -3,7 +3,11 @@ import {DialogType} from './DialogType';
 import {MessageType} from './MessageType';
 
 export type StateType = {
-	posts: PostType[]
-	dialogs: DialogType[]
-	messages: MessageType[]
+	profilePage: {
+		posts: PostType[]
+	}
+	messagesPage: {
+		messages: MessageType[]
+		dialogs: DialogType[]
+	}
 }

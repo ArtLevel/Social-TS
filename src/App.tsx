@@ -6,16 +6,14 @@ import {NavBar} from './components/NavBar/NavBar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 
+import {DialogType, MessageType, PostType, StateType} from './types/types';
 import './App.css';
-import {DialogType, MessageType, PostType} from './types/types';
 
 interface IApp {
-	posts: PostType[]
-	dialogs: DialogType[]
-	messages: MessageType[]
+	appState: StateType
 }
 
-const App: FC<IApp> = ({posts, dialogs, messages}) => {
+const App: FC<IApp> = ({appState}) => {
 	return (
 		<BrowserRouter>
 			<div className="app-wrapper">
@@ -24,8 +22,8 @@ const App: FC<IApp> = ({posts, dialogs, messages}) => {
 				<NavBar/>
 
 				<div className='app-wrapper-content'>
-					<Route path='/dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages}/>}/>
-					<Route path='/profile' render={() => <Profile posts={posts}/>}/>
+					<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
+					<Route path='/profile' render={() => <Profile {...appState.profilePage}/>}/>
 				</div>
 
 			</div>
