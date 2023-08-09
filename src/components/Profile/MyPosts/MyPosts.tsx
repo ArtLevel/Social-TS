@@ -7,16 +7,18 @@ import s from './MyPosts.module.css';
 
 interface IMyPostsProps {
 	posts: PostType[]
+	addPost: (postMessage: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({posts}) => {
+export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p}/>)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
-	const addPost = () => {
+	const addPostHandler = () => {
 		if(newPostElement.current) {
+			debugger
 			const text = newPostElement.current.value
-			console.log(text)
+			addPost(text)
 		}
 	}
 
@@ -29,7 +31,7 @@ export const MyPosts: FC<IMyPostsProps> = ({posts}) => {
 					<textarea ref={newPostElement}></textarea>
 				</div>
 				<div>
-					<button onClick={addPost}>Add post</button>
+					<button onClick={addPostHandler}>Add post</button>
 				</div>
 			</div>
 

@@ -7,14 +7,15 @@ import {PostType} from '../../types/types';
 
 interface IProfile {
 	posts: PostType[]
+	addPost: (postMessage: string) => void
 }
 
-export const Profile: FC<IProfile> = ({posts}) => {
+export const Profile: FC<IProfile> = ({posts, addPost}) => {
 	return (
 		<div>
 
 			<ProfileInfo/>
-			<MyPosts posts={posts}/>
+			<MyPosts posts={posts} addPost={addPost}/>
 
 		</div>
 	)

@@ -11,9 +11,10 @@ import './App.css';
 
 interface IApp {
 	appState: StateType
+	addPost: (postMessage: string) => void
 }
 
-const App: FC<IApp> = ({appState}) => {
+const App: FC<IApp> = ({appState, addPost}) => {
 	return (
 		<div className="app-wrapper">
 
@@ -22,7 +23,7 @@ const App: FC<IApp> = ({appState}) => {
 
 			<div className='app-wrapper-content'>
 				<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
-				<Route path='/profile' render={() => <Profile {...appState.profilePage}/>}/>
+				<Route path='/profile' render={() => <Profile {...appState.profilePage} addPost={addPost}/>}/>
 			</div>
 
 		</div>

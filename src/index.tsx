@@ -8,7 +8,7 @@ import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
 	<BrowserRouter>
-		<App appState={state}/>
+		<App appState={state} addPost={addPost}/>
 	</BrowserRouter>,
 	document.getElementById('root')
 )

@@ -76,4 +76,5 @@ export const addPost = (postMessage: string) => {
 	}
 
 	state.profilePage.posts.push(newPost)
+	debugger
 }
