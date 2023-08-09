@@ -13,6 +13,8 @@ interface IApp {
 	appState: StateType
 }
 
+// Lesson 30 complete 1/2
+
 const App: FC<IApp> = ({appState}) => {
 	return (
 		<BrowserRouter>
