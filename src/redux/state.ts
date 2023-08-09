@@ -70,6 +70,7 @@ export const state: StateType = {
 }
 
 export const addPost = (postMessage: string) => {
+	console.log(postMessage)
 	const newPost: PostType = {
 		id: 5,
 		message: postMessage,

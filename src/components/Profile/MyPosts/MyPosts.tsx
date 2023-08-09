@@ -18,6 +18,7 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
 		if(newPostElement.current) {
 			const text = newPostElement.current.value
 			addPost(text)
+			newPostElement.current.value = ''
 		}
 	}
 
