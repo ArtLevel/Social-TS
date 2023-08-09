@@ -13,8 +13,6 @@ interface IApp {
 	appState: StateType
 }
 
-// Lesson 30 complete 2/2
-
 const App: FC<IApp> = ({appState}) => {
 	return (
 		<div className="app-wrapper">
@@ -32,8 +30,6 @@ const App: FC<IApp> = ({appState}) => {
 }
 
 export default App;
-
-// 29 2/2 complete
 
 // Ссылочный тип данных
 // Область памяти hip

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {createRef, FC} from 'react';
 
 import {Post} from './Post/Post';
 import {PostType} from '../../../types/types';
@@ -11,6 +11,14 @@ interface IMyPostsProps {
 
 export const MyPosts: FC<IMyPostsProps> = ({posts}) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p}/>)
+	const newPostElement = createRef<HTMLTextAreaElement>()
+
+	const addPost = () => {
+		if(newPostElement.current) {
+			const text = newPostElement.current.value
+			console.log(text)
+		}
+	}
 
 	return (
 		<div className={s.postsBlock}>
@@ -18,10 +26,10 @@ export const MyPosts: FC<IMyPostsProps> = ({posts}) => {
 
 			<div>
 				<div>
-					<textarea></textarea>
+					<textarea ref={newPostElement}></textarea>
 				</div>
 				<div>
-					<button>Add post</button>
+					<button onClick={addPost}>Add post</button>
 				</div>
 			</div>
 

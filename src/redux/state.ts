@@ -1,4 +1,4 @@
-import {StateType} from '../types/types';
+import {PostType, StateType} from '../types/types';
 
 export const state: StateType = {
 	profilePage: {
@@ -66,4 +66,14 @@ export const state: StateType = {
 			},
 		]
 	}
+}
+
+export const addPost = (postMessage: string) => {
+	const newPost: PostType = {
+		id: 5,
+		message: postMessage,
+		likesCount: 0
+	}
+
+	state.profilePage.posts.push(newPost)
 }
