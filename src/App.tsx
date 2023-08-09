@@ -13,23 +13,21 @@ interface IApp {
 	appState: StateType
 }
 
-// Lesson 30 complete 1/2
+// Lesson 30 complete 2/2
 
 const App: FC<IApp> = ({appState}) => {
 	return (
-		<BrowserRouter>
-			<div className="app-wrapper">
+		<div className="app-wrapper">
 
-				<Header/>
-				<NavBar {...appState.sidebar}/>
+			<Header/>
+			<NavBar {...appState.sidebar}/>
 
-				<div className='app-wrapper-content'>
-					<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
-					<Route path='/profile' render={() => <Profile {...appState.profilePage}/>}/>
-				</div>
-
+			<div className='app-wrapper-content'>
+				<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
+				<Route path='/profile' render={() => <Profile {...appState.profilePage}/>}/>
 			</div>
-		</BrowserRouter>
+
+		</div>
 	)
 }
 

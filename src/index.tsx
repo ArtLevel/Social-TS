@@ -4,9 +4,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {state} from './redux/state'
 import './index.css';
+import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
-	<App appState={state}/>,
+	<BrowserRouter>
+		<App appState={state}/>
+	</BrowserRouter>,
 	document.getElementById('root')
 )
 
