@@ -16,7 +16,6 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
 
 	const addPostHandler = () => {
 		if(newPostElement.current) {
-			debugger
 			const text = newPostElement.current.value
 			addPost(text)
 		}

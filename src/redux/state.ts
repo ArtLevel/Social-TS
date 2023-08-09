@@ -1,4 +1,5 @@
 import {PostType, StateType} from '../types/types';
+import {rerenderEntireTree} from '../render';
 
 export const state: StateType = {
 	profilePage: {
@@ -76,5 +77,5 @@ export const addPost = (postMessage: string) => {
 	}
 
 	state.profilePage.posts.push(newPost)
-	debugger
+	rerenderEntireTree(state, addPost)
 }
