@@ -3,7 +3,7 @@ import {createRef, FC} from 'react';
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 
-import {DialogType, MessageType} from '../../types/types';
+import {MessageType} from '../../types/types';
 import s from './Dialogs.module.css'
 
 interface IDialogs {
@@ -13,7 +13,7 @@ interface IDialogs {
 export const Dialogs: FC<IDialogs> = ({messagesPage}) => {
 	const newMessageEl = createRef<HTMLTextAreaElement>()
 
-	const {dialogs, messages} = messagesPage
+	const messages: MessageType = messagesPage.message
 
 	const dialogsEl = dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
 	const messagesEl = messages.map(m => <Message key={m.id} message={m.message}/>)

@@ -4,14 +4,14 @@ import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ProfilePageType} from '../../types/types';
 
-import {addPost} from '../../redux/state';
 import s from './Profile.module.css';
 
 interface IProfile {
 	profilePage: ProfilePageType
+	addPost: (postMessage: string) => void
 }
 
-export const Profile: FC<IProfile> = ({profilePage}) => {
+export const Profile: FC<IProfile> = ({profilePage, addPost}) => {
 	const {posts, newPostText} = profilePage
 
 	return (

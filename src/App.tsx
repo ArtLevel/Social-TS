@@ -23,7 +23,7 @@ const App: FC<IApp> = ({appState, addPost}) => {
 
 			<div className='app-wrapper-content'>
 				<Route path='/dialogs' render={() => <Dialogs messagesPage={appState.messagesPage}/>}/>
-				<Route path='/profile' render={() => <Profile profilePage={appState.profilePage}/>}/>
+				<Route path='/profile' render={() => <Profile profilePage={appState.profilePage} addPost={addPost}/>}/>
 			</div>
 
 		</div>
