@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 import {Header} from './components/Header/Header';
 import {NavBar} from './components/NavBar/NavBar';
@@ -12,9 +12,10 @@ import './App.css';
 interface IApp {
 	appState: StateType
 	addPost: (postMessage: string) => void
+	updateNewPostText: (newText: string) => void
 }
 
-const App: FC<IApp> = ({appState, addPost}) => {
+const App: FC<IApp> = ({appState, addPost, updateNewPostText}) => {
 	return (
 		<div className="app-wrapper">
 
@@ -22,8 +23,9 @@ const App: FC<IApp> = ({appState, addPost}) => {
 			<NavBar {...appState.sidebar}/>
 
 			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <Dialogs messagesPage={appState.messagesPage}/>}/>
-				<Route path='/profile' render={() => <Profile profilePage={appState.profilePage} addPost={addPost}/>}/>
+				<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
+				<Route path='/profile' render={() => <Profile {...appState.profilePage} addPost={addPost}
+				                                              updateNewPostText={updateNewPostText}/>}/>
 			</div>
 
 		</div>

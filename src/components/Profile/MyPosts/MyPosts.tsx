@@ -7,24 +7,25 @@ import s from './MyPosts.module.css';
 
 interface IMyPostsProps {
 	posts: PostType[]
-	addPost: (postMessage: string) => void
 	newPostText: string
+	addPost: (postMessage: string) => void
+	updateNewPostText: (newText: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText}) => {
+export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText, updateNewPostText}) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p}/>)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
-		if(newPostElement.current) {
-			const text = newPostElement.current.value
-			addPost(text)
-			newPostElement.current.value = ''
-		}
+		addPost(newPostText)
+		updateNewPostText('')
 	}
 
 	const onPostChange = () => {
-
+		if (newPostElement.current) {
+			const text = newPostElement.current.value
+			updateNewPostText(text)
+		}
 	}
 
 	return (
@@ -33,7 +34,7 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText}) => {
 
 			<div>
 				<div>
-					<textarea onChange={onPostChange} ref={newPostElement} value={'dasf'}/>
+					<textarea onChange={onPostChange} ref={newPostElement} value={newPostText}></textarea>
 				</div>
 				<div>
 					<button onClick={addPostHandler}>Add post</button>

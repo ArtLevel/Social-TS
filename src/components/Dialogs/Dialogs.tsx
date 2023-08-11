@@ -1,19 +1,16 @@
-import {createRef, FC} from 'react';
-
+import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-
-import {MessageType} from '../../types/types';
-import s from './Dialogs.module.css'
+import {DialogType, MessageType} from '../../types/types';
+import {createRef, FC} from 'react';
 
 interface IDialogs {
-	messagesPage: MessageType
+	dialogs: DialogType[]
+	messages: MessageType[]
 }
 
-export const Dialogs: FC<IDialogs> = ({messagesPage}) => {
+export const Dialogs: FC<IDialogs> = ({dialogs, messages}) => {
 	const newMessageEl = createRef<HTMLTextAreaElement>()
-
-	const messages: MessageType = messagesPage.message
 
 	const dialogsEl = dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
 	const messagesEl = messages.map(m => <Message key={m.id} message={m.message}/>)
