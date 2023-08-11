@@ -20,6 +20,7 @@ export const state: StateType = {
 				likesCount: 120
 			}
 		],
+		newPostText: ''
 	},
 	messagesPage: {
 		messages: [

@@ -2,21 +2,23 @@ import React, {FC} from 'react';
 
 import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {PostType} from '../../types/types';
+import {ProfilePageType} from '../../types/types';
 
+import {addPost} from '../../redux/state';
 import s from './Profile.module.css';
 
 interface IProfile {
-	posts: PostType[]
-	addPost: (postMessage: string) => void
+	profilePage: ProfilePageType
 }
 
-export const Profile: FC<IProfile> = ({posts, addPost}) => {
+export const Profile: FC<IProfile> = ({profilePage}) => {
+	const {posts, newPostText} = profilePage
+
 	return (
 		<div>
 
 			<ProfileInfo/>
-			<MyPosts posts={posts} addPost={addPost}/>
+			<MyPosts posts={posts} addPost={addPost} newPostText={newPostText}/>
 
 		</div>
 	)
