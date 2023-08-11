@@ -17,15 +17,12 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText, updateN
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
-		if(newPostElement.current) {
-			const text = newPostElement.current.value
-			addPost(text)
-			updateNewPostText('')
-		}
+		addPost(newPostText)
+		updateNewPostText('')
 	}
 
 	const onPostChange = () => {
-		if(newPostElement.current) {
+		if (newPostElement.current) {
 			const text = newPostElement.current.value
 			updateNewPostText(text)
 		}
