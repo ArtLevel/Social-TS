@@ -8,15 +8,17 @@ import s from './Profile.module.css';
 
 interface IProfile {
 	posts: PostType[]
+	newPostText: string
 	addPost: (postMessage: string) => void
+	updateNewPostText: (newText: string) => void
 }
 
-export const Profile: FC<IProfile> = ({posts, addPost}) => {
+export const Profile: FC<IProfile> = ({posts, addPost, newPostText, updateNewPostText}) => {
 	return (
 		<div>
 
 			<ProfileInfo/>
-			<MyPosts posts={posts} addPost={addPost}/>
+			<MyPosts posts={posts} addPost={addPost} newPostText={newPostText} updateNewPostText={updateNewPostText}/>
 
 		</div>
 	)

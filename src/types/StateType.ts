@@ -6,6 +6,7 @@ import {SidebarType} from './SidebarType';
 export type StateType = {
 	profilePage: {
 		posts: PostType[]
+		newPostText: string
 	}
 	messagesPage: {
 		messages: MessageType[]

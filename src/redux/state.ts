@@ -20,6 +20,7 @@ export const state: StateType = {
 				likesCount: 120
 			}
 		],
+		newPostText: ''
 	},
 	messagesPage: {
 		messages: [
@@ -70,7 +71,6 @@ export const state: StateType = {
 }
 
 export const addPost = (postMessage: string) => {
-	console.log(postMessage)
 	const newPost: PostType = {
 		id: 5,
 		message: postMessage,
@@ -78,5 +78,11 @@ export const addPost = (postMessage: string) => {
 	}
 
 	state.profilePage.posts.push(newPost)
-	rerenderEntireTree(state, addPost)
+	rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+	state.profilePage.newPostText = newText
+
+	rerenderEntireTree(state)
 }

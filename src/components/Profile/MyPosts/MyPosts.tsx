@@ -7,10 +7,12 @@ import s from './MyPosts.module.css';
 
 interface IMyPostsProps {
 	posts: PostType[]
+	newPostText: string
 	addPost: (postMessage: string) => void
+	updateNewPostText: (newText: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
+export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText, updateNewPostText}) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p}/>)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
@@ -18,7 +20,14 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
 		if(newPostElement.current) {
 			const text = newPostElement.current.value
 			addPost(text)
-			newPostElement.current.value = ''
+			updateNewPostText('')
+		}
+	}
+
+	const onPostChange = () => {
+		if(newPostElement.current) {
+			const text = newPostElement.current.value
+			updateNewPostText(text)
 		}
 	}
 
@@ -28,7 +37,7 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost}) => {
 
 			<div>
 				<div>
-					<textarea ref={newPostElement}></textarea>
+					<textarea onChange={onPostChange} ref={newPostElement} value={newPostText}></textarea>
 				</div>
 				<div>
 					<button onClick={addPostHandler}>Add post</button>
