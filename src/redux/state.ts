@@ -70,14 +70,15 @@ export const state: StateType = {
 	}
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
 	const newPost: PostType = {
 		id: 5,
-		message: postMessage,
+		message: state.profilePage.newPostText,
 		likesCount: 0
 	}
 
 	state.profilePage.posts.push(newPost)
+	state.profilePage.newPostText = ''
 	rerenderEntireTree(state)
 }
 

@@ -11,7 +11,7 @@ import './App.css';
 
 interface IApp {
 	appState: StateType
-	addPost: (postMessage: string) => void
+	addPost: () => void
 	updateNewPostText: (newText: string) => void
 }
 

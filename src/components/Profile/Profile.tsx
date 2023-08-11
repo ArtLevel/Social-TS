@@ -9,7 +9,7 @@ import s from './Profile.module.css';
 interface IProfile {
 	posts: PostType[]
 	newPostText: string
-	addPost: (postMessage: string) => void
+	addPost: () => void
 	updateNewPostText: (newText: string) => void
 }
 

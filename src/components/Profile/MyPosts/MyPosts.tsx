@@ -8,7 +8,7 @@ import s from './MyPosts.module.css';
 interface IMyPostsProps {
 	posts: PostType[]
 	newPostText: string
-	addPost: (postMessage: string) => void
+	addPost: () => void
 	updateNewPostText: (newText: string) => void
 }
 
@@ -17,8 +17,7 @@ export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText, updateN
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
-		addPost(newPostText)
-		updateNewPostText('')
+		addPost()
 	}
 
 	const onPostChange = () => {
