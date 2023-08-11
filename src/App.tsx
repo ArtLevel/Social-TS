@@ -15,6 +15,8 @@ interface IApp {
 	updateNewPostText: (newText: string) => void
 }
 
+// Lesson 34 complete: 2/2
+
 const App: FC<IApp> = ({appState, addPost, updateNewPostText}) => {
 	return (
 		<div className="app-wrapper">
