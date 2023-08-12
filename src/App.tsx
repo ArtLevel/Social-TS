@@ -8,14 +8,11 @@ import {Dialogs} from './components/Dialogs/Dialogs';
 
 import {StateType} from './types/types';
 import './App.css';
-
 interface IApp {
 	appState: StateType
 	addPost: () => void
 	updateNewPostText: (newText: string) => void
 }
-
-// Lesson 34 complete: 2/2
 
 const App: FC<IApp> = ({appState, addPost, updateNewPostText}) => {
 	return (
@@ -29,7 +26,6 @@ const App: FC<IApp> = ({appState, addPost, updateNewPostText}) => {
 				<Route path='/profile' render={() => <Profile {...appState.profilePage} addPost={addPost}
 				                                              updateNewPostText={updateNewPostText}/>}/>
 			</div>
-
 		</div>
 	)
 }

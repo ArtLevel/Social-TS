@@ -1,4 +1,19 @@
-import {rerenderEntireTree} from './render';
-import {state} from './redux/state';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 
-rerenderEntireTree(state)
+import App from './App';
+import {state, addPost, updateNewPostText, subscribe} from './redux/state';
+
+import './index.css';
+
+const rerenderEntireTree = () => {
+	ReactDOM.render(
+		<BrowserRouter>
+			<App appState={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+		</BrowserRouter>,
+		document.getElementById('root')
+	)
+}
+
+subscribe(rerenderEntireTree)
