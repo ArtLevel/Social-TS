@@ -5,9 +5,10 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 import {state, addPost, updateNewPostText, subscribe} from './redux/state';
 
+import {StateType} from './types/types';
 import './index.css';
 
-const rerenderEntireTree = () => {
+const rerenderEntireTree = (state: StateType) => {
 	ReactDOM.render(
 		<BrowserRouter>
 			<App appState={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
@@ -16,4 +17,5 @@ const rerenderEntireTree = () => {
 	)
 }
 
+rerenderEntireTree(state)
 subscribe(rerenderEntireTree)

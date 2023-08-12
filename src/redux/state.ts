@@ -1,8 +1,6 @@
 import {PostType, StateType} from '../types/types';
 
-const rerenderEntireTree = (state: StateType) => {
-	console.log('asdjfl;jaskldfjlkasdjfj')
-}
+let rerenderEntireTree = (state: StateType) => {}
 
 export const state: StateType = {
 	profilePage: {
@@ -91,6 +89,6 @@ export const updateNewPostText = (newText: string) => {
 	rerenderEntireTree(state)
 }
 
-export const subscribe = (observer: () => void) => {
-	observer()
+export const subscribe = (observer: (state: StateType) => void) => {
+	rerenderEntireTree = observer // observer
 }
