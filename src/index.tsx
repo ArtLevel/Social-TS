@@ -11,11 +11,11 @@ import './index.css';
 const rerenderEntireTree = (state: StateType) => {
 	ReactDOM.render(
 		<BrowserRouter>
-			<App appState={store._state} addPost={store.addPost} updateNewPostText={store.updateNewPostText}/>
+			<App appState={store.getState()} addPost={store.addPost} updateNewPostText={store.updateNewPostText}/>
 		</BrowserRouter>,
 		document.getElementById('root')
 	)
 }
 
-rerenderEntireTree(state)
-subscribe(rerenderEntireTree)
+rerenderEntireTree(store.getState())
+store.subscribe(rerenderEntireTree)

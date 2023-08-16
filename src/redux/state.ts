@@ -77,21 +77,21 @@ const store: StoreType = {
 	addPost() {
 		const newPost: PostType = {
 			id: 5,
-			message: state.profilePage.newPostText,
+			message: this._state.profilePage.newPostText,
 			likesCount: 0
 		}
 
-		state.profilePage.posts.push(newPost)
-		state.profilePage.newPostText = ''
-		rerenderEntireTree(state)
+		this._state.profilePage.posts.push(newPost)
+		this._state.profilePage.newPostText = ''
+		this.rerenderEntireTree(this._state)
 	},
 	updateNewPostText (newText: string) {
-		state.profilePage.newPostText = newText
+		this._state.profilePage.newPostText = newText
 
-		rerenderEntireTree(state)
+		this.rerenderEntireTree(this._state)
 	},
 	subscribe (observer: (state: StateType) => void) {
-		rerenderEntireTree = observer // observer
+		this.rerenderEntireTree = observer // observer
 	}
 }
 
