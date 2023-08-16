@@ -1,5 +1,7 @@
 import {PostType, StateType} from '../types/types';
 
+// ООП
+
 let rerenderEntireTree = (state: StateType) => {}
 
 export const state: StateType = {
