@@ -1,5 +1,6 @@
 import {PostType, StateType} from '../types/types';
 import {StoreType} from '../types/StoreType';
+// Fix bug
 
 const store: StoreType = {
 	_state: {
