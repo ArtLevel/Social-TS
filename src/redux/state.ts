@@ -1,5 +1,8 @@
-import { PostType, StateType } from '../types/types'
+import { ActionType, PostType, StateType } from '../types/types'
 import { StoreType } from '../types/types'
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
 const store: StoreType = {
 	_state: {
@@ -23,7 +26,7 @@ const store: StoreType = {
 			],
 			newPostText: ''
 		},
-		messagesPage: {
+		dialogsPage: {
 			messages: [
 				{
 					id: 1,
@@ -70,10 +73,10 @@ const store: StoreType = {
 			]
 		}
 	},
+	_callSubscriber(state: StateType) {
+	},
 	getState() {
 		return this._state
-	},
-	_callSubscriber(state: StateType) {
 	},
 	addPost() {
 		const newPost: PostType = {
@@ -95,7 +98,7 @@ const store: StoreType = {
 		this._callSubscriber = observer // observer
 	},
 	dispatch(action) {
-		if (action.type === 'ADD-POST') {
+		if (action.type === ADD_POST) {
 			const newPost: PostType = {
 				id: 5,
 				message: this._state.profilePage.newPostText,
@@ -107,13 +110,18 @@ const store: StoreType = {
 			this._callSubscriber(this._state)
 		}
 
-		if (action.type === 'UPDATE-NEW-POST-TEXT') {
-			if (action.message) {
-				this._state.profilePage.newPostText = action.message
+		if (action.type === UPDATE_NEW_POST_TEXT) {
+			if (action.newText !== undefined) {
+				this._state.profilePage.newPostText = action.newText
 				this._callSubscriber(this._state)
 			}
 		}
 	}
 }
+
+export const addPostActionCreator = (): ActionType => ({ type: ADD_POST })
+
+export const updateNewPostTextActionCreator = (newText: string): ActionType =>
+	({ type: UPDATE_NEW_POST_TEXT, newText })
 
 export default store

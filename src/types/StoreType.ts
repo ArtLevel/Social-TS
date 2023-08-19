@@ -4,7 +4,7 @@ type ActionValueType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
 
 export type ActionType = {
 	type: ActionValueType
-	message?: string
+	newText?: string
 }
 
 export type StoreType = {
@@ -14,5 +14,6 @@ export type StoreType = {
 	addPost: () => void
 	updateNewPostText: (newText: string) => void
 	subscribe: (observer: (state: StateType) => void) => void
+
 	dispatch: (action: ActionType) => void
 }

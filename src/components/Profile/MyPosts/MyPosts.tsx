@@ -4,7 +4,7 @@ import { Post } from './Post/Post'
 import { ActionType, PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
-import state from '../../../redux/state'
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/state'
 
 interface IMyPostsProps {
 	posts: PostType[]
@@ -17,13 +17,14 @@ export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, dispatch }) => 
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
-		dispatch({ type: 'ADD-POST' })
+		dispatch(addPostActionCreator())
 	}
 
 	const onPostChange = () => {
 		if (newPostElement.current) {
 			const text = newPostElement.current.value
-			dispatch({ type: 'UPDATE-NEW-POST-TEXT', message: text })
+
+			dispatch(updateNewPostTextActionCreator(text))
 		}
 	}
 
