@@ -1,6 +1,5 @@
-import {PostType, StateType} from '../types/types';
-import {StoreType} from '../types/StoreType';
-// Fix bug
+import { PostType, StateType } from '../types/types'
+import { StoreType } from '../types/StoreType'
 
 const store: StoreType = {
 	_state: {
@@ -52,7 +51,7 @@ const store: StoreType = {
 					id: 3,
 					name: 'Maria'
 				}
-			],
+			]
 		},
 		sidebar: {
 			sidebar: [
@@ -67,14 +66,15 @@ const store: StoreType = {
 				{
 					id: 3,
 					name: 'Dimych'
-				},
+				}
 			]
 		}
 	},
 	getState() {
 		return this._state
 	},
-	rerenderEntireTree(state: StateType) {},
+	_callSubscriber(state: StateType) {
+	},
 	addPost() {
 		const newPost: PostType = {
 			id: 5,
@@ -84,15 +84,18 @@ const store: StoreType = {
 
 		this._state.profilePage.posts.push(newPost)
 		this._state.profilePage.newPostText = ''
-		this.rerenderEntireTree(this._state)
+		this._callSubscriber(this._state)
 	},
-	updateNewPostText (newText: string) {
+	updateNewPostText(newText: string) {
 		this._state.profilePage.newPostText = newText
 
-		this.rerenderEntireTree(this._state)
+		this._callSubscriber(this._state)
 	},
-	subscribe (observer: (state: StateType) => void) {
-		this.rerenderEntireTree = observer // observer
+	subscribe(observer: (state: StateType) => void) {
+		this._callSubscriber = observer // observer
+	},
+	dispatch() {
+
 	}
 }
 

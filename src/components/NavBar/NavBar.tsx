@@ -1,14 +1,14 @@
-import React, {FC} from 'react';
-import {NavLink} from 'react-router-dom'
+import React, { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import s from './NavBar.module.css'
-import {SidebarType} from '../../types/types';
+import { SidebarType } from '../../types/types'
 
 interface INavBar {
 	sidebar: SidebarType[]
 }
 
-export const NavBar: FC<INavBar> = ({sidebar}) => {
+export const NavBar: FC<INavBar> = ({ sidebar }) => {
 	return (
 		<nav className={s.nav}>
 			<ul>

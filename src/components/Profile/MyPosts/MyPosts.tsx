@@ -1,9 +1,10 @@
-import React, {createRef, FC} from 'react';
+import React, { createRef, FC } from 'react'
 
-import {Post} from './Post/Post';
-import {PostType} from '../../../types/types';
+import { Post } from './Post/Post'
+import { PostType } from '../../../types/types'
 
-import s from './MyPosts.module.css';
+import s from './MyPosts.module.css'
+import state from '../../../redux/state'
 
 interface IMyPostsProps {
 	posts: PostType[]
@@ -12,8 +13,8 @@ interface IMyPostsProps {
 	updateNewPostText: (newText: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({posts, addPost, newPostText, updateNewPostText}) => {
-	const postEl = posts.map(p => <Post key={p.id} {...p}/>)
+export const MyPosts: FC<IMyPostsProps> = ({ posts, addPost, newPostText, updateNewPostText }) => {
+	const postEl = posts.map(p => <Post key={p.id} {...p} />)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
