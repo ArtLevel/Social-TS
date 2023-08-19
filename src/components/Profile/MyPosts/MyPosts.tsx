@@ -1,7 +1,7 @@
 import React, { createRef, FC } from 'react'
 
 import { Post } from './Post/Post'
-import { PostType } from '../../../types/types'
+import { ActionType, PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
 import state from '../../../redux/state'
@@ -9,11 +9,10 @@ import state from '../../../redux/state'
 interface IMyPostsProps {
 	posts: PostType[]
 	newPostText: string
-	addPost: () => void
-	updateNewPostText: (newText: string) => void
+	dispatch: (action: ActionType) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({ posts, addPost, newPostText, updateNewPostText }) => {
+export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, dispatch }) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p} />)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 

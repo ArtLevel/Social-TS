@@ -1,5 +1,10 @@
 import { StateType } from './StateType'
 
+export type ActionType = {
+	type: string
+	message?: string
+}
+
 export type StoreType = {
 	_state: StateType
 	getState: () => StateType
@@ -7,5 +12,5 @@ export type StoreType = {
 	addPost: () => void
 	updateNewPostText: (newText: string) => void
 	subscribe: (observer: (state: StateType) => void) => void
-	dispatch: () => void
+	dispatch: (action: ActionType) => void
 }

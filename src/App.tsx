@@ -6,16 +6,15 @@ import { NavBar } from './components/NavBar/NavBar'
 import { Profile } from './components/Profile/Profile'
 import { Dialogs } from './components/Dialogs/Dialogs'
 
-import { StateType } from './types/types'
+import { ActionType, StateType } from './types/types'
 import './App.css'
 
 interface IApp {
 	appState: StateType
-	addPost: () => void
-	updateNewPostText: (newText: string) => void
+	dispatch: (action: ActionType) => void
 }
 
-const App: FC<IApp> = ({ appState, addPost, updateNewPostText }) => {
+const App: FC<IApp> = ({ appState, dispatch }) => {
 	return (
 		<div className='app-wrapper'>
 
@@ -24,8 +23,7 @@ const App: FC<IApp> = ({ appState, addPost, updateNewPostText }) => {
 
 			<div className='app-wrapper-content'>
 				<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage} />} />
-				<Route path='/profile' render={() => <Profile {...appState.profilePage} addPost={addPost}
-				                                              updateNewPostText={updateNewPostText} />} />
+				<Route path='/profile' render={() => <Profile {...appState.profilePage} dispatch={dispatch} />} />
 			</div>
 		</div>
 	)

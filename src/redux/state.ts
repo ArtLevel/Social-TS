@@ -1,5 +1,5 @@
 import { PostType, StateType } from '../types/types'
-import { StoreType } from '../types/StoreType'
+import { StoreType } from '../types/types'
 
 const store: StoreType = {
 	_state: {
@@ -94,8 +94,25 @@ const store: StoreType = {
 	subscribe(observer: (state: StateType) => void) {
 		this._callSubscriber = observer // observer
 	},
-	dispatch() {
+	dispatch(action) {
+		if (action.type === 'ADD-POST') {
+			const newPost: PostType = {
+				id: 5,
+				message: this._state.profilePage.newPostText,
+				likesCount: 0
+			}
 
+			this._state.profilePage.posts.push(newPost)
+			this._state.profilePage.newPostText = ''
+			this._callSubscriber(this._state)
+		}
+
+		if (action.type === 'UPDATE-NEW-POST-TEXT') {
+			if (action.message) {
+				this._state.profilePage.newPostText = action.message
+				this._callSubscriber(this._state)
+			}
+		}
 	}
 }
 
