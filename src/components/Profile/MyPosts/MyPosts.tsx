@@ -17,13 +17,13 @@ export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, dispatch }) => 
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
 	const addPostHandler = () => {
-		addPost()
+		dispatch({ type: 'ADD-POST' })
 	}
 
 	const onPostChange = () => {
 		if (newPostElement.current) {
 			const text = newPostElement.current.value
-			updateNewPostText(text)
+			dispatch({ type: 'UPDATE-NEW-POST-TEXT', message: text })
 		}
 	}
 

@@ -1,7 +1,9 @@
 import { StateType } from './StateType'
 
+type ActionValueType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
+
 export type ActionType = {
-	type: string
+	type: ActionValueType
 	message?: string
 }
 
