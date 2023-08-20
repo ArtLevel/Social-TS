@@ -4,7 +4,7 @@ import { Post } from './Post/Post'
 import { ActionType, PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/state'
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profileReducer'
 
 interface IMyPostsProps {
 	posts: PostType[]

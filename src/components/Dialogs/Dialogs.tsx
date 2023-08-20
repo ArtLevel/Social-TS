@@ -3,7 +3,8 @@ import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 import { ChangeEvent, FC } from 'react'
 import { DialogsPageType } from '../../types/types'
-import store, { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/state'
+import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer'
+import store from '../../redux/state'
 
 interface IDialogs {
 	state: DialogsPageType
