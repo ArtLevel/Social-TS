@@ -1,17 +1,10 @@
 import { SidebarType } from './SidebarType'
-import { PostType } from './PostType'
-import { DialogType } from './DialogType'
-import { MessageType } from './MessageType'
+import { ProfilePageType } from './Pages/ProfilePageType'
+import { DialogsPageType } from './Pages/DialogsPageType'
 
 export type StateType = {
-	profilePage: {
-		posts: PostType[]
-		newPostText: string
-	}
-	dialogsPage: {
-		messages: MessageType[]
-		dialogs: DialogType[]
-	}
+	profilePage: ProfilePageType
+	dialogsPage: DialogsPageType
 	sidebar: {
 		sidebar: SidebarType[]
 	}

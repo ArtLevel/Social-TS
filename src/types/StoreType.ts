@@ -1,6 +1,6 @@
 import { StateType } from './StateType'
 
-type ActionValueType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
+type ActionValueType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'UPDATE-NEW-MESSAGE-BODY' | 'SEND-MESSAGE'
 
 export type ActionType = {
 	type: ActionValueType

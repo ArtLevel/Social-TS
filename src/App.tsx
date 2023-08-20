@@ -22,7 +22,7 @@ const App: FC<IApp> = ({ appState, dispatch }) => {
 			<NavBar {...appState.sidebar} />
 
 			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <Dialogs {...appState.dialogsPage} />} />
+				<Route path='/dialogs' render={() => <Dialogs state={appState.dialogsPage} />} />
 				<Route path='/profile' render={() => <Profile {...appState.profilePage} dispatch={dispatch} />} />
 			</div>
 		</div>
