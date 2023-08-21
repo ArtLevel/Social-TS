@@ -1,5 +1,4 @@
-import { ActionType, PostType, StateType } from '../types/types'
-import { StoreType } from '../types/types'
+import { PostType, StateType, StoreType } from '../types/types'
 import profileReducer from './profileReducer'
 import dialogsReducer from './dialogsReducer'
 import sidebarReducer from './sidebarReducer'
