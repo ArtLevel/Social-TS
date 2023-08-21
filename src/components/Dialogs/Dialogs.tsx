@@ -4,7 +4,7 @@ import { Message } from './Message/Message'
 import { ChangeEvent, FC } from 'react'
 import { DialogsPageType } from '../../types/types'
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer'
-import store from '../../redux/state'
+import store from '../../redux/store'
 
 interface IDialogs {
 	state: DialogsPageType
