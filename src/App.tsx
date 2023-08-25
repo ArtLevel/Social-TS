@@ -8,6 +8,7 @@ import { Dialogs } from './components/Dialogs/Dialogs'
 
 import { StoreType } from './types/types'
 import './App.css'
+import { DialogsContainer } from './components/Dialogs/DialogsContainer'
 
 interface IApp {
 	store: StoreType
@@ -21,7 +22,7 @@ const App: FC<IApp> = ({ store }) => {
 			<NavBar />
 
 			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <Dialogs store={store} />} />
+				<Route path='/dialogs' render={() => <DialogsContainer store={store} />} />
 				<Route path='/profile' render={() => <Profile store={store} />} />
 			</div>
 		</div>
