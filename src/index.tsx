@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
-import store from './redux/reduxStore'
+import store from './redux/store'
 
 import { StateType } from './types/types'
 import './index.css'
@@ -18,4 +18,7 @@ const rerenderEntireTree = (state: StateType) => {
 }
 
 rerenderEntireTree(store.getState())
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+	const state = store._state
+	rerenderEntireTree(state)
+})
