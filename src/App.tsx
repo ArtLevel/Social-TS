@@ -18,7 +18,7 @@ const App: FC<IApp> = ({ store }) => {
 		<div className='app-wrapper'>
 
 			<Header />
-			{/*<NavBar {...appState.sidebar} />*/}
+			<NavBar />
 
 			<div className='app-wrapper-content'>
 				<Route path='/dialogs' render={() => <Dialogs store={store} />} />

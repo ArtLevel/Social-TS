@@ -2,13 +2,11 @@ import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import s from './NavBar.module.css'
-import { SidebarType } from '../../types/types'
 
 interface INavBar {
-	sidebar: SidebarType[]
 }
 
-export const NavBar: FC<INavBar> = ({ sidebar }) => {
+export const NavBar: FC<INavBar> = () => {
 	return (
 		<nav className={s.nav}>
 			<ul>
@@ -26,7 +24,6 @@ export const NavBar: FC<INavBar> = ({ sidebar }) => {
 				</li>
 				<li className={s.item}>
 					<NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink>
-					{sidebar.map(el => <div key={el.id}>{el.name}</div>)}
 				</li>
 			</ul>
 		</nav>
