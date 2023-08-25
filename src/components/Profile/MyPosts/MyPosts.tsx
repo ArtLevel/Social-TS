@@ -1,30 +1,29 @@
 import React, { createRef, FC } from 'react'
 
 import { Post } from './Post/Post'
-import { ActionType, PostType } from '../../../types/types'
+import { PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profileReducer'
 
 interface IMyPostsProps {
 	posts: PostType[]
 	newPostText: string
-	dispatch: (action: ActionType) => void
+	addPost: () => void
+	updateNewPostText: (text: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, dispatch }) => {
+export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, addPost, updateNewPostText }) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p} />)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
-	const addPostHandler = () => {
-		dispatch(addPostActionCreator())
+	const onAddPost = () => {
+		addPost()
 	}
 
 	const onPostChange = () => {
 		if (newPostElement.current) {
 			const text = newPostElement.current.value
-
-			dispatch(updateNewPostTextActionCreator(text))
+			updateNewPostText(text)
 		}
 	}
 
@@ -37,7 +36,7 @@ export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, dispatch }) => 
 					<textarea onChange={onPostChange} ref={newPostElement} value={newPostText}></textarea>
 				</div>
 				<div>
-					<button onClick={addPostHandler}>Add post</button>
+					<button onClick={onAddPost}>Add post</button>
 				</div>
 			</div>
 

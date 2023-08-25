@@ -1,23 +1,19 @@
 import React, { FC } from 'react'
 
-import { MyPosts } from './MyPosts/MyPosts'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo'
-import { ActionType, PostType } from '../../types/types'
-
-import s from './Profile.module.css'
+import { StoreType } from '../../types/types'
+import { MyPostsContainer } from './MyPosts/MyPostsContainer'
 
 interface IProfile {
-	posts: PostType[]
-	newPostText: string
-	dispatch: (action: ActionType) => void
+	store: StoreType
 }
 
-export const Profile: FC<IProfile> = ({ posts, newPostText, dispatch }) => {
+export const Profile: FC<IProfile> = ({ store }) => {
 	return (
 		<div>
 
 			<ProfileInfo />
-			<MyPosts posts={posts} dispatch={dispatch} newPostText={newPostText} />
+			<MyPostsContainer store={store} />
 
 		</div>
 	)

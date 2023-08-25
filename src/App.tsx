@@ -6,24 +6,23 @@ import { NavBar } from './components/NavBar/NavBar'
 import { Profile } from './components/Profile/Profile'
 import { Dialogs } from './components/Dialogs/Dialogs'
 
-import { ActionType, StateType } from './types/types'
+import { StoreType } from './types/types'
 import './App.css'
 
 interface IApp {
-	appState: StateType
-	dispatch: (action: ActionType) => void
+	store: StoreType
 }
 
-const App: FC<IApp> = ({ appState, dispatch }) => {
+const App: FC<IApp> = ({ store }) => {
 	return (
 		<div className='app-wrapper'>
 
 			<Header />
-			<NavBar {...appState.sidebar} />
+			{/*<NavBar {...appState.sidebar} />*/}
 
 			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <Dialogs state={appState.dialogsPage} />} />
-				<Route path='/profile' render={() => <Profile {...appState.profilePage} dispatch={dispatch} />} />
+				<Route path='/dialogs' render={() => <Dialogs store={store} />} />
+				<Route path='/profile' render={() => <Profile store={store} />} />
 			</div>
 		</div>
 	)

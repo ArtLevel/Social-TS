@@ -1,19 +1,20 @@
-import s from './Dialogs.module.css'
 import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 import { ChangeEvent, FC } from 'react'
-import { DialogsPageType } from '../../types/types'
+import { StoreType } from '../../types/types'
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer'
-import store from '../../redux/store'
+import s from './Dialogs.module.css'
 
 interface IDialogs {
-	state: DialogsPageType
+	store: StoreType
 }
 
-export const Dialogs: FC<IDialogs> = ({ state }) => {
-	const dialogsEl = state.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
-	const messagesEl = state.messages.map(m => <Message key={m.id} message={m.message} />)
-	const newMessageBody = state.newMessageBody
+export const Dialogs: FC<IDialogs> = ({ store }) => {
+	const state = store.getState()
+
+	const dialogsEl = state.dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
+	const messagesEl = state.dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
+	const newMessageBody = state.dialogsPage.newMessageBody
 
 	const onSendMessageClick = () => {
 		store.dispatch(sendMessageCreator())

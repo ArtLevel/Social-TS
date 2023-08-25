@@ -1,50 +1,25 @@
-import React, { createRef, FC } from 'react'
-
-import { Post } from './Post/Post'
-import { ActionType, PostType } from '../../../types/types'
-
-import s from './MyPosts.module.css'
+import React, { FC } from 'react'
+import { PostType, StoreType } from '../../../types/types'
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profileReducer'
+import { MyPosts } from './MyPosts'
 
 interface IMyPostsContainer {
-	posts: PostType[]
-	newPostText: string
-	dispatch: (action: ActionType) => void
+	store: StoreType
 }
 
-export const MyPostsContainer: FC<IMyPostsContainer> = ({ posts, newPostText, dispatch }) => {
-	const postEl = posts.map(p => <Post key={p.id} {...p} />)
-	const newPostElement = createRef<HTMLTextAreaElement>()
+export const MyPostsContainer: FC<IMyPostsContainer> = ({ store }) => {
+	const state = store.getState()
 
-	const addPostHandler = () => {
-		dispatch(addPostActionCreator())
+	const addPost = () => {
+		store.dispatch(addPostActionCreator())
 	}
 
-	const onPostChange = () => {
-		if (newPostElement.current) {
-			const text = newPostElement.current.value
-
-			dispatch(updateNewPostTextActionCreator(text))
-		}
+	const onPostChange = (text: string) => {
+		store.dispatch(updateNewPostTextActionCreator(text))
 	}
 
 	return (
-		<div className={s.postsBlock}>
-			<h3>My posts</h3>
-
-			<div>
-				<div>
-					<textarea onChange={onPostChange} ref={newPostElement} value={newPostText}></textarea>
-				</div>
-				<div>
-					<button onClick={addPostHandler}>Add post</button>
-				</div>
-			</div>
-
-			<div className={s.posts}>
-				{postEl}
-			</div>
-
-		</div>
+		<MyPosts posts={state.profilePage.posts} newPostText={state.profilePage.newPostText}
+		         updateNewPostText={onPostChange} addPost={addPost} />
 	)
 }
