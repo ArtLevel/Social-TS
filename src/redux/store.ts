@@ -108,6 +108,4 @@ const store: StoreType = {
 	}
 }
 
-// react-redux
-
 export default store
