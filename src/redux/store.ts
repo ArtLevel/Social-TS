@@ -76,7 +76,6 @@ const store: StoreType = {
 	_callSubscriber(state: StateType) {
 	},
 	getState() {
-		const b = 1
 		return this._state
 	},
 	addPost() {
