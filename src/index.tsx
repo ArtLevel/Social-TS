@@ -18,7 +18,7 @@ const rerenderEntireTree = () => {
 	)
 }
 
-// deep copy vs shallow 1/2
+// deep copy vs shallow 2/2
 
 rerenderEntireTree()
 store.subscribe(() => {
