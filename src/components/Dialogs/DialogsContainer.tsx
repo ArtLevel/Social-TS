@@ -1,9 +1,6 @@
-import { DialogItem } from './DialogItem/DialogItem'
-import { Message } from './Message/Message'
-import { ChangeEvent, FC } from 'react'
+import { FC } from 'react'
 import { StoreType } from '../../types/types'
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer'
-import s from './Dialogs.module.css'
 import { Dialogs } from './Dialogs'
 
 interface IDialogs {
