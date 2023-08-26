@@ -7,11 +7,14 @@ import store from './redux/store'
 
 import { StateType } from './types/types'
 import './index.css'
+import { Provider } from './StoreContext'
 
 const rerenderEntireTree = (state: StateType) => {
 	ReactDOM.render(
 		<BrowserRouter>
-			<App store={store} />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</BrowserRouter>,
 		document.getElementById('root')
 	)

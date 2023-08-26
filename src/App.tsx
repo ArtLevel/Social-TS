@@ -1,19 +1,13 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 
 import { Header } from './components/Header/Header'
 import { NavBar } from './components/NavBar/NavBar'
 import { Profile } from './components/Profile/Profile'
-
-import { StoreType } from './types/types'
 import './App.css'
 import { DialogsContainer } from './components/Dialogs/DialogsContainer'
 
-interface IApp {
-	store: StoreType
-}
-
-const App: FC<IApp> = ({ store }) => {
+const App = () => {
 	return (
 		<div className='app-wrapper'>
 
@@ -21,8 +15,8 @@ const App: FC<IApp> = ({ store }) => {
 			<NavBar />
 
 			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <DialogsContainer store={store} />} />
-				<Route path='/profile' render={() => <Profile store={store} />} />
+				<Route path='/dialogs' render={() => <DialogsContainer />} />
+				<Route path='/profile' render={() => <Profile />} />
 			</div>
 		</div>
 	)
