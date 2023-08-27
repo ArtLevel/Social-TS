@@ -41,14 +41,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 		}
 		case UPDATE_NEW_POST_TEXT: {
 			const stateCopy: ProfilePageType = { ...state }
-			if (action.newText !== undefined) {
-				stateCopy.newPostText = action.newText
-			}
+			if (action.newText !== undefined) stateCopy.newPostText = action.newText
 			return stateCopy
 		}
-		default: {
+		default:
 			return state
-		}
 	}
 }
 
