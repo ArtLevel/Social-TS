@@ -33,18 +33,18 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 				likesCount: 0
 			}
 
-			const copyState = { ...state, posts: [...state.posts.map(o => ({ ...o }))] }
-			copyState.posts.push(newPost)
-			copyState.newPostText = ''
+			const stateCopy = { ...state, posts: [...state.posts.map(o => ({ ...o }))] }
+			stateCopy.posts.push(newPost)
+			stateCopy.newPostText = ''
 
-			return copyState
+			return stateCopy
 		}
 		case UPDATE_NEW_POST_TEXT: {
-			const copyState = { ...state }
+			const stateCopy = { ...state }
 			if (action.newText !== undefined) {
-				copyState.newPostText = action.newText
+				stateCopy.newPostText = action.newText
 			}
-			return copyState
+			return stateCopy
 		}
 		default: {
 			return state
