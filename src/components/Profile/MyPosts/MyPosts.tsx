@@ -16,9 +16,7 @@ export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, addPost, update
 	const postEl = posts.map(p => <Post key={p.id} {...p} />)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
-	const onAddPost = () => {
-		addPost()
-	}
+	const onAddPost = () => addPost()
 
 	const onPostChange = () => {
 		if (newPostElement.current) {
