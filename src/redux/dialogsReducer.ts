@@ -45,12 +45,12 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTyp
 			return copyState
 		}
 		case SEND_MESSAGE: {
-			const copyState = { ...state, messages: [...state.messages.map(o => ({ ...o }))] }
-			const body = copyState.newMessageBody
-			copyState.messages.push({ id: 4, message: body })
+			const stateCopy = { ...state, messages: [...state.messages.map(o => ({ ...o }))] }
+			const body = stateCopy.newMessageBody
+			stateCopy.messages.push({ id: 4, message: body })
 
-			copyState.newMessageBody = ''
-			return copyState
+			stateCopy.newMessageBody = ''
+			return stateCopy
 		}
 		default: {
 			return state
