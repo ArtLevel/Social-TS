@@ -1,4 +1,5 @@
 import { StateType } from './StateType'
+import { UsersType } from './Pages/UsersPageType'
 
 export type ActionValueType =
 	'ADD-POST'
@@ -7,11 +8,13 @@ export type ActionValueType =
 	| 'SEND-MESSAGE'
 	| 'FOLLOW'
 	| 'UNFOLLOW'
+	| 'SET_USERS'
 
 export type ActionType = {
 	type: ActionValueType
 	newText?: string
 	userId?: number
+	users?: UsersType[]
 }
 
 export type StoreType = {
