@@ -1,18 +1,25 @@
 import { UsersType } from '../../types/Pages/UsersPageType'
+import s from './Users.module.css'
 import { FC } from 'react'
 
 interface IUsers {
 	users: UsersType[]
+	unfollow: (userId: number) => void
+	follow: (userId: number) => void
 }
 
-export const Users: FC<IUsers> = ({ users }) => {
+export const Users: FC<IUsers> = ({ users, unfollow, follow }) => {
+	const onUnfollowHandler = (userId: number) => unfollow(userId)
+	const onFollowHandler = (userId: number) => follow(userId)
+
 	return <div>{users.map(u => <div key={u.id}>
 		<span>
 			<div>
-				<img />
+				<img src={u.photoUrl} className={s.userPhoto} />
 			</div>
 			<div>
-				<button>Follow</button>
+				{u.followed ? <button onClick={() => onUnfollowHandler(u.id)}>Unfollow</button> :
+					<button onClick={() => onFollowHandler(u.id)}>Follow</button>}
 			</div>
 		</span>
 		<span>
