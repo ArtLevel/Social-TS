@@ -57,7 +57,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 			return state
 	}
 }
-
+//
 export const followAC = (userId: number): ActionType => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId: number): ActionType => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users: UsersType[]): ActionType => ({ type: SET_USERS, users })
