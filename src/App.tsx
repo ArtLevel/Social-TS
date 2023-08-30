@@ -6,6 +6,7 @@ import { NavBar } from './components/NavBar/NavBar'
 import { Profile } from './components/Profile/Profile'
 import './App.css'
 import { DialogsContainer } from './components/Dialogs/DialogsContainer'
+import { Users } from './components/Users/Users'
 
 const App = () => {
 	return (
@@ -17,6 +18,7 @@ const App = () => {
 			<div className='app-wrapper-content'>
 				<Route path='/dialogs' render={() => <DialogsContainer />} />
 				<Route path='/profile' render={() => <Profile />} />
+				<Route path='/users' render={() => <Users />} />
 			</div>
 		</div>
 	)
