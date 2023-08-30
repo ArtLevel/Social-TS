@@ -8,6 +8,7 @@ const initialState: UsersPageType = {
 	users: [
 		{
 			id: 1,
+			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
 			fullName: 'Dmitry',
 			status: 'A am a boss',
 			followed: true,
@@ -18,6 +19,7 @@ const initialState: UsersPageType = {
 		},
 		{
 			id: 2,
+			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
 			fullName: 'Sasha',
 			status: 'A am a boss, too',
 			followed: false,
@@ -28,6 +30,7 @@ const initialState: UsersPageType = {
 		},
 		{
 			id: 3,
+			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
 			fullName: 'Andrew',
 			status: 'A am a boss, too',
 			followed: true,
