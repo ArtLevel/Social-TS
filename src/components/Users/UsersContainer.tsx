@@ -18,6 +18,4 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
 	}
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
-
-export default UsersContainer
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)

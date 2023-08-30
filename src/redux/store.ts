@@ -71,7 +71,8 @@ const store: StoreType = {
 					name: 'Dimych'
 				}
 			]
-		}
+		},
+		usersPage: { users: [] }
 	},
 	_callSubscriber(state: StateType) {
 	},
