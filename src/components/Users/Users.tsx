@@ -9,6 +9,8 @@ interface IUsers {
 	setUsers: (users: UsersType[]) => void
 }
 
+// REST API
+
 export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 	!users.length && setUsers([
 		{
