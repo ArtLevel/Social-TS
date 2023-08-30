@@ -1,10 +1,17 @@
 import { StateType } from './StateType'
 
-type ActionValueType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'UPDATE-NEW-MESSAGE-BODY' | 'SEND-MESSAGE'
+export type ActionValueType =
+	'ADD-POST'
+	| 'UPDATE-NEW-POST-TEXT'
+	| 'UPDATE-NEW-MESSAGE-BODY'
+	| 'SEND-MESSAGE'
+	| 'FOLLOW'
+	| 'UNFOLLOW'
 
 export type ActionType = {
 	type: ActionValueType
 	newText?: string
+	userId?: number
 }
 
 export type StoreType = {
