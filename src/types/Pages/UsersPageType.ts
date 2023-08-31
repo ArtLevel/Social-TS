@@ -1,15 +1,14 @@
-export type UserOfLocation = {
-	city: string
-	country: string
+export type UserOfPhotos = {
+	small: string
+	large: string
 }
 
 export type UsersType = {
+	name: string
 	id: number
-	photoUrl: string
-	fullName: string
+	photos: UserOfPhotos
 	status: string
 	followed: boolean
-	location: UserOfLocation
 }
 
 export type UsersPageType = {

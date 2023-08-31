@@ -1,6 +1,9 @@
 import { UsersType } from '../../types/Pages/UsersPageType'
 import s from './Users.module.css'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import axios from 'axios'
+
+import userPhoto from '../../assets/images/user.png'
 
 interface IUsers {
 	users: UsersType[]
@@ -10,40 +13,11 @@ interface IUsers {
 }
 
 export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
-	!users.length && setUsers([
-		{
-			id: 1,
-			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
-			fullName: 'Dmitry',
-			status: 'A am a boss',
-			followed: true,
-			location: {
-				city: 'Minsk',
-				country: 'Belarus'
-			}
-		},
-		{
-			id: 2,
-			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
-			fullName: 'Sasha',
-			status: 'A am a boss, too',
-			followed: false,
-			location: {
-				city: 'Moscow',
-				country: 'Russia'
-			}
-		},
-		{
-			id: 3,
-			photoUrl: 'https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg?w=2000',
-			fullName: 'Andrew',
-			status: 'A am a boss, too',
-			followed: true,
-			location: {
-				city: 'Kiev',
-				country: 'Ukraine'
-			}
-		}])
+	useEffect(() => {
+		axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+			setUsers(response.data.items)
+		})
+	}, [])
 
 	const onUnfollowHandler = (userId: number) => unfollow(userId)
 	const onFollowHandler = (userId: number) => follow(userId)
@@ -51,7 +25,7 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 	return <div>{users.map(u => <div key={u.id}>
 		<span>
 			<div>
-				<img src={u.photoUrl} className={s.userPhoto} />
+				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
 			</div>
 			<div>
 				{u.followed ? <button onClick={() => onUnfollowHandler(u.id)}>Unfollow</button> :
@@ -60,12 +34,12 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 		</span>
 		<span>
 			<span>
-				<div>{u.fullName}</div>
+				<div>{u.name}</div>
 				<div>{u.status}</div>
 			</span>
 			<span>
-				<div>{u.location.country}</div>
-				<div>{u.location.city}</div>
+				<div>{'u.location.country'}</div>
+				<div>{'u.location.city'}</div>
 			</span>
 		</span>
 	</div>)}</div>
