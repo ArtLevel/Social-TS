@@ -1,6 +1,6 @@
 import { UsersType } from '../../types/Pages/UsersPageType'
 import s from './Users.module.css'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import axios from 'axios'
 
 import userPhoto from '../../assets/images/user.png'
@@ -13,16 +13,22 @@ interface IUsers {
 }
 
 export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
-	useEffect(() => {
-		axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-			setUsers(response.data.items)
-		})
-	}, [])
+	const getUsers = () => {
+		if (!users.length) {
+			axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+				setUsers(response.data.items)
+			})
+		}
+	}
 
 	const onUnfollowHandler = (userId: number) => unfollow(userId)
 	const onFollowHandler = (userId: number) => follow(userId)
 
-	return <div>{users.map(u => <div key={u.id}>
+	return (
+		<div>
+			<button onClick={getUsers}>Get Users</button>
+			{users.map(u => (
+				<div key={u.id}>
 		<span>
 			<div>
 				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
@@ -32,7 +38,7 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 					<button onClick={() => onFollowHandler(u.id)}>Follow</button>}
 			</div>
 		</span>
-		<span>
+					<span>
 			<span>
 				<div>{u.name}</div>
 				<div>{u.status}</div>
@@ -42,5 +48,7 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 				<div>{'u.location.city'}</div>
 			</span>
 		</span>
-	</div>)}</div>
+				</div>
+			))}
+		</div>)
 }
