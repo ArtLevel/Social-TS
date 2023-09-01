@@ -5,7 +5,9 @@ const UNFOLLOW: ActionValueType = 'UNFOLLOW'
 const SET_USERS: ActionValueType = 'SET_USERS'
 
 const initialState: UsersPageType = {
-	users: []
+	users: [],
+	pageSize: 5,
+	totalUsersCount: 0
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
