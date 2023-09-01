@@ -6,6 +6,10 @@ import { UserType } from '../../types/Pages/UsersPageType'
 
 interface IUserProps {
 	users: UserType[]
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	setUsers: (users: UserType[]) => void
@@ -19,17 +23,8 @@ class User extends React.Component<IUserProps> {
 	}
 
 	render() {
-		return (
-			<div>
-				<div>
-					<span className={s.selectedPage}>1</span>
-					<span>2</span>
-					<span>3</span>
-					<span>4</span>
-					<span>5</span>
-				</div>
-				{this.props.users.map(u => (
-					<div key={u.id}>
+		const usersMapped = this.props.users.map(u => (
+			<div key={u.id}>
 		<span>
 			<div>
 				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
@@ -39,7 +34,7 @@ class User extends React.Component<IUserProps> {
 					<button onClick={() => this.props.follow(u.id)}>Follow</button>}
 			</div>
 		</span>
-						<span>
+				<span>
 			<span>
 				<div>{u.name}</div>
 				<div>{u.status}</div>
@@ -49,9 +44,21 @@ class User extends React.Component<IUserProps> {
 				<div>{'u.location.city'}</div>
 			</span>
 		</span>
-					</div>
-				))}
-			</div>)
+			</div>
+		))
+		const pagesCount = this.props.totalUsersCount / this.props.pageSize
+
+		const pages = []
+		for (let i = 1; i <= pagesCount; i++) pages.push(i)
+
+		return (
+			<div>
+				<div>
+					{pages.map(p => <span>{p}</span>)}
+				</div>
+				{usersMapped}
+			</div>
+		)
 	}
 }
 
