@@ -21,8 +21,15 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 		}
 	}
 
-	const usersMapped = users.map(u => (
-		<div key={u.id}>
+
+	const onUnfollowHandler = (userId: number) => unfollow(userId)
+	const onFollowHandler = (userId: number) => follow(userId)
+
+	return (
+		<div>
+			<button onClick={getUsers}>Get Users</button>
+			{users.map(u => (
+				<div key={u.id}>
 		<span>
 			<div>
 				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
@@ -32,7 +39,7 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 					<button onClick={() => onFollowHandler(u.id)}>Follow</button>}
 			</div>
 		</span>
-			<span>
+					<span>
 			<span>
 				<div>{u.name}</div>
 				<div>{u.status}</div>
@@ -42,15 +49,7 @@ export const Users: FC<IUsers> = ({ users, unfollow, follow, setUsers }) => {
 				<div>{'u.location.city'}</div>
 			</span>
 		</span>
-		</div>
-	))
-
-	const onUnfollowHandler = (userId: number) => unfollow(userId)
-	const onFollowHandler = (userId: number) => follow(userId)
-
-	return (
-		<div>
-			<button onClick={getUsers}>Get Users</button>
-			{usersMapped}
+				</div>
+			))}
 		</div>)
 }

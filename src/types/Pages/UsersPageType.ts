@@ -3,7 +3,7 @@ export type UserOfPhotos = {
 	large: string
 }
 
-export type UsersType = {
+export type UserType = {
 	name: string
 	id: number
 	photos: UserOfPhotos
@@ -12,5 +12,5 @@ export type UsersType = {
 }
 
 export type UsersPageType = {
-	users: UsersType[]
+	users: UserType[]
 }
