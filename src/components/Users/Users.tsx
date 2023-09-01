@@ -2,23 +2,20 @@ import React from 'react'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import axios from 'axios'
-import { UserType } from '../../types/types'
+import { UserType } from '../../types/Pages/UsersPageType'
 
-interface IUserCProps {
+interface IUserProps {
 	users: UserType[]
-}
-
-interface IUserCState {
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	setUsers: (users: UserType[]) => void
 }
 
-class User extends React.Component<IUserCProps, IUserCState> {
+class User extends React.Component<IUserProps> {
 	getUsers = () => {
-		if (!this.users.length) {
+		if (!this.props.users.length) {
 			axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-				this.setUsers(response.data.items)
+				this.props.setUsers(response.data.items)
 			})
 		}
 	}
@@ -27,15 +24,15 @@ class User extends React.Component<IUserCProps, IUserCState> {
 		return (
 			<div>
 				<button onClick={this.getUsers}>Get Users</button>
-				{this.users.map(u => (
+				{this.props.users.map(u => (
 					<div key={u.id}>
 		<span>
 			<div>
 				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
 			</div>
 			<div>
-				{u.followed ? <button onClick={() => this.unfollow(u.id)}>Unfollow</button> :
-					<button onClick={() => this.follow(u.id)}>Follow</button>}
+				{u.followed ? <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button> :
+					<button onClick={() => this.props.follow(u.id)}>Follow</button>}
 			</div>
 		</span>
 						<span>

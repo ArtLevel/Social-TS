@@ -1,4 +1,4 @@
-import { ActionType, ActionValueType, UsersPageType, UsersType } from '../types/types'
+import { ActionType, ActionValueType, UsersPageType, UserType } from '../types/types'
 
 const FOLLOW: ActionValueType = 'FOLLOW'
 const UNFOLLOW: ActionValueType = 'UNFOLLOW'
@@ -29,6 +29,6 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 
 export const followAC = (userId: number): ActionType => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId: number): ActionType => ({ type: UNFOLLOW, userId })
-export const setUsersAC = (users: UsersType[]): ActionType => ({ type: SET_USERS, users })
+export const setUsersAC = (users: UserType[]): ActionType => ({ type: SET_USERS, users })
 
 export default usersReducer
