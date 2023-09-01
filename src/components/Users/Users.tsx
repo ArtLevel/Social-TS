@@ -11,8 +11,6 @@ interface IUserProps {
 	setUsers: (users: UserType[]) => void
 }
 
-// lesson 54 complete
-
 class User extends React.Component<IUserProps> {
 	componentDidMount() {
 		axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
