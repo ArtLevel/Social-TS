@@ -11,6 +11,8 @@ interface IUserProps {
 	setUsers: (users: UserType[]) => void
 }
 
+// lesson 54 complete
+
 class User extends React.Component<IUserProps> {
 	constructor(props: IUserProps) {
 		super(props)
