@@ -25,7 +25,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 				users: state.users.map(u => u.id === action.userId ? { ...u, followed: false } : u)
 			}
 		case SET_USERS:
-			return typeof action.users === 'object' ? { ...state, users: [...state.users, ...action.users] } : state
+			return typeof action.users === 'object' ? { ...state, users: action.users } : state
 		case SET_CURRENT_PAGE:
 			return action.currentPage ? { ...state, currentPage: action.currentPage } : state
 		default:
