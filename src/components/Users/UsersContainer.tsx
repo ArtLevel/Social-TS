@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC } from '../../redux/usersReducer'
 import { ActionType, StateType, UserType } from '../../types/types'
-import Users from './Users'
+import UsersAPIComponent from './UsersAPIComponent'
 
 const mapStateToProps = (state: StateType) => {
 	return {
@@ -22,5 +22,4 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
 	}
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
-
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
