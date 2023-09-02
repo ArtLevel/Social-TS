@@ -13,7 +13,7 @@ interface IUserProps {
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	setUsers: (users: UserType[]) => void
-	setCurrentPage: (pageId: number) => void
+	setCurrentPage: (currentPage: number) => void
 }
 
 class User extends React.Component<IUserProps> {

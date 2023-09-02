@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
 		follow: (userId: number) => dispatch(followAC(userId)),
 		unfollow: (userId: number) => dispatch(unfollowAC(userId)),
 		setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
-		setCurrentPage: (pageId: number) => dispatch(setCurrentPageAC(pageId))
+		setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage))
 	}
 }
 

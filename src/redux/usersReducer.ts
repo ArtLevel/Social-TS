@@ -36,6 +36,6 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 export const followAC = (userId: number): ActionType => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId: number): ActionType => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users: UserType[]): ActionType => ({ type: SET_USERS, users })
-export const setCurrentPageAC = (pageId: number): ActionType => ({ type: SET_CURRENT_PAGE, currentPage: pageId })
+export const setCurrentPageAC = (currentPage: number): ActionType => ({ type: SET_CURRENT_PAGE, currentPage })
 
 export default usersReducer
