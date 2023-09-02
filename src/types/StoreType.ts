@@ -18,7 +18,7 @@ export type ActionType = {
 	userId?: number
 	users?: UserType[]
 	currentPage?: number
-	totalCount?: number
+	totalUsersCount?: number
 }
 
 export type StoreType = {
