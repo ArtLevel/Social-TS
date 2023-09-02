@@ -60,7 +60,9 @@ export const Users: FC<IUsers> = (props) => {
 			<div>
 				{pagesMapped}
 			</div>
-			{usersMapped}
+			<div>
+				{usersMapped}
+			</div>
 		</div>
 	)
 }
