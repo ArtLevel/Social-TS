@@ -1,7 +1,7 @@
-import userPhoto from '../../assets/images/user.png'
-import s from './Users.module.css'
 import React, { FC } from 'react'
 import { UserType } from '../../types/Pages/UsersPageType'
+import userPhoto from '../../assets/images/user.png'
+import s from './Users.module.css'
 
 interface IUsers {
 	users: UserType[]
