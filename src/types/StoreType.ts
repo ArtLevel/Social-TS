@@ -10,6 +10,7 @@ export type ActionValueType =
 	| 'UNFOLLOW'
 	| 'SET_USERS'
 	| 'SET_CURRENT_PAGE'
+	| 'SET_TOTAL_USERS_COUNT'
 
 export type ActionType = {
 	type: ActionValueType
@@ -17,6 +18,7 @@ export type ActionType = {
 	userId?: number
 	users?: UserType[]
 	currentPage?: number
+	totalCount?: number
 }
 
 export type StoreType = {
