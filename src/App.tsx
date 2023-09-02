@@ -6,7 +6,7 @@ import { NavBar } from './components/NavBar/NavBar'
 import { Profile } from './components/Profile/Profile'
 import './App.css'
 import { DialogsContainer } from './components/Dialogs/DialogsContainer'
-import { UsersContainer } from './components/Users/UsersContainer'
+import UsersContainer from './components/Users/UsersContainer'
 
 const App = () => {
 	return (

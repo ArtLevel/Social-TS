@@ -18,7 +18,7 @@ interface IUsersAPIComponentProps {
 	setTotalUsersCount: (totalCount: number) => void
 }
 
-class UsersAPIComponent extends React.Component<IUsersAPIComponentProps> {
+class UsersContainer extends React.Component<IUsersAPIComponentProps> {
 	componentDidMount() {
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
 			this.props.setUsers(response.data.items)
@@ -67,4 +67,4 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
 	}
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
