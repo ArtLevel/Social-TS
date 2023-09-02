@@ -9,6 +9,7 @@ export type ActionValueType =
 	| 'FOLLOW'
 	| 'UNFOLLOW'
 	| 'SET_USERS'
+	| 'SET_CURRENT_PAGE'
 
 export type ActionType = {
 	type: ActionValueType

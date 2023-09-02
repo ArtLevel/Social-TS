@@ -72,7 +72,7 @@ const store: StoreType = {
 				}
 			]
 		},
-		usersPage: { users: [], pageSize: 5, totalUsersCount: 0 }
+		usersPage: { users: [], pageSize: 5, totalUsersCount: 0, currentPage: 1 }
 	},
 	_callSubscriber(state: StateType) {
 	},

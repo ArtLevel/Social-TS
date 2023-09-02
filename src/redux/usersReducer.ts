@@ -3,11 +3,12 @@ import { ActionType, ActionValueType, UsersPageType, UserType } from '../types/t
 const FOLLOW: ActionValueType = 'FOLLOW'
 const UNFOLLOW: ActionValueType = 'UNFOLLOW'
 const SET_USERS: ActionValueType = 'SET_USERS'
+const SET_CURRENT_PAGE: ActionValueType = 'SET_CURRENT_PAGE'
 
 const initialState: UsersPageType = {
 	users: [],
 	pageSize: 5,
-	totalUsersCount: 0,
+	totalUsersCount: 21,
 	currentPage: 1
 }
 
@@ -25,6 +26,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 			}
 		case SET_USERS:
 			return typeof action.users === 'object' ? { ...state, users: [...state.users, ...action.users] } : state
+
 		default:
 			return state
 	}
