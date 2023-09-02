@@ -11,9 +11,6 @@ interface IUsers {
 
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
-	setUsers: (users: UserType[]) => void
-	setCurrentPage: (currentPage: number) => void
-	setTotalUsersCount: (totalCount: number) => void
 	onPageChanged: (currentPage: number) => void
 }
 
