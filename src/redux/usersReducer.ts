@@ -26,7 +26,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 			}
 		case SET_USERS:
 			return typeof action.users === 'object' ? { ...state, users: [...state.users, ...action.users] } : state
-
+		case SET_CURRENT_PAGE:
+			return action.currentPage ? { ...state, currentPage: action.currentPage } : state
 		default:
 			return state
 	}
@@ -35,5 +36,6 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 export const followAC = (userId: number): ActionType => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId: number): ActionType => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users: UserType[]): ActionType => ({ type: SET_USERS, users })
+export const setCurrentPageAC = (pageId: number): ActionType => ({ type: SET_CURRENT_PAGE, currentPage: pageId })
 
 export default usersReducer

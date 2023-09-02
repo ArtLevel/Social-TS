@@ -16,6 +16,7 @@ export type ActionType = {
 	newText?: string
 	userId?: number
 	users?: UserType[]
+	currentPage?: number
 }
 
 export type StoreType = {

@@ -13,6 +13,7 @@ interface IUserProps {
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	setUsers: (users: UserType[]) => void
+	setCurrentPage: (pageId: number) => void
 }
 
 class User extends React.Component<IUserProps> {
@@ -50,7 +51,8 @@ class User extends React.Component<IUserProps> {
 
 		const pages = []
 		for (let i = 1; i <= pagesCount; i++) pages.push(i)
-		const pagesMapped = pages.map(p => <span className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>)
+		const pagesMapped = pages.map(p => <span onClick={() => this.props.setCurrentPage(p)}
+		                                         className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>)
 
 		return (
 			<div>
