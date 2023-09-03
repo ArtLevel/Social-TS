@@ -11,7 +11,8 @@ import {
 } from '../../redux/usersReducer'
 import { ActionType, StateType, UserType } from '../../types/types'
 import { Users } from './Users'
-import preloader from '../../assets/images/preloader.gif'
+import { Preloader } from '../common/preloader/Preloader'
+import preloaderGif from '../../assets/images/preloader.gif'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -60,9 +61,7 @@ class UsersContainer extends React.Component<IUsersContainer> {
 
 		return (
 			<>
-				{isFetching ? <div>
-					<img src={preloader} alt={preloader} />
-				</div> : null}
+				{isFetching ? <Preloader preloader={preloaderGif} /> : null}
 				<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
 				       currentPage={currentPage}
 				       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
