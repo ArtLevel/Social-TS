@@ -24,7 +24,24 @@ const store: StoreType = {
 				}
 			],
 			newPostText: '',
-			profile: null
+			profile: {
+				photos: { large: '', small: '' },
+				aboutMe: '',
+				userId: 2,
+				contacts: {
+					facebook: '',
+					github: '',
+					instagram: '',
+					mainLink: '',
+					twitter: '',
+					vk: '',
+					website: '',
+					youtube: ''
+				},
+				fullName: '',
+				lookingForAJob: false,
+				lookingForAJobDescription: ''
+			}
 		},
 		dialogsPage: {
 			dialogs: [

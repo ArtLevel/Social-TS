@@ -1,4 +1,4 @@
-import { ActionType, ActionValueType, PostType, ProfilePageType } from '../types/types'
+import { ActionType, ActionValueType, PostType, ProfilePageType, ProfileType } from '../types/types'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
@@ -53,6 +53,6 @@ export const addPostActionCreator = (): ActionType => ({ type: ADD_POST })
 export const updateNewPostTextActionCreator = (newText: string): ActionType =>
 	({ type: UPDATE_NEW_POST_TEXT, newText })
 
-export const setUserProfile = (profile: any): ActionType => ({ type: SET_USER_PROFILE, profile })
+export const setUserProfile = (profile: ProfileType): ActionType => ({ type: SET_USER_PROFILE, profile })
 
 export default profileReducer

@@ -2,11 +2,13 @@ import React from 'react'
 import { Profile } from './Profile'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { ProfilePageType } from '../../types/Pages/ProfilePageType'
+
+import { ProfileType, StateType } from '../../types/types'
 import { setUserProfile } from '../../redux/profileReducer'
 
 interface IProfileContainerProps {
-	setUserProfile: (profile: any) => void
+	profile: ProfileType | null
+	setUserProfile: (profile: ProfileType) => void
 }
 
 class ProfileContainer extends React.Component<IProfileContainerProps> {
@@ -18,14 +20,14 @@ class ProfileContainer extends React.Component<IProfileContainerProps> {
 
 	render() {
 		return (
-			<Profile />
+			<Profile {...this.props} profile={this.props.profile} />
 		)
 	}
 }
 
-const mapStateToProps = (state: ProfilePageType) => {
-
-}
+const mapStateToProps = (state: StateType) => ({
+	profile: state.profilePage.profile
+})
 
 export default connect(mapStateToProps, {
 	setUserProfile
