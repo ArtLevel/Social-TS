@@ -12,6 +12,7 @@ export type ActionValueType =
 	| 'SET_CURRENT_PAGE'
 	| 'SET_TOTAL_USERS_COUNT'
 	| 'TOGGLE_IS_FETCHING'
+	| 'SET_USER_PROFILE'
 
 export type ActionType = {
 	type: ActionValueType
@@ -21,6 +22,7 @@ export type ActionType = {
 	currentPage?: number
 	totalUsersCount?: number
 	isFetching?: boolean
+	profile?: any
 }
 
 export type StoreType = {

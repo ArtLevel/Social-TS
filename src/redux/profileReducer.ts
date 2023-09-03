@@ -1,7 +1,8 @@
-import { ActionType, PostType, ProfilePageType } from '../types/types'
+import { ActionType, ActionValueType, PostType, ProfilePageType } from '../types/types'
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_POST: ActionValueType = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
+const SET_USER_PROFILE: ActionValueType = 'SET_USER_PROFILE'
 
 const initialState: ProfilePageType = {
 	posts: [
@@ -21,7 +22,8 @@ const initialState: ProfilePageType = {
 			likesCount: 120
 		}
 	],
-	newPostText: ''
+	newPostText: '',
+	profile: null
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
@@ -39,6 +41,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 			if (action.newText) stateCopy.newPostText = action.newText
 			return stateCopy
 		}
+		case SET_USER_PROFILE:
+			return { ...state, profile: action.profile }
 		default:
 			return state
 	}
@@ -48,5 +52,7 @@ export const addPostActionCreator = (): ActionType => ({ type: ADD_POST })
 
 export const updateNewPostTextActionCreator = (newText: string): ActionType =>
 	({ type: UPDATE_NEW_POST_TEXT, newText })
+
+export const setUserProfile = (profile: any): ActionType => ({ type: SET_USER_PROFILE, profile })
 
 export default profileReducer

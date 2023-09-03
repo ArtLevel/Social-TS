@@ -23,7 +23,8 @@ const store: StoreType = {
 					likesCount: 120
 				}
 			],
-			newPostText: ''
+			newPostText: '',
+			profile: null
 		},
 		dialogsPage: {
 			dialogs: [
