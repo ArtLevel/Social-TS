@@ -61,11 +61,13 @@ class UsersContainer extends React.Component<IUsersContainer> {
 
 		return (
 			<>
-				{isFetching ? <Preloader preloader={preloaderGif} /> : null}
-				<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
-				       currentPage={currentPage}
-				       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
-				/>
+				{
+					isFetching ? <Preloader preloader={preloaderGif} /> :
+						<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
+						       currentPage={currentPage}
+						       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
+						/>
+				}
 			</>
 		)
 	}
