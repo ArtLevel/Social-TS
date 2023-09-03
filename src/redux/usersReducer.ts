@@ -5,6 +5,7 @@ const UNFOLLOW: ActionValueType = 'UNFOLLOW'
 const SET_USERS: ActionValueType = 'SET_USERS'
 const SET_CURRENT_PAGE: ActionValueType = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT: ActionValueType = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING: ActionValueType = 'TOGGLE_IS_FETCHING'
 
 const initialState: UsersPageType = {
 	users: [],
@@ -33,6 +34,9 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 		case SET_TOTAL_USERS_COUNT: {
 			return action.totalUsersCount ? { ...state, totalUsersCount: action.totalUsersCount } : state
 		}
+		case TOGGLE_IS_FETCHING: {
+			return action.isFetching ? { ...state, isFetching: action.isFetching } : state
+		}
 		default:
 			return state
 	}
@@ -46,5 +50,11 @@ export const setUsersTotalCountAC = (totalUsersCount: number): ActionType => ({
 	type: SET_TOTAL_USERS_COUNT,
 	totalUsersCount
 })
+
+export const setIsFetchingAC = (isFetching: boolean): ActionType => ({
+	type: TOGGLE_IS_FETCHING,
+	isFetching
+})
+
 
 export default usersReducer
