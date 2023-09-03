@@ -10,7 +10,8 @@ const initialState: UsersPageType = {
 	users: [],
 	pageSize: 5,
 	totalUsersCount: 0,
-	currentPage: 1
+	currentPage: 1,
+	isFetching: false
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {

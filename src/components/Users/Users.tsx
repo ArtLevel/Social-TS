@@ -8,6 +8,7 @@ interface IUsers {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
+	isFetching: boolean
 
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
@@ -52,7 +53,7 @@ export const Users: FC<IUsers> = (props) => {
 
 	const pages = []
 	for (let i = 1; i <= pagesCount; i++) pages.push(i)
-	const pagesMapped = pages.map(p => <span onClick={() => onPageChanged(p)}
+	const pagesMapped = pages.map(p => <span key={p} onClick={() => onPageChanged(p)}
 	                                         className={currentPage === p ? s.selectedPage : ''}>{p}</span>)
 
 	return (
