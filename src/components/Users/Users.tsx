@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { UserType } from '../../types/Pages/UsersPageType'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
+import { NavLink } from 'react-router-dom'
 
 interface IUsers {
 	users: UserType[]
@@ -29,7 +30,8 @@ export const Users: FC<IUsers> = (props) => {
 		<div key={u.id}>
 		<span>
 			<div>
-				<img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto} />
+				<NavLink to={`/profile/${u.id}`}><img src={u.photos.small ? u.photos.small : userPhoto}
+				                                      className={s.userPhoto} /></NavLink>
 			</div>
 			<div>
 				{u.followed ? <button onClick={() => unfollow(u.id)}>Unfollow</button> :
