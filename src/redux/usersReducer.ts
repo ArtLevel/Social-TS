@@ -34,9 +34,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 		case SET_TOTAL_USERS_COUNT: {
 			return action.totalUsersCount ? { ...state, totalUsersCount: action.totalUsersCount } : state
 		}
-		case TOGGLE_IS_FETCHING: {
-			return action.isFetching ? { ...state, isFetching: action.isFetching } : state
-		}
+		case TOGGLE_IS_FETCHING:
+			return action.isFetching !== undefined ? { ...state, isFetching: action.isFetching } : state
 		default:
 			return state
 	}

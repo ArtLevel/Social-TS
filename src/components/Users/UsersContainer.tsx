@@ -39,8 +39,10 @@ class UsersContainer extends React.Component<IUsersContainer> {
 	}
 
 	onPageChanged = (currentPage: number) => {
+		this.props.toggleIsFetching(true)
 		this.props.setCurrentPage(currentPage)
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+			this.props.toggleIsFetching(false)
 			this.props.setUsers(response.data.items)
 		})
 	}
@@ -58,7 +60,9 @@ class UsersContainer extends React.Component<IUsersContainer> {
 
 		return (
 			<>
-				{isFetching ? <img src={preloader} /> : null}
+				{isFetching ? <div>
+					<img src={preloader} alt={preloader} />
+				</div> : null}
 				<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
 				       currentPage={currentPage}
 				       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
