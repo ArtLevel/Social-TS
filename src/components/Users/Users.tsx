@@ -8,7 +8,6 @@ interface IUsers {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
-	isFetching: boolean
 
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void

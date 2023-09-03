@@ -4,6 +4,7 @@ import axios from 'axios'
 import { followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC } from '../../redux/usersReducer'
 import { ActionType, StateType, UserType } from '../../types/types'
 import { Users } from './Users'
+import preloader from '../../assets/images/preloader.gif'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -45,9 +46,15 @@ class UsersContainer extends React.Component<IUsersContainer> {
 			unfollow
 		} = this.props
 
-		return <Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
-		              currentPage={currentPage} isFetching={isFetching}
-		              follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged} />
+		return (
+			<>
+				{isFetching ? <img src={preloader} /> : null}
+				<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
+				       currentPage={currentPage}
+				       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
+				/>
+			</>
+		)
 	}
 }
 
