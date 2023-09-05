@@ -18,7 +18,8 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, setUserProfile }) => {
 			/>
 			<div className={s.descriptionBlock}>
 				<img src={profile.photos.large} />
-				ava + description
+				<p>{profile.aboutMe}</p>
+				<p>{profile.lookingForAJobDescription}</p>
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />

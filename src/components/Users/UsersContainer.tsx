@@ -50,22 +50,15 @@ class UsersContainer extends React.Component<IUsersContainer> {
 
 	render() {
 		const {
-			users,
-			pageSize,
-			totalUsersCount,
-			currentPage,
 			isFetching,
-			follow,
-			unfollow
+			...restProps
 		} = this.props
 
 		return (
 			<>
 				{
 					isFetching ? <Preloader preloader={preloaderGif} /> :
-						<Users users={users} pageSize={pageSize} totalUsersCount={totalUsersCount}
-						       currentPage={currentPage}
-						       follow={follow} unfollow={unfollow} onPageChanged={this.onPageChanged}
+						<Users {...this.props} onPageChanged={this.onPageChanged}
 						/>
 				}
 			</>
