@@ -59,6 +59,15 @@ export type ToggleIsFetchingAT = {
 	isFetching: boolean
 }
 
+export type SendMessageAT = {
+	type: 'SEND-MESSAGE',
+}
+
+export type UpdateNewMessageBodyAT = {
+	type: 'UPDATE-NEW-MESSAGE-BODY',
+	newText: string
+}
+
 export type ActionsType =
 	AddPostAT
 	| UpdateNewPostTextAT
@@ -69,6 +78,8 @@ export type ActionsType =
 	| SetCurrentPageAT
 	| SetTotalUsersCountAT
 	| ToggleIsFetchingAT
+	| SendMessageAT
+	| UpdateNewMessageBodyAT
 
 export type ActionType = {
 	type: ActionValueType
