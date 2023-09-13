@@ -12,10 +12,17 @@ interface IProfileContainerProps {
 	setUserProfile: (profile: ProfileType) => void
 }
 
-class ProfileContainer extends React.Component<IProfileContainerProps & RouteComponentProps> {
+interface IRouteComponentParams {
+	userId: string
+}
+
+class ProfileContainer extends React.Component<IProfileContainerProps & RouteComponentProps<IRouteComponentParams>> {
 	componentDidMount() {
-		debugger
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${2}`).then(response => {
+		let userId = this.props.match.params.userId
+
+		if (!userId) userId = '2' // '29914'
+
+		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
 			this.props.setUserProfile(response.data)
 		})
 	}
