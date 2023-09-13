@@ -13,6 +13,7 @@ export type ActionValueType =
 	| 'SET_TOTAL_USERS_COUNT'
 	| 'TOGGLE_IS_FETCHING'
 	| 'SET_USER_PROFILE'
+	| 'SET_USER_DATA'
 
 export type ActionType = {
 	type: ActionValueType
@@ -23,6 +24,11 @@ export type ActionType = {
 	totalUsersCount?: number
 	isFetching?: boolean
 	profile?: any
+	data?: {
+		id: null | number
+		email: null | string
+		login: null | string
+	}
 }
 
 export type StoreType = {
