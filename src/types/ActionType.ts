@@ -68,6 +68,16 @@ export type UpdateNewMessageBodyAT = {
 	newText: string
 }
 
+export type SetAuthUserDataAT = {
+	type: 'SET_USER_DATA',
+	data: {
+		id: null | number
+		email: null | string
+		login: null | string
+	}
+}
+
+
 export type ActionsType =
 	AddPostAT
 	| UpdateNewPostTextAT
@@ -80,6 +90,7 @@ export type ActionsType =
 	| ToggleIsFetchingAT
 	| SendMessageAT
 	| UpdateNewMessageBodyAT
+	| SetAuthUserDataAT
 
 export type ActionType = {
 	type: ActionValueType

@@ -1,4 +1,4 @@
-import { ActionType, ActionValueType } from '../types/types'
+import { ActionsType, ActionValueType, SetAuthUserDataAT } from '../types/types'
 
 const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
 
@@ -9,7 +9,7 @@ const initialState = {
 	isAuth: false
 }
 
-const authReducer = (state = initialState, action: ActionType) => {
+const authReducer = (state = initialState, action: ActionsType) => {
 	switch (action.type) {
 		case SET_USER_DATA:
 			return {
@@ -22,7 +22,7 @@ const authReducer = (state = initialState, action: ActionType) => {
 	}
 }
 
-export const setAuthUserDataAC = (data: any) => ({
+export const setAuthUserDataAC = (data: any): SetAuthUserDataAT => ({
 	type: SET_USER_DATA,
 	data
 })
