@@ -1,4 +1,4 @@
-import { ActionType, SidebarPageType } from '../types/types'
+import { ActionsType, SidebarPageType } from '../types/types'
 
 const initialState: SidebarPageType = {
 	sidebar: [
@@ -17,7 +17,7 @@ const initialState: SidebarPageType = {
 	]
 }
 
-const sidebarReducer = (state: SidebarPageType = initialState, action: ActionType) => {
+const sidebarReducer = (state: SidebarPageType = initialState, action: ActionsType) => {
 
 	return state
 }

@@ -1,11 +1,11 @@
 import {
 	ActionsType,
-	ActionType,
 	ActionValueType,
 	FollowAT,
 	SetCurrentPageAT,
 	SetTotalUsersCountAT,
 	SetUsersAT,
+	ToggleIsFetchingAT,
 	UnfollowAT,
 	UsersPageType,
 	UserType
@@ -61,7 +61,7 @@ export const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountA
 	totalUsersCount
 })
 
-export const toggleIsFetching = (isFetching: boolean): ActionType => ({
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAT => ({
 	type: TOGGLE_IS_FETCHING,
 	isFetching
 })

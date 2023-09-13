@@ -1,5 +1,5 @@
 import { StateType } from './StateType'
-import { ActionType } from './ActionType'
+import { ActionsType } from './ActionType'
 
 export type StoreType = {
 	_state: StateType
@@ -9,5 +9,5 @@ export type StoreType = {
 	updateNewPostText: (newText: string) => void
 	subscribe: (observer: (state: StateType) => void) => void
 
-	dispatch: (action: ActionType) => void
+	dispatch: (action: ActionsType) => void
 }

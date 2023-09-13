@@ -91,19 +91,3 @@ export type ActionsType =
 	| SendMessageAT
 	| UpdateNewMessageBodyAT
 	| SetAuthUserDataAT
-
-export type ActionType = {
-	type: ActionValueType
-	newText?: string
-	userId?: number
-	users?: UserType[]
-	currentPage?: number
-	totalUsersCount?: number
-	isFetching?: boolean
-	profile?: any
-	data?: {
-		id: null | number
-		email: null | string
-		login: null | string
-	}
-}
