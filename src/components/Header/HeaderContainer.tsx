@@ -3,11 +3,13 @@ import { Header } from './Header'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { setAuthUserDataAC } from '../../redux/authReducer'
+import { AuthUserDataType } from '../../types/AuthType'
+import { StateType } from '../../types/StateType'
 
 interface IHeaderContainer {
 	isAuth: boolean
 	login: null | string
-	setAuthUserDataAC: (data: any) => void
+	setAuthUserDataAC: (data: AuthUserDataType) => void
 }
 
 class HeaderContainer extends React.Component<IHeaderContainer> {
@@ -27,7 +29,7 @@ class HeaderContainer extends React.Component<IHeaderContainer> {
 	}
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: StateType) => ({
 	isAuth: state.auth.isAuth,
 	login: state.auth.login
 })
