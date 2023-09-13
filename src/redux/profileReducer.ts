@@ -1,4 +1,13 @@
-import { ActionType, ActionValueType, PostType, ProfilePageType, ProfileType } from '../types/types'
+import {
+	ActionType,
+	ActionValueType,
+	AddPostAT,
+	PostType,
+	ProfilePageType,
+	ProfileType,
+	setUserProfileAT,
+	UpdateNewPostTextAT
+} from '../types/types'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
@@ -48,11 +57,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 	}
 }
 
-export const addPostActionCreator = (): ActionType => ({ type: ADD_POST })
+export const addPostActionCreator = (): AddPostAT => ({ type: ADD_POST })
 
-export const updateNewPostTextActionCreator = (newText: string): ActionType =>
+export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextAT =>
 	({ type: UPDATE_NEW_POST_TEXT, newText })
 
-export const setUserProfile = (profile: ProfileType): ActionType => ({ type: SET_USER_PROFILE, profile })
+export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
 
 export default profileReducer

@@ -1,4 +1,5 @@
 import { UserType } from './Pages/UsersPageType'
+import { ProfileType } from './Pages/ProfilePageType'
 
 export type ActionValueType =
 	'ADD-POST'
@@ -13,6 +14,20 @@ export type ActionValueType =
 	| 'TOGGLE_IS_FETCHING'
 	| 'SET_USER_PROFILE'
 	| 'SET_USER_DATA'
+
+export type AddPostAT = {
+	type: 'ADD-POST',
+}
+
+export type UpdateNewPostTextAT = {
+	type: 'UPDATE-NEW-POST-TEXT',
+	newText: string
+}
+
+export type setUserProfileAT = {
+	type: 'SET_USER_PROFILE',
+	profile: ProfileType
+}
 
 export type ActionType = {
 	type: ActionValueType
