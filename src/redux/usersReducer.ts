@@ -1,4 +1,15 @@
-import { ActionType, ActionValueType, UsersPageType, UserType } from '../types/types'
+import {
+	ActionsType,
+	ActionType,
+	ActionValueType,
+	FollowAT,
+	SetCurrentPageAT,
+	SetTotalUsersCountAT,
+	SetUsersAT,
+	UnfollowAT,
+	UsersPageType,
+	UserType
+} from '../types/types'
 
 const FOLLOW: ActionValueType = 'FOLLOW'
 const UNFOLLOW: ActionValueType = 'UNFOLLOW'
@@ -15,7 +26,7 @@ const initialState: UsersPageType = {
 	isFetching: true
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
+const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
 	switch (action.type) {
 		case FOLLOW:
 			return {
@@ -41,11 +52,11 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
 	}
 }
 
-export const follow = (userId: number): ActionType => ({ type: FOLLOW, userId })
-export const unfollow = (userId: number): ActionType => ({ type: UNFOLLOW, userId })
-export const setUsers = (users: UserType[]): ActionType => ({ type: SET_USERS, users })
-export const setCurrentPage = (currentPage: number): ActionType => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCount = (totalUsersCount: number): ActionType => ({
+export const follow = (userId: number): FollowAT => ({ type: FOLLOW, userId })
+export const unfollow = (userId: number): UnfollowAT => ({ type: UNFOLLOW, userId })
+export const setUsers = (users: UserType[]): SetUsersAT => ({ type: SET_USERS, users })
+export const setCurrentPage = (currentPage: number): SetCurrentPageAT => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountAT => ({
 	type: SET_TOTAL_USERS_COUNT,
 	totalUsersCount
 })

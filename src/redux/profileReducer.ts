@@ -1,5 +1,5 @@
 import {
-	ActionType,
+	ActionsType,
 	ActionValueType,
 	AddPostAT,
 	PostType,
@@ -35,7 +35,7 @@ const initialState: ProfilePageType = {
 	profile: null
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
 	switch (action.type) {
 		case ADD_POST: {
 			const newPost: PostType = {

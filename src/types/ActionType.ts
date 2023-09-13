@@ -29,6 +29,47 @@ export type setUserProfileAT = {
 	profile: ProfileType
 }
 
+export type FollowAT = {
+	type: 'FOLLOW',
+	userId: number
+}
+
+export type UnfollowAT = {
+	type: 'UNFOLLOW',
+	userId: number
+}
+
+export type SetUsersAT = {
+	type: 'SET_USERS',
+	users: UserType[]
+}
+
+export type SetCurrentPageAT = {
+	type: 'SET_CURRENT_PAGE',
+	currentPage: number
+}
+
+export type SetTotalUsersCountAT = {
+	type: 'SET_TOTAL_USERS_COUNT',
+	totalUsersCount: number
+}
+
+export type ToggleIsFetchingAT = {
+	type: 'TOGGLE_IS_FETCHING',
+	isFetching: boolean
+}
+
+export type ActionsType =
+	AddPostAT
+	| UpdateNewPostTextAT
+	| setUserProfileAT
+	| FollowAT
+	| UnfollowAT
+	| SetUsersAT
+	| SetCurrentPageAT
+	| SetTotalUsersCountAT
+	| ToggleIsFetchingAT
+
 export type ActionType = {
 	type: ActionValueType
 	newText?: string
