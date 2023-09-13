@@ -5,7 +5,8 @@ const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
 const initialState = {
 	id: null,
 	email: null,
-	login: null
+	login: null,
+	isAuth: false
 }
 
 const authReducer = (state = initialState, action: ActionType) => {
@@ -13,14 +14,15 @@ const authReducer = (state = initialState, action: ActionType) => {
 		case SET_USER_DATA:
 			return {
 				...state,
-				...action.data
+				...action.data,
+				isAuth: true
 			}
 		default:
 			return state
 	}
 }
 
-export const setUserDataAC = (data: ActionType) => ({
+export const setAuthUserDataAC = (data: any) => ({
 	type: SET_USER_DATA,
 	data
 })

@@ -1,19 +1,18 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-
-import { Header } from './components/Header/Header'
 import { NavBar } from './components/NavBar/NavBar'
 
 import { DialogsContainer } from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import './App.css'
+import HeaderContainer from './components/Header/HeaderContainer'
 
 const App = () => {
 	return (
 		<div className='app-wrapper'>
 
-			<Header />
+			<HeaderContainer />
 			<NavBar />
 
 			<div className='app-wrapper-content'>
