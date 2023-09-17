@@ -3,7 +3,7 @@ import { UserType } from '../../types/Pages/UsersPageType'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import { usersAPI } from '../../api/api'
 
 interface IUsers {
 	users: UserType[]
@@ -28,27 +28,13 @@ export const Users: FC<IUsers> = (props) => {
 	} = props
 
 	const unfollowHandler = (userId: number) => {
-		axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-			withCredentials: true,
-			headers: {
-				'API-KEY': 'e6c1104d-b018-490b-b03c-8c3d00a39810'
-			}
-		}).then(response => {
-			if (response.data.resultCode === 0) {
-				unfollow(userId)
-			}
+		usersAPI.deleteFollow(userId).then(data => {
+			if (data.resultCode === 0) unfollow(userId)
 		})
 	}
 	const followHandler = (userId: number) => {
-		axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
-			withCredentials: true,
-			headers: {
-				'API-KEY': 'e6c1104d-b018-490b-b03c-8c3d00a39810'
-			}
-		}).then(response => {
-			if (response.data.resultCode === 0) {
-				follow(userId)
-			}
+		usersAPI.postFollow(userId).then(data => {
+			if (data.resultCode === 0) follow(userId)
 		})
 	}
 

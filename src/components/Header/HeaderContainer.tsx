@@ -14,7 +14,7 @@ interface IHeaderContainer {
 
 class HeaderContainer extends React.Component<IHeaderContainer> {
 	componentDidMount() {
-		usersAPI.authMe().then(data => {
+		usersAPI.getAuthMe().then(data => {
 			if (data.resultCode === 0) {
 				const { id, login, email } = data.data
 				this.props.setAuthUserDataAC({ id, login, email })

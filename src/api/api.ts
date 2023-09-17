@@ -13,8 +13,20 @@ export const usersAPI = {
 		return instance.get(`users?page=${currentPage}&count=${pageSize}`)
 			.then(response => response.data)
 	},
-	authMe() {
+	getAuthMe() {
 		return instance.get(`auth/me`)
+			.then(response => response.data)
+	},
+	getUserProfile(userId: number) {
+		return instance.get(`profile/${userId}`)
+			.then(response => response.data)
+	},
+	deleteFollow(userId: number) {
+		return axios.delete(`follow/${userId}`)
+			.then(response => response.data)
+	},
+	postFollow(userId: number) {
+		return axios.post(`follow/${userId}`)
 			.then(response => response.data)
 	}
 }
