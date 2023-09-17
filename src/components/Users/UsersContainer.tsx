@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import {
 	follow,
 	setCurrentPage,
@@ -12,8 +11,8 @@ import {
 import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
-import preloaderGif from '../../assets/images/preloader.gif'
 import { getUsers } from '../../api/api'
+import preloaderGif from '../../assets/images/preloader.gif'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -35,6 +34,7 @@ class UsersContainer extends React.Component<IUsersContainer> {
 		this.props.toggleIsFetching(true)
 
 		getUsers(this.props.currentPage, this.props.pageSize).then(response => {
+			debugger
 			this.props.toggleIsFetching(false)
 			this.props.setUsers(response.data.items)
 			this.props.setTotalUsersCount(response.data.totalCount)
@@ -44,12 +44,8 @@ class UsersContainer extends React.Component<IUsersContainer> {
 	onPageChanged = (currentPage: number) => {
 		this.props.toggleIsFetching(true)
 		this.props.setCurrentPage(currentPage)
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-			withCredentials: true,
-			headers: {
-				'API-KEY': 'e6c1104d-b018-490b-b03c-8c3d00a39810'
-			}
-		}).then(response => {
+
+		getUsers(currentPage, this.props.pageSize).then(response => {
 			this.props.toggleIsFetching(false)
 			this.props.setUsers(response.data.items)
 		})
