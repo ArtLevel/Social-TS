@@ -11,7 +11,7 @@ import {
 import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
-import { getUsers } from '../../api/api'
+import { usersAPI } from '../../api/api'
 import preloaderGif from '../../assets/images/preloader.gif'
 
 interface IUsersContainer {
@@ -33,11 +33,10 @@ class UsersContainer extends React.Component<IUsersContainer> {
 	componentDidMount() {
 		this.props.toggleIsFetching(true)
 
-		getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-			debugger
+		usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
 			this.props.toggleIsFetching(false)
-			this.props.setUsers(response.data.items)
-			this.props.setTotalUsersCount(response.data.totalCount)
+			this.props.setUsers(data.items)
+			this.props.setTotalUsersCount(data.totalCount)
 		})
 	}
 
@@ -45,9 +44,9 @@ class UsersContainer extends React.Component<IUsersContainer> {
 		this.props.toggleIsFetching(true)
 		this.props.setCurrentPage(currentPage)
 
-		getUsers(currentPage, this.props.pageSize).then(response => {
+		usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
 			this.props.toggleIsFetching(false)
-			this.props.setUsers(response.data.items)
+			this.props.setUsers(data.items)
 		})
 	}
 
