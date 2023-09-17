@@ -34,8 +34,9 @@ export const Users: FC<IUsers> = (props) => {
 				                                      className={s.userPhoto} /></NavLink>
 			</div>
 			<div>
-				{u.followed ? <button onClick={() => unfollow(u.id)}>Unfollow</button> :
-					<button onClick={() => follow(u.id)}>Follow</button>}
+				{u.followed
+					? <button onClick={() => unfollow(u.id)}>Unfollow</button>
+					: <button onClick={() => follow(u.id)}>Follow</button>}
 			</div>
 		</span>
 			<span>
