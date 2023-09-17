@@ -1,10 +1,10 @@
 import React from 'react'
 import { Header } from './Header'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { setAuthUserDataAC } from '../../redux/authReducer'
 import { AuthUserDataType } from '../../types/AuthType'
 import { StateType } from '../../types/StateType'
+import { usersAPI } from '../../api/api'
 
 interface IHeaderContainer {
 	isAuth: boolean
@@ -14,11 +14,9 @@ interface IHeaderContainer {
 
 class HeaderContainer extends React.Component<IHeaderContainer> {
 	componentDidMount() {
-		axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-			withCredentials: true
-		}).then(response => {
-			if (response.data.resultCode === 0) {
-				const { id, login, email } = response.data.data
+		usersAPI.authMe().then(data => {
+			if (data.resultCode === 0) {
+				const { id, login, email } = data.data
 				this.props.setAuthUserDataAC({ id, login, email })
 			}
 		})
