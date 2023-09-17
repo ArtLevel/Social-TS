@@ -3,6 +3,7 @@ import { UserType } from '../../types/Pages/UsersPageType'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 interface IUsers {
 	users: UserType[]
@@ -26,6 +27,32 @@ export const Users: FC<IUsers> = (props) => {
 		onPageChanged
 	} = props
 
+	const unfollowHandler = (userId: number) => {
+		axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+			withCredentials: true,
+			headers: {
+				'API-KEY': 'e6c1104d-b018-490b-b03c-8c3d00a39810'
+			}
+		}).then(response => {
+			if (response.data.resultCode === 0) {
+				unfollow(userId)
+			}
+		})
+	}
+	const followHandler = (userId: number) => {
+		axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+			withCredentials: true,
+			headers: {
+				'API-KEY': 'e6c1104d-b018-490b-b03c-8c3d00a39810'
+			}
+		}).then(response => {
+			if (response.data.resultCode === 0) {
+				follow(userId)
+			}
+		})
+	}
+
+
 	const usersMapped = users.map(u => (
 		<div key={u.id}>
 		<span>
@@ -35,8 +62,8 @@ export const Users: FC<IUsers> = (props) => {
 			</div>
 			<div>
 				{u.followed
-					? <button onClick={() => unfollow(u.id)}>Unfollow</button>
-					: <button onClick={() => follow(u.id)}>Follow</button>}
+					? <button onClick={() => unfollowHandler(u.id)}>Unfollow</button>
+					: <button onClick={() => followHandler(u.id)}>Follow</button>}
 			</div>
 		</span>
 			<span>
