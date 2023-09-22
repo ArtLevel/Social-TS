@@ -38,7 +38,6 @@ export const Users: FC<IUsers> = (props) => {
 		})
 	}
 
-
 	const usersMapped = users.map(u => (
 		<div key={u.id}>
 		<span>
