@@ -14,6 +14,7 @@ export type ActionValueType =
 	| 'TOGGLE_IS_FETCHING'
 	| 'SET_USER_PROFILE'
 	| 'SET_USER_DATA'
+	| 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 export type AddPostAT = {
 	type: 'ADD-POST',
@@ -77,6 +78,10 @@ export type SetAuthUserDataAT = {
 	}
 }
 
+export type ToggleFollowingProgressAT = {
+	type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+	isFetching: boolean
+}
 
 export type ActionsType =
 	AddPostAT
@@ -91,3 +96,4 @@ export type ActionsType =
 	| SendMessageAT
 	| UpdateNewMessageBodyAT
 	| SetAuthUserDataAT
+	| ToggleFollowingProgressAT

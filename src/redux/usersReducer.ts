@@ -5,6 +5,7 @@ import {
 	SetCurrentPageAT,
 	SetTotalUsersCountAT,
 	SetUsersAT,
+	ToggleFollowingProgressAT,
 	ToggleIsFetchingAT,
 	UnfollowAT,
 	UsersPageType,
@@ -17,13 +18,15 @@ const SET_USERS: ActionValueType = 'SET_USERS'
 const SET_CURRENT_PAGE: ActionValueType = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT: ActionValueType = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING: ActionValueType = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS: ActionValueType = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 const initialState: UsersPageType = {
 	users: [],
 	pageSize: 5,
 	totalUsersCount: 0,
 	currentPage: 1,
-	isFetching: true
+	isFetching: true,
+	followingInProgress: false
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
@@ -47,6 +50,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
 		}
 		case TOGGLE_IS_FETCHING:
 			return action.isFetching !== undefined ? { ...state, isFetching: action.isFetching } : state
+		case TOGGLE_IS_FOLLOWING_PROGRESS:
+			return { ...state, followingInProgress: action.isFetching }
 		default:
 			return state
 	}
@@ -63,6 +68,11 @@ export const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountA
 
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAT => ({
 	type: TOGGLE_IS_FETCHING,
+	isFetching
+})
+
+export const toggleFollowingProgress = (isFetching: boolean): ToggleFollowingProgressAT => ({
+	type: TOGGLE_IS_FOLLOWING_PROGRESS,
 	isFetching
 })
 

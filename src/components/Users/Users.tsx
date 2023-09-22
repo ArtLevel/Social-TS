@@ -10,10 +10,12 @@ interface IUsers {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
+	followingInProgress: boolean
 
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	onPageChanged: (currentPage: number) => void
+	toggleFollowingProgress: (isFetching: boolean) => void
 }
 
 export const Users: FC<IUsers> = (props) => {
@@ -22,22 +24,28 @@ export const Users: FC<IUsers> = (props) => {
 		pageSize,
 		totalUsersCount,
 		currentPage,
+		followingInProgress,
 		follow,
 		unfollow,
-		onPageChanged
+		onPageChanged,
+		toggleFollowingProgress
 	} = props
 
 	const unfollowHandler = (userId: number) => {
+		toggleFollowingProgress(true)
 		usersAPI.deleteFollow(userId).then(data => {
 			if (data.resultCode === 0) unfollow(userId)
+			toggleFollowingProgress(false)
 		})
 	}
 	const followHandler = (userId: number) => {
+		toggleFollowingProgress(true)
 		usersAPI.postFollow(userId).then(data => {
 			if (data.resultCode === 0) follow(userId)
+			toggleFollowingProgress(false)
 		})
 	}
-
+	
 	const usersMapped = users.map(u => (
 		<div key={u.id}>
 		<span>
@@ -47,8 +55,8 @@ export const Users: FC<IUsers> = (props) => {
 			</div>
 			<div>
 				{u.followed
-					? <button onClick={() => unfollowHandler(u.id)}>Unfollow</button>
-					: <button onClick={() => followHandler(u.id)}>Follow</button>}
+					? <button onClick={() => unfollowHandler(u.id)} disabled={followingInProgress}>Unfollow</button>
+					: <button onClick={() => followHandler(u.id)} disabled={followingInProgress}>Follow</button>}
 			</div>
 		</span>
 			<span>
