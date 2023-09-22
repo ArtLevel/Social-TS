@@ -22,8 +22,8 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 
 		if (!userId) userId = 2 // 29914
 
-		usersAPI.getUserProfile(userId).then(response => {
-			this.props.setUserProfile(response.data)
+		usersAPI.getUserProfile(userId).then(data => {
+			this.props.setUserProfile(data)
 		})
 	}
 
