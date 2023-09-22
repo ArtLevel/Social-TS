@@ -80,6 +80,7 @@ export type SetAuthUserDataAT = {
 
 export type ToggleFollowingProgressAT = {
 	type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+	userId: number
 	isFetching: boolean
 }
 

@@ -21,7 +21,7 @@ interface IUsersContainer {
 	totalUsersCount: number
 	currentPage: number
 	isFetching: boolean
-	followingInProgress: boolean
+	followingInProgress: number[]
 
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
@@ -29,7 +29,7 @@ interface IUsersContainer {
 	setCurrentPage: (currentPage: number) => void
 	setTotalUsersCount: (totalCount: number) => void
 	toggleIsFetching: (isFetching: boolean) => void
-	toggleFollowingProgress: (isFetching: boolean) => void
+	toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 class UsersContainer extends React.Component<IUsersContainer> {
