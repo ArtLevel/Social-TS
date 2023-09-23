@@ -15,6 +15,8 @@ import { Preloader } from '../common/preloader/Preloader'
 import { usersAPI } from '../../api/api'
 import preloaderGif from '../../assets/images/preloader.gif'
 
+// ReduxThunk
+
 interface IUsersContainer {
 	users: UserType[]
 	pageSize: number
