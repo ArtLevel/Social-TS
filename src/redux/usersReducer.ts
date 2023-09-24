@@ -11,6 +11,7 @@ import {
 	UsersPageType,
 	UserType
 } from '../types/types'
+import { usersAPI } from '../api/api'
 
 const FOLLOW: ActionValueType = 'FOLLOW'
 const UNFOLLOW: ActionValueType = 'UNFOLLOW'
@@ -80,5 +81,16 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 	isFetching
 })
 
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+	return (dispatch: (action: ActionsType) => void) => {
+		dispatch(toggleIsFetching(true))
+
+		usersAPI.getUsers(currentPage, pageSize).then(data => {
+			dispatch(toggleIsFetching(false))
+			dispatch(setUsers(data.items))
+			dispatch(setTotalUsersCount(data.totalCount))
+		})
+	}
+}
 
 export default usersReducer
