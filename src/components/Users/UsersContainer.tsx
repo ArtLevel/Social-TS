@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
 	follow,
+	getUsersThunkCreator,
 	setCurrentPage,
 	setTotalUsersCount,
 	setUsers,
@@ -12,7 +13,6 @@ import {
 import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
-import { usersAPI } from '../../api/api'
 import preloaderGif from '../../assets/images/preloader.gif'
 
 interface IUsersContainer {
@@ -30,27 +30,16 @@ interface IUsersContainer {
 	setTotalUsersCount: (totalCount: number) => void
 	toggleIsFetching: (isFetching: boolean) => void
 	toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+	getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<IUsersContainer> {
 	componentDidMount() {
-		this.props.toggleIsFetching(true)
-
-		usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-			this.props.toggleIsFetching(false)
-			this.props.setUsers(data.items)
-			this.props.setTotalUsersCount(data.totalCount)
-		})
+		this.props.getUsers(this.props.currentPage, this.props.pageSize)
 	}
 
 	onPageChanged = (currentPage: number) => {
-		this.props.toggleIsFetching(true)
-		this.props.setCurrentPage(currentPage)
-
-		usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
-			this.props.toggleIsFetching(false)
-			this.props.setUsers(data.items)
-		})
+		this.props.getUsers(currentPage, this.props.pageSize)
 	}
 
 	render() {
@@ -88,5 +77,6 @@ export default connect(mapStateToProps, {
 	setCurrentPage,
 	setTotalUsersCount,
 	toggleIsFetching,
-	toggleFollowingProgress
+	toggleFollowingProgress,
+	getUsers: getUsersThunkCreator
 })(UsersContainer)
