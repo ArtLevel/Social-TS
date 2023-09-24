@@ -5,8 +5,8 @@ import { NavBar } from './components/NavBar/NavBar'
 import { DialogsContainer } from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
-import './App.css'
 import HeaderContainer from './components/Header/HeaderContainer'
+import './App.css'
 
 const App = () => {
 	return (

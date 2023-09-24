@@ -1,5 +1,6 @@
 import { ActionsType, ActionValueType, SetAuthUserDataAT } from '../types/types'
 import { AuthType, AuthUserDataType } from '../types/AuthType'
+import { usersAPI } from '../api/api'
 
 const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
 
@@ -23,9 +24,20 @@ const authReducer = (state: AuthType = initialState, action: ActionsType): AuthT
 	}
 }
 
-export const setAuthUserDataAC = (data: AuthUserDataType): SetAuthUserDataAT => ({
+export const setAuthUserData = (data: AuthUserDataType): SetAuthUserDataAT => ({
 	type: SET_USER_DATA,
 	data
 })
+
+export const getAuthMe = () => {
+	return (dispatch: (action: ActionsType) => void) => {
+		usersAPI.getAuthMe().then(data => {
+			if (data.resultCode === 0) {
+				const { id, login, email } = data.data
+				dispatch(setAuthUserData({ id, login, email }))
+			}
+		})
+	}
+}
 
 export default authReducer
