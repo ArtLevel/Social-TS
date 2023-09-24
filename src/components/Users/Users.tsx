@@ -3,7 +3,6 @@ import { UserType } from '../../types/Pages/UsersPageType'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../api/api'
 
 interface IUsers {
 	users: UserType[]
@@ -12,10 +11,9 @@ interface IUsers {
 	currentPage: number
 	followingInProgress: number[]
 
+	onPageChanged: (currentPage: number) => void
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
-	onPageChanged: (currentPage: number) => void
-	toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 export const Users: FC<IUsers> = (props) => {
@@ -25,25 +23,16 @@ export const Users: FC<IUsers> = (props) => {
 		totalUsersCount,
 		currentPage,
 		followingInProgress,
-		follow,
-		unfollow,
 		onPageChanged,
-		toggleFollowingProgress
+		follow,
+		unfollow
 	} = props
 
 	const unfollowHandler = (userId: number) => {
-		toggleFollowingProgress(true, userId)
-		usersAPI.deleteFollow(userId).then(data => {
-			if (data.resultCode === 0) unfollow(userId)
-			toggleFollowingProgress(false, userId)
-		})
+		unfollow(userId)
 	}
 	const followHandler = (userId: number) => {
-		toggleFollowingProgress(true, userId)
-		usersAPI.postFollow(userId).then(data => {
-			if (data.resultCode === 0) follow(userId)
-			toggleFollowingProgress(false, userId)
-		})
+		follow(userId)
 	}
 
 	const usersMapped = users.map(u => (
