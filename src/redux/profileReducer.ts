@@ -8,6 +8,7 @@ import {
 	setUserProfileAT,
 	UpdateNewPostTextAT
 } from '../types/types'
+import { usersAPI } from '../api/api'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
@@ -56,12 +57,17 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 			return state
 	}
 }
-
 export const addPostActionCreator = (): AddPostAT => ({ type: ADD_POST })
-
 export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextAT =>
 	({ type: UPDATE_NEW_POST_TEXT, newText })
-
 export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
+
+export const getUserProfile = (userId: number) => {
+	return (dispatch: (action: ActionsType) => void) => {
+		usersAPI.getUserProfile(userId).then(data => {
+			dispatch(setUserProfile(data))
+		})
+	}
+}
 
 export default profileReducer

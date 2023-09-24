@@ -7,10 +7,9 @@ import preloaderGif from '../../../assets/images/preloader.gif'
 
 interface IProfileInfo {
 	profile: ProfileType | null
-	setUserProfile: (profile: ProfileType) => void
 }
 
-export const ProfileInfo: FC<IProfileInfo> = ({ profile, setUserProfile }) => {
+export const ProfileInfo: FC<IProfileInfo> = ({ profile }) => {
 	return profile ? (
 		<div>
 			<img

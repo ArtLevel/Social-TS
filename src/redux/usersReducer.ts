@@ -114,5 +114,4 @@ export const unfollow = (userId: number) => {
 	}
 }
 
-
 export default usersReducer

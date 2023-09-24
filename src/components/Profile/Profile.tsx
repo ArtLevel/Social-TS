@@ -6,7 +6,6 @@ import { ProfileType } from '../../types/Pages/ProfilePageType'
 
 interface IProfile {
 	profile: ProfileType | null
-	setUserProfile: (profile: ProfileType) => void
 }
 
 export const Profile: FC<IProfile> = (props) => {

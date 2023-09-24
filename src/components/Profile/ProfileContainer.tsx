@@ -3,13 +3,12 @@ import { Profile } from './Profile'
 import { connect } from 'react-redux'
 
 import { ProfileType, StateType } from '../../types/types'
-import { setUserProfile } from '../../redux/profileReducer'
+import { getUserProfile } from '../../redux/profileReducer'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { usersAPI } from '../../api/api'
 
 interface IProfileContainerProps {
 	profile: ProfileType | null
-	setUserProfile: (profile: ProfileType) => void
+	getUserProfile: (userId: number) => void
 }
 
 interface IRouteComponentParams {
@@ -22,9 +21,7 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 
 		if (!userId) userId = 2 // 29914
 
-		usersAPI.getUserProfile(userId).then(data => {
-			this.props.setUserProfile(data)
-		})
+		this.props.getUserProfile(userId)
 	}
 
 	render() {
@@ -41,5 +38,5 @@ const mapStateToProps = (state: StateType) => ({
 const withUrlDataContainerComponent = withRouter(ProfileContainer)
 
 export default connect(mapStateToProps, {
-	setUserProfile
+	getUserProfile
 })(withUrlDataContainerComponent)
