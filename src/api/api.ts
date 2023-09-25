@@ -12,21 +12,26 @@ export const usersAPI = {
 	getUsers(currentPage: number = 1, pageSize: number = 10) {
 		return instance.get(`users?page=${currentPage}&count=${pageSize}`)
 			.then(response => response.data)
+			.catch(err => console.log(err))
 	},
 	getAuthMe() {
 		return instance.get(`auth/me`)
 			.then(response => response.data)
+			.catch(err => console.log(err))
 	},
 	getUserProfile(userId: number) {
 		return instance.get(`profile/${userId}`)
 			.then(response => response.data)
+			.catch(err => console.log(err))
 	},
 	deleteFollow(userId: number) {
 		return instance.delete(`follow/${userId}`)
 			.then(response => response.data)
+			.catch(err => console.log(err))
 	},
 	postFollow(userId: number) {
 		return instance.post(`follow/${userId}`)
 			.then(response => response.data)
+			.catch(err => console.log(err))
 	}
 }
