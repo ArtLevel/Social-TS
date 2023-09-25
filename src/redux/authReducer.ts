@@ -29,7 +29,7 @@ export const setAuthUserData = (data: AuthUserDataType): SetAuthUserDataAT => ({
 	data
 })
 
-export const getAuthMe = () => {
+export const getAuthUserData = () => {
 	return (dispatch: (action: ActionsType) => void) => {
 		authAPI.me().then(data => {
 			if (data.resultCode === 0) {
