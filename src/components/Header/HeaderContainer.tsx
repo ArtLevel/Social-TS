@@ -25,5 +25,4 @@ const mapStateToProps = (state: StateType) => ({
 	login: state.auth.login
 })
 
-
 export default connect(mapStateToProps, { getAuthMe })(HeaderContainer)
