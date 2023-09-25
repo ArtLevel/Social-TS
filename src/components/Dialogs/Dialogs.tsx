@@ -3,14 +3,17 @@ import { Message } from './Message/Message'
 import { ChangeEvent, FC } from 'react'
 import { DialogsPageType } from '../../types/types'
 import s from './Dialogs.module.css'
+import { Redirect } from 'react-router-dom'
 
 interface IDialogs {
 	dialogsPage: DialogsPageType
+	isAuth: boolean
+
 	updateNewMessageBody: (body: string) => void
 	sendMessage: () => void
 }
 
-export const Dialogs: FC<IDialogs> = ({ dialogsPage, updateNewMessageBody, sendMessage }) => {
+export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, updateNewMessageBody, sendMessage }) => {
 	const dialogsEl = dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
 	const messagesEl = dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
 	const newMessageBody = dialogsPage.newMessageBody
@@ -23,6 +26,8 @@ export const Dialogs: FC<IDialogs> = ({ dialogsPage, updateNewMessageBody, sendM
 		const body = e.currentTarget.value
 		updateNewMessageBody(body)
 	}
+
+	if (!isAuth) return <Redirect to='/login' />
 
 	return (
 		<div className={s.dialogs}>

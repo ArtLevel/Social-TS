@@ -5,7 +5,8 @@ import { ActionsType, StateType } from '../../types/types'
 
 const mapStateToProps = (state: StateType) => {
 	return {
-		dialogsPage: state.dialogsPage
+		dialogsPage: state.dialogsPage,
+		isAuth: state.auth.isAuth
 	}
 }
 
