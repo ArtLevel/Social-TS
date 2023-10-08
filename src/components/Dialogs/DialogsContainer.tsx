@@ -1,7 +1,9 @@
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer'
-import { Dialogs } from './Dialogs'
+import { Dialogs, IDialogs } from './Dialogs'
 import { connect } from 'react-redux'
 import { ActionsType, StateType } from '../../types/types'
+import { Redirect } from 'react-router-dom'
+import React from 'react'
 
 const mapStateToProps = (state: StateType) => {
 	return {
@@ -17,4 +19,9 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
 	}
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const AuthRedirectComponent = (props: IDialogs) => {
+	if (!props.isAuth) return <Redirect to='/login' />
+	return <Dialogs {...props} />
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
