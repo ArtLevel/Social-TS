@@ -5,6 +5,7 @@ import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
+import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -58,10 +59,10 @@ const mapStateToProps = (state: StateType) => {
 		followingInProgress: state.usersPage.followingInProgress
 	}
 }
-export default connect(mapStateToProps, {
+export default WithAuthRedirect(connect(mapStateToProps, {
 	setCurrentPage,
 	setTotalUsersCount,
 	getUsers,
 	follow,
 	unfollow
-})(UsersContainer)
+})(UsersContainer))
