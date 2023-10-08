@@ -4,6 +4,7 @@ import { ActionsType, StateType } from '../../types/types'
 import React from 'react'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 import { Dialogs } from './Dialogs'
+import { compose } from 'redux'
 
 const mapStateToProps = (state: StateType) => {
 	return {
@@ -12,12 +13,15 @@ const mapStateToProps = (state: StateType) => {
 }
 
 const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
+
 	return {
 		updateNewMessageBody: (body: string) => dispatch(updateNewMessageBodyCreator(body)),
 		sendMessage: () => dispatch(sendMessageCreator())
 	}
 }
 
-const AuthRedirectComponent = WithAuthRedirect(Dialogs)
+export default compose<React.ComponentType>(
+	connect(mapStateToProps, mapDispatchToProps),
+	WithAuthRedirect
+)(Dialogs)
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)

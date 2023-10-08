@@ -6,6 +6,7 @@ import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
+import { compose } from 'redux'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -59,10 +60,15 @@ const mapStateToProps = (state: StateType) => {
 		followingInProgress: state.usersPage.followingInProgress
 	}
 }
-export default WithAuthRedirect(connect(mapStateToProps, {
-	setCurrentPage,
-	setTotalUsersCount,
-	getUsers,
-	follow,
-	unfollow
-})(UsersContainer))
+
+export default compose<React.ComponentType>(
+	connect(
+		mapStateToProps,
+		{
+			setCurrentPage,
+			setTotalUsersCount,
+			getUsers,
+			follow,
+			unfollow
+		}
+	), WithAuthRedirect)(UsersContainer)
