@@ -4,6 +4,9 @@ import s from './ProfileInfo.module.css'
 import { ProfileType } from '../../../types/Pages/ProfilePageType'
 import { Preloader } from '../../common/preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
+import { ProfileStatus } from './ProfileStatus'
+
+// import ProfileStatus from './ProfileStatus'
 
 interface IProfileInfo {
 	profile: ProfileType | null
@@ -17,8 +20,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile }) => {
 			/>
 			<div className={s.descriptionBlock}>
 				<img src={profile.photos.large} />
-				<p>{profile.aboutMe}</p>
-				<p>{profile.lookingForAJobDescription}</p>
+				<ProfileStatus status={'Hello my friends'} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />
