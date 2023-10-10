@@ -12,10 +12,10 @@ interface IProfileInfo {
 	status: string
 	profile: ProfileType | null
 
-	updateStatus: (status: string) => void
+	updateUserStatus: (status: string) => void
 }
 
-export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateStatus }) => {
+export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatus }) => {
 	return profile ? (
 		<div>
 			<img

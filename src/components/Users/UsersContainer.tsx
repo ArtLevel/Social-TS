@@ -5,7 +5,6 @@ import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
-import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 import { compose } from 'redux'
 
 interface IUsersContainer {
@@ -71,4 +70,4 @@ export default compose<React.ComponentType>(
 			follow,
 			unfollow
 		}
-	), WithAuthRedirect)(UsersContainer)
+	))(UsersContainer)

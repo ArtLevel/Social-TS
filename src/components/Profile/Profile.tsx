@@ -7,8 +7,8 @@ import { ProfileType } from '../../types/Pages/ProfilePageType'
 interface IProfile {
 	status: string
 	profile: ProfileType | null
-	
-	updateStatus: (status: string) => void
+
+	updateUserStatus: (status: string) => void
 }
 
 export const Profile: FC<IProfile> = (props) => {
