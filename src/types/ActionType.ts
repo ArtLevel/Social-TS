@@ -15,62 +15,63 @@ export type ActionValueType =
 	| 'SET_USER_PROFILE'
 	| 'SET_USER_DATA'
 	| 'TOGGLE_IS_FOLLOWING_PROGRESS'
+	| 'SET_STATUS'
 
 export type AddPostAT = {
-	type: 'ADD-POST',
+	type: 'ADD-POST'
 }
 
 export type UpdateNewPostTextAT = {
-	type: 'UPDATE-NEW-POST-TEXT',
+	type: 'UPDATE-NEW-POST-TEXT'
 	newText: string
 }
 
 export type setUserProfileAT = {
-	type: 'SET_USER_PROFILE',
+	type: 'SET_USER_PROFILE'
 	profile: ProfileType
 }
 
 export type FollowAT = {
-	type: 'FOLLOW',
+	type: 'FOLLOW'
 	userId: number
 }
 
 export type UnfollowAT = {
-	type: 'UNFOLLOW',
+	type: 'UNFOLLOW'
 	userId: number
 }
 
 export type SetUsersAT = {
-	type: 'SET_USERS',
+	type: 'SET_USERS'
 	users: UserType[]
 }
 
 export type SetCurrentPageAT = {
-	type: 'SET_CURRENT_PAGE',
+	type: 'SET_CURRENT_PAGE'
 	currentPage: number
 }
 
 export type SetTotalUsersCountAT = {
-	type: 'SET_TOTAL_USERS_COUNT',
+	type: 'SET_TOTAL_USERS_COUNT'
 	totalUsersCount: number
 }
 
 export type ToggleIsFetchingAT = {
-	type: 'TOGGLE_IS_FETCHING',
+	type: 'TOGGLE_IS_FETCHING'
 	isFetching: boolean
 }
 
 export type SendMessageAT = {
-	type: 'SEND-MESSAGE',
+	type: 'SEND-MESSAGE'
 }
 
 export type UpdateNewMessageBodyAT = {
-	type: 'UPDATE-NEW-MESSAGE-BODY',
+	type: 'UPDATE-NEW-MESSAGE-BODY'
 	newText: string
 }
 
 export type SetAuthUserDataAT = {
-	type: 'SET_USER_DATA',
+	type: 'SET_USER_DATA'
 	data: {
 		id: null | number
 		email: null | string
@@ -79,9 +80,14 @@ export type SetAuthUserDataAT = {
 }
 
 export type ToggleFollowingProgressAT = {
-	type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+	type: 'TOGGLE_IS_FOLLOWING_PROGRESS'
 	userId: number
 	isFetching: boolean
+}
+
+export type SetStatusAT = {
+	type: 'SET_STATUS',
+	status: string
 }
 
 export type ActionsType =
@@ -98,3 +104,4 @@ export type ActionsType =
 	| UpdateNewMessageBodyAT
 	| SetAuthUserDataAT
 	| ToggleFollowingProgressAT
+	| SetStatusAT

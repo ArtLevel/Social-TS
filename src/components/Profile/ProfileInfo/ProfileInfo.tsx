@@ -9,10 +9,13 @@ import { ProfileStatus } from './ProfileStatus'
 // import ProfileStatus from './ProfileStatus'
 
 interface IProfileInfo {
+	status: string
 	profile: ProfileType | null
+
+	updateStatus: (status: string) => void
 }
 
-export const ProfileInfo: FC<IProfileInfo> = ({ profile }) => {
+export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateStatus }) => {
 	return profile ? (
 		<div>
 			<img
@@ -20,7 +23,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile }) => {
 			/>
 			<div className={s.descriptionBlock}>
 				<img src={profile.photos.large} />
-				<ProfileStatus status={'Hello my friends'} />
+				<ProfileStatus status={status} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />
