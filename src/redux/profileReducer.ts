@@ -8,7 +8,7 @@ import {
 	setUserProfileAT,
 	UpdateNewPostTextAT
 } from '../types/types'
-import { usersAPI } from '../api/api'
+import { profileAPI } from '../api/api'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
@@ -64,7 +64,7 @@ export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ typ
 
 export const getUserProfile = (userId: number) => {
 	return (dispatch: (action: ActionsType) => void) => {
-		usersAPI.getUserProfile(userId).then(data => {
+		profileAPI.getUserProfile(userId).then(data => {
 			dispatch(setUserProfile(data))
 		})
 	}
