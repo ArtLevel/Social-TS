@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 interface IProfileStatus {
 	status: string
+	updateUserStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<IProfileStatus> {
 	state = {
-		editMode: false
+		editMode: false,
+		status: this.props.status
 	}
 
 	activateEditMode = () => {
@@ -15,6 +17,11 @@ export class ProfileStatus extends React.Component<IProfileStatus> {
 
 	deactivateEditMode = () => {
 		this.setState({ editMode: false })
+		this.props.updateUserStatus(this.state.status)
+	}
+
+	onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+		this.setState({ status: e.currentTarget.value })
 	}
 
 	render() {
@@ -27,7 +34,8 @@ export class ProfileStatus extends React.Component<IProfileStatus> {
 					</div>
 					:
 					<div>
-						<input onBlur={this.deactivateEditMode} value={this.props.status} autoFocus />
+						<input onChange={this.onStatusChange} onBlur={this.deactivateEditMode} value={this.state.status}
+						       autoFocus />
 					</div>
 			}
 		</div>

@@ -23,7 +23,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 			/>
 			<div className={s.descriptionBlock}>
 				<img src={profile.photos.large} />
-				<ProfileStatus status={status} />
+				<ProfileStatus status={status} updateUserStatus={updateUserStatus} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />
