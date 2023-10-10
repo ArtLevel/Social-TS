@@ -25,7 +25,7 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 	componentDidMount() {
 		let userId = parseInt(this.props.match.params.userId)
 
-		if (!userId) userId = 2 // 29914
+		if (!userId) userId = 29914 // 29914
 
 		this.props.getUserProfile(userId)
 		this.props.getUserStatus(userId)
