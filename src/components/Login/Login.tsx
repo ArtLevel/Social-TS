@@ -2,13 +2,27 @@ import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
 export const Login = () => {
+	const onSubmit = (formData: {
+		login: string
+		password: string
+		rememberMe: boolean
+	}) => {
+		console.log(formData)
+	}
+
 	return <div>
 		<h1>Login</h1>
-		<LoginReduxForm />
+		<LoginReduxForm onSubmit={onSubmit} />
 	</div>
 }
 
-const LoginForm = (props: InjectedFormProps) => {
+interface LoginFormPT {
+	login: string
+	password: string
+	rememberMe: boolean
+}
+
+const LoginForm = (props: InjectedFormProps<LoginFormPT>) => {
 	return <form onSubmit={props.handleSubmit}>
 		<div>
 			<Field placeholder='Login' component='input' name='login' />
@@ -28,6 +42,6 @@ const LoginForm = (props: InjectedFormProps) => {
 	</form>
 }
 
-const LoginReduxForm = reduxForm({
+const LoginReduxForm = reduxForm<LoginFormPT>({
 	form: 'login'
 })(LoginForm)
