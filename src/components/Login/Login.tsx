@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
 export const Login = () => {
 	return <div>
@@ -8,8 +8,8 @@ export const Login = () => {
 	</div>
 }
 
-const LoginForm = () => {
-	return <form>
+const LoginForm = (props: InjectedFormProps) => {
+	return <form onSubmit={props.handleSubmit}>
 		<div>
 			<Field placeholder='Login' component='input' name='login' />
 		</div>
