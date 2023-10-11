@@ -5,8 +5,13 @@ interface IProfileStatus {
 	updateUserStatus: (status: string) => void
 }
 
+interface IProfileStatusState {
+	editMode: boolean
+	status: string
+}
+
 export class ProfileStatus extends React.Component<IProfileStatus> {
-	state = {
+	state: IProfileStatusState = {
 		editMode: false,
 		status: this.props.status
 	}
@@ -22,6 +27,12 @@ export class ProfileStatus extends React.Component<IProfileStatus> {
 
 	onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
 		this.setState({ status: e.currentTarget.value })
+	}
+
+	componentDidUpdate(prevProps: IProfileStatus, prevState: IProfileStatusState) {
+		if (prevProps.status !== this.props.status) {
+			this.setState({ status: this.props.status })
+		}
 	}
 
 	render() {
