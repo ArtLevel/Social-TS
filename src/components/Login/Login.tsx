@@ -1,22 +1,23 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
 export const Login = () => {
 	return <div>
 		<h1>Login</h1>
-		<LoginForm />
+		<LoginReduxForm />
 	</div>
 }
 
 const LoginForm = () => {
 	return <form>
 		<div>
-			<input placeholder='Login' />
+			<Field placeholder='Login' component='input' name='login' />
 		</div>
 		<div>
-			<input placeholder='Password' />
+			<Field placeholder='Login' component='input' name='password' />
 		</div>
 		<div>
-			<input type='Checkbox' />
+			<Field type='checkbox' component='input' name='rememberMe' />
 			Remember me
 		</div>
 		<div>
@@ -26,3 +27,7 @@ const LoginForm = () => {
 		</div>
 	</form>
 }
+
+const LoginReduxForm = reduxForm({
+	form: 'login'
+})(LoginForm)
