@@ -3,8 +3,6 @@ import { ProfileType } from './Pages/ProfilePageType'
 
 export type ActionValueType =
 	'ADD-POST'
-	| 'UPDATE-NEW-POST-TEXT'
-	| 'UPDATE-NEW-MESSAGE-BODY'
 	| 'SEND-MESSAGE'
 	| 'FOLLOW'
 	| 'UNFOLLOW'
@@ -20,11 +18,6 @@ export type ActionValueType =
 export type AddPostAT = {
 	type: 'ADD-POST'
 	newPostText: string
-}
-
-export type UpdateNewPostTextAT = {
-	type: 'UPDATE-NEW-POST-TEXT'
-	newText: string
 }
 
 export type setUserProfileAT = {
@@ -67,11 +60,6 @@ export type SendMessageAT = {
 	newMessageBody: string
 }
 
-export type UpdateNewMessageBodyAT = {
-	type: 'UPDATE-NEW-MESSAGE-BODY'
-	newText: string
-}
-
 export type SetAuthUserDataAT = {
 	type: 'SET_USER_DATA'
 	data: {
@@ -94,7 +82,6 @@ export type SetStatusAT = {
 
 export type ActionsType =
 	AddPostAT
-	| UpdateNewPostTextAT
 	| setUserProfileAT
 	| FollowAT
 	| UnfollowAT
@@ -103,7 +90,6 @@ export type ActionsType =
 	| SetTotalUsersCountAT
 	| ToggleIsFetchingAT
 	| SendMessageAT
-	| UpdateNewMessageBodyAT
 	| SetAuthUserDataAT
 	| ToggleFollowingProgressAT
 	| SetStatusAT

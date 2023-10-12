@@ -5,7 +5,7 @@ export type AddPostFormPT = {
 	newPostText: string
 }
 
-const AddPostForm = (props: InjectedFormProps<AddPostFormPT>) => {
+const AddNewPostForm = (props: InjectedFormProps<AddPostFormPT>) => {
 	return <form onSubmit={props.handleSubmit}>
 		<div>
 			<Field component='textarea' name='newPostText' placeholder='your post text' />
@@ -17,5 +17,5 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormPT>) => {
 }
 
 export const AddPostFormRedux = reduxForm<AddPostFormPT>({
-	form: 'AddPostForm'
-})(AddPostForm)
+	form: 'Profile AddNewPostForm'
+})(AddNewPostForm)

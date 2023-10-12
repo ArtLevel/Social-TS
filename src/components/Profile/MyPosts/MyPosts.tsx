@@ -4,7 +4,7 @@ import { Post } from './Post/Post'
 import { PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
-import { AddPostFormPT, AddPostFormRedux } from './AddPostForm'
+import { AddPostFormPT, AddPostFormRedux } from './AddNewPostForm'
 
 interface IMyPostsProps {
 	posts: PostType[]

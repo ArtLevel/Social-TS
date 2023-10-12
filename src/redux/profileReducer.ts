@@ -11,7 +11,6 @@ import {
 import { profileAPI } from '../api/api'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT: ActionValueType = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE: ActionValueType = 'SET_USER_PROFILE'
 const SET_STATUS: ActionValueType = 'SET_STATUS'
 
