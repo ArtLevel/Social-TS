@@ -9,11 +9,10 @@ export interface IDialogs {
 	dialogsPage: DialogsPageType
 	isAuth: boolean
 
-	updateNewMessageBody: (body: string) => void
 	sendMessage: (newMessageBody: string) => void
 }
 
-export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, updateNewMessageBody, sendMessage }) => {
+export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, sendMessage }) => {
 	const dialogsEl = dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
 	const messagesEl = dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
 
