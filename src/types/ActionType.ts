@@ -63,6 +63,7 @@ export type ToggleIsFetchingAT = {
 
 export type SendMessageAT = {
 	type: 'SEND-MESSAGE'
+	newMessageBody: string
 }
 
 export type UpdateNewMessageBodyAT = {

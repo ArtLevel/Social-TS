@@ -31,22 +31,19 @@ const initialState: DialogsPageType = {
 			id: 3,
 			message: 'How are you ?'
 		}
-	],
-	newMessageBody: ''
+	]
 }
 
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
 	switch (action.type) {
 		case UPDATE_NEW_MESSAGE_BODY: {
-			if (action.newText) return { ...state, newMessageBody: action.newText }
+			if (action.newText) return { ...state }
 			return state
 		}
 		case SEND_MESSAGE: {
-			const body = state.newMessageBody
-			if (body) return {
+			if (action.newMessageBody) return {
 				...state,
-				messages: [...state.messages, { id: 6, message: body }],
-				newMessageBody: ''
+				messages: [...state.messages, { id: 6, message: action.newMessageBody }]
 			}
 			return state
 		}
@@ -55,8 +52,8 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
 	}
 }
 
-export const sendMessageCreator = (): SendMessageAT =>
-	({ type: SEND_MESSAGE })
+export const sendMessageCreator = (newMessageBody: string): SendMessageAT =>
+	({ type: SEND_MESSAGE, newMessageBody })
 
 export const updateNewMessageBodyCreator = (newText: string): UpdateNewMessageBodyAT =>
 	({ type: UPDATE_NEW_MESSAGE_BODY, newText })
