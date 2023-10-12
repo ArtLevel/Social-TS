@@ -1,6 +1,6 @@
-import s from './FormsControls.module.css'
 import { WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form'
 import { FC, HTMLInputTypeAttribute } from 'react'
+import s from './FormsControls.module.css'
 
 interface ITextarea {
 	meta: WrappedFieldMetaProps,
@@ -14,11 +14,11 @@ export const Textarea: FC<ITextarea> = ({ input, meta, ...props }) => {
 	const hasError = meta.touched && meta.error
 
 	return (
-		<div className={s.formControl + ' ' + hasError ? s.error : ''}>
+		<div>
 			<div>
-				<textarea {...input} {...props} />
+				<textarea {...input} {...props} className={hasError ? s.errorTextarea : ''} />
 			</div>
-			{hasError && <span>{'some error'}</span>}
+			{hasError && <span className={hasError ? s.errorSpan : ''}>{meta.error}</span>}
 		</div>
 	)
 }
