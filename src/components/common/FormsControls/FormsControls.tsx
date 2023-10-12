@@ -10,28 +10,27 @@ interface IForm {
 	autoFocus?: boolean
 }
 
-export const Textarea: FC<IForm> = ({ input, meta, ...props }) => {
+export const FormControl: FC<IForm> = ({ meta, children }) => {
 	const hasError = meta.touched && meta.error
 
 	return (
 		<div>
 			<div>
-				<textarea {...input} {...props} className={hasError ? s.errorTextarea : ''} />
+				{children}
 			</div>
 			{hasError && <span className={hasError ? s.errorSpan : ''}>{meta.error}</span>}
 		</div>
 	)
 }
 
-export const Input: FC<IForm> = ({ input, meta, ...props }) => {
-	const hasError = meta.touched && meta.error
+export const Textarea: FC<IForm> = ({ input, ...props }) => {
+	return <FormControl input={input} {...props}>
+		<textarea {...input} {...props} />
+	</FormControl>
+}
 
-	return (
-		<div>
-			<div>
-				<input {...input} {...props} className={hasError ? s.errorTextarea : ''} />
-			</div>
-			{hasError && <span className={hasError ? s.errorSpan : ''}>{meta.error}</span>}
-		</div>
-	)
+export const Input: FC<IForm> = ({ input, ...props }) => {
+	return <FormControl input={input} {...props}>
+		<input {...input} {...props} />
+	</FormControl>
 }
