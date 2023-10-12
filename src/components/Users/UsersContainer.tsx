@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { follow, getUsers, setCurrentPage, setTotalUsersCount, unfollow } from '../../redux/usersReducer'
 import { StateType, UserType } from '../../types/types'
 import { Users } from './Users'
-import { Preloader } from '../common/preloader/Preloader'
+import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
 import { compose } from 'redux'
 

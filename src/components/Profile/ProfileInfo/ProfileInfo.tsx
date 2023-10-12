@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import s from './ProfileInfo.module.css'
 import { ProfileType } from '../../../types/Pages/ProfilePageType'
-import { Preloader } from '../../common/preloader/Preloader'
+import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import { ProfileStatus } from './ProfileStatus'
 
