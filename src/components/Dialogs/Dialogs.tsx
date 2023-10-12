@@ -3,7 +3,7 @@ import { Message } from './Message/Message'
 import { ChangeEvent, FC } from 'react'
 import { DialogsPageType } from '../../types/types'
 import s from './Dialogs.module.css'
-import { AddMessageFormRedux } from './AddMessageForm'
+import { AddMessageFormPT, AddMessageFormRedux } from './AddMessageForm'
 
 export interface IDialogs {
 	dialogsPage: DialogsPageType
@@ -27,6 +27,10 @@ export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, updateNewMessageBod
 		updateNewMessageBody(body)
 	}
 
+	const addNewMessage = (values: AddMessageFormPT) => {
+		alert(values.newMessageBody)
+	}
+
 	return (
 		<div className={s.dialogs}>
 			<div className={s.dialogsItems}>
@@ -34,7 +38,7 @@ export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, updateNewMessageBod
 			</div>
 			<div className={s.messages}>
 				{messagesEl}
-				<AddMessageFormRedux onSubmit={(data: any) => console.log(data)} />
+				<AddMessageFormRedux onSubmit={addNewMessage} />
 			</div>
 		</div>
 	)

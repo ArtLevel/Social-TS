@@ -16,7 +16,7 @@ export const Login = () => {
 	</div>
 }
 
-interface LoginFormPT {
+type LoginFormPT = {
 	login: string
 	password: string
 	rememberMe: boolean

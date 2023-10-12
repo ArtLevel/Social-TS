@@ -1,6 +1,6 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
-type AddMessageFormPT = {
+export type AddMessageFormPT = {
 	newMessageBody: string
 }
 
