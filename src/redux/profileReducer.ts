@@ -6,8 +6,7 @@ import {
 	ProfilePageType,
 	ProfileType,
 	SetStatusAT,
-	setUserProfileAT,
-	UpdateNewPostTextAT
+	setUserProfileAT
 } from '../types/types'
 import { profileAPI } from '../api/api'
 
@@ -34,7 +33,6 @@ const initialState: ProfilePageType = {
 			likesCount: 120
 		}
 	],
-	newPostText: '',
 	profile: null,
 	status: ''
 }
@@ -44,15 +42,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 		case ADD_POST: {
 			const newPost: PostType = {
 				id: 5,
-				message: state.newPostText,
+				message: action.newPostText,
 				likesCount: 0
 			}
-			return { ...state, posts: [...state.posts, newPost], newPostText: '' }
-		}
-		case UPDATE_NEW_POST_TEXT: {
-			const stateCopy: ProfilePageType = { ...state }
-			if (action.newText) stateCopy.newPostText = action.newText
-			return stateCopy
+			return { ...state, posts: [...state.posts, newPost] }
 		}
 		case SET_USER_PROFILE:
 			return { ...state, profile: action.profile }
@@ -65,9 +58,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 			return state
 	}
 }
-export const addPost = (): AddPostAT => ({ type: ADD_POST })
-export const updateNewPostText = (newText: string): UpdateNewPostTextAT =>
-	({ type: UPDATE_NEW_POST_TEXT, newText })
+export const addPost = (newPostText: string): AddPostAT => ({ type: ADD_POST, newPostText })
 export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
 

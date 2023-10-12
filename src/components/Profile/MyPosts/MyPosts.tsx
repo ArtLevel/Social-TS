@@ -1,4 +1,4 @@
-import React, { createRef, FC } from 'react'
+import React, { FC } from 'react'
 
 import { Post } from './Post/Post'
 import { PostType } from '../../../types/types'
@@ -8,16 +8,13 @@ import { AddPostFormPT, AddPostFormRedux } from './AddPostForm'
 
 interface IMyPostsProps {
 	posts: PostType[]
-	newPostText: string
-	addPost: () => void
-	updateNewPostText: (text: string) => void
+	addPost: (newPostText: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, addPost, updateNewPostText }) => {
+export const MyPosts: FC<IMyPostsProps> = ({ posts, addPost }) => {
 	const postEl = posts.map(p => <Post key={p.id} {...p} />)
-	const newPostElement = createRef<HTMLTextAreaElement>()
 
-	const onAddPost = (values: AddPostFormPT) => addPost()
+	const onAddPost = (values: AddPostFormPT) => addPost(values.newPostText)
 
 	return (
 		<div className={s.postsBlock}>

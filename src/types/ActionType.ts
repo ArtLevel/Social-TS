@@ -19,6 +19,7 @@ export type ActionValueType =
 
 export type AddPostAT = {
 	type: 'ADD-POST'
+	newPostText: string
 }
 
 export type UpdateNewPostTextAT = {
