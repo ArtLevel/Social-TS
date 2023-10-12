@@ -65,8 +65,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 			return state
 	}
 }
-export const addPostActionCreator = (): AddPostAT => ({ type: ADD_POST })
-export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextAT =>
+export const addPost = (): AddPostAT => ({ type: ADD_POST })
+export const updateNewPostText = (newText: string): UpdateNewPostTextAT =>
 	({ type: UPDATE_NEW_POST_TEXT, newText })
 export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
