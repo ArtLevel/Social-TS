@@ -4,6 +4,7 @@ import { Post } from './Post/Post'
 import { PostType } from '../../../types/types'
 
 import s from './MyPosts.module.css'
+import { AddPostFormPT, AddPostFormRedux } from './AddPostForm'
 
 interface IMyPostsProps {
 	posts: PostType[]
@@ -16,27 +17,12 @@ export const MyPosts: FC<IMyPostsProps> = ({ posts, newPostText, addPost, update
 	const postEl = posts.map(p => <Post key={p.id} {...p} />)
 	const newPostElement = createRef<HTMLTextAreaElement>()
 
-	const onAddPost = () => addPost()
-
-	const onPostChange = () => {
-		if (newPostElement.current) {
-			const text = newPostElement.current.value
-			updateNewPostText(text)
-		}
-	}
+	const onAddPost = (values: AddPostFormPT) => addPost()
 
 	return (
 		<div className={s.postsBlock}>
 			<h3>My posts</h3>
-
-			<div>
-				<div>
-					<textarea onChange={onPostChange} ref={newPostElement} value={newPostText}></textarea>
-				</div>
-				<div>
-					<button onClick={onAddPost}>Add post</button>
-				</div>
-			</div>
+			<AddPostFormRedux onSubmit={onAddPost} />
 
 			<div className={s.posts}>
 				{postEl}
