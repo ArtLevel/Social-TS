@@ -17,5 +17,5 @@ const AddNewPostForm = (props: InjectedFormProps<AddPostFormPT>) => {
 }
 
 export const AddPostFormRedux = reduxForm<AddPostFormPT>({
-	form: 'Profile AddNewPostForm'
+	form: 'ProfileAddNewPostForm'
 })(AddNewPostForm)
