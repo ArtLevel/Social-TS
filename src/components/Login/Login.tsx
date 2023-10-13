@@ -3,7 +3,9 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required } from '../../utils/validators/validators'
 import { connect } from 'react-redux'
-import { login, logout } from '../../redux/authReducer'
+import { login } from '../../redux/authReducer'
+import { Redirect } from 'react-router-dom'
+import { StateType } from '../../types/StateType'
 
 export type LoginFormT = {
 	email: string
@@ -12,14 +14,16 @@ export type LoginFormT = {
 }
 
 interface ILogin {
-	login: (formData: LoginFormT) => void
-	logout: () => void
+	isAuth: boolean
+	login: (dataForm: LoginFormT) => void
 }
 
-const Login: FC<ILogin> = ({ login, logout }) => {
+const Login: FC<ILogin> = ({ isAuth, login }) => {
 	const onSubmit = (formData: LoginFormT) => {
 		login(formData)
 	}
+
+	if (isAuth) return <Redirect to='/profile' />
 
 	return <div>
 		<h1>Login</h1>
@@ -51,4 +55,8 @@ const LoginReduxForm = reduxForm<LoginFormT>({
 	form: 'login'
 })(LoginForm)
 
-export default connect(null, { login, logout })(Login)
+const mapStateToProps = (state: StateType) => ({
+	isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, { login })(Login)
