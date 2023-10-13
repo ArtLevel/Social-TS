@@ -31,22 +31,21 @@ export const setAuthUserData = (data: AuthType): SetAuthUserDataAT => ({
 	}
 })
 
-export const getAuthUserData = () => {
-	return (dispatch: (action: ActionsType) => void) => {
-		authAPI.me().then(data => {
-			if (data.resultCode === 0) {
-				const { id, login, email } = data.data
-				dispatch(setAuthUserData({ id, login, email, isAuth: true }))
-			}
-		})
-	}
+export const getAuthUserData = () => (dispatch: (action: ActionsType) => void) => {
+	authAPI.me().then(data => {
+		if (data.resultCode === 0) {
+			const { id, login, email } = data.data
+			dispatch(setAuthUserData({ id, login, email, isAuth: true }))
+		}
+	})
 }
 
 export const login = (formData: LoginFormT) => {
 	return (dispatch: (action: ActionsType) => void) => {
 		authAPI.login(formData).then(data => {
 			if (data.resultCode === 0) {
-				// dispatch(getAuthUserData())
+				// @ts-ignore
+				dispatch(getAuthUserData())
 			}
 		})
 	}

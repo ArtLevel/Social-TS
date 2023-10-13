@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { login, logout } from '../../redux/authReducer'
 
 export type LoginFormT = {
-	login: string
+	email: string
 	password: string
 	rememberMe: boolean
 }
@@ -18,7 +18,7 @@ interface ILogin {
 
 const Login: FC<ILogin> = ({ login, logout }) => {
 	const onSubmit = (formData: LoginFormT) => {
-		login({ ...formData, rememberMe: !formData.rememberMe ? false : true })
+		login(formData)
 	}
 
 	return <div>

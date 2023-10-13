@@ -46,7 +46,11 @@ export const authAPI = {
 			.then(response => response.data)
 	},
 	login(dataForm: LoginFormT) {
-		return instance.post(`auth/login`, { ...dataForm })
+		return instance.post(`auth/login`, {
+			email: dataForm.email,
+			password: dataForm.password,
+			rememberMe: dataForm.rememberMe
+		})
 			.then(response => response.data)
 	},
 	logout() {
