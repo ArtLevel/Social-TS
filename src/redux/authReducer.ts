@@ -46,7 +46,7 @@ export const login = (formData: LoginFormT) => {
 	return (dispatch: (action: ActionsType) => void) => {
 		authAPI.login(formData).then(data => {
 			if (data.resultCode === 0) {
-				console.log('login', data)
+				// dispatch(getAuthUserData())
 			}
 		})
 	}
