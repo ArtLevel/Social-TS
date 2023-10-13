@@ -14,11 +14,11 @@ export const FormControl: FC<IForm> = ({ meta, children }) => {
 	const hasError = meta.touched && meta.error
 
 	return (
-		<div>
+		<div className={s.formControl + ' ' + hasError ? s.error : ''}>
 			<div>
 				{children}
 			</div>
-			{hasError && <span className={hasError ? s.errorSpan : ''}>{meta.error}</span>}
+			{hasError && <span>{meta.error}</span>}
 		</div>
 	)
 }
