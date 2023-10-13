@@ -63,7 +63,7 @@ export type SendMessageAT = {
 export type SetAuthUserDataAT = {
 	type: 'SET_USER_DATA'
 	payload: {
-		id: null | number
+		userId: null | number
 		email: null | string
 		login: null | string
 		isAuth: boolean

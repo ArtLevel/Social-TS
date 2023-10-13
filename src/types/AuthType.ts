@@ -1,5 +1,5 @@
 export type AuthType = {
-	id: null | number
+	userId: null | number
 	email: null | string
 	login: null | string
 	isAuth: boolean

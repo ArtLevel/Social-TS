@@ -2,11 +2,12 @@ import { ActionsType, ActionValueType, SetAuthUserDataAT } from '../types/types'
 import { AuthType } from '../types/AuthType'
 import { authAPI } from '../api/api'
 import { LoginFormT } from '../components/Login/Login'
+import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
 
 const initialState: AuthType = {
-	id: null,
+	userId: null,
 	email: null,
 	login: null,
 	isAuth: false
@@ -35,7 +36,7 @@ export const getAuthUserData = () => (dispatch: (action: ActionsType) => void) =
 	authAPI.me().then(data => {
 		if (data.resultCode === 0) {
 			const { id, login, email } = data.data
-			dispatch(setAuthUserData({ id, login, email, isAuth: true }))
+			dispatch(setAuthUserData({ userId: id, login, email, isAuth: true }))
 		}
 	})
 }
@@ -46,6 +47,11 @@ export const login = (formData: LoginFormT) => {
 			if (data.resultCode === 0) {
 				// @ts-ignore
 				dispatch(getAuthUserData())
+			} else {
+				console.log(data)
+				const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
+				// @ts-ignore
+				dispatch(stopSubmit('login', { _error: message }))
 			}
 		})
 	}
@@ -55,7 +61,7 @@ export const logout = () => {
 	return (dispatch: (action: ActionsType) => void) => {
 		authAPI.logout().then(data => {
 			if (data.resultCode === 0) {
-				dispatch(setAuthUserData({ id: null, email: null, login: null, isAuth: false }))
+				dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false }))
 			}
 		})
 	}

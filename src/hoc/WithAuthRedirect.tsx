@@ -4,7 +4,6 @@ import { StateType } from '../types/StateType'
 import { connect } from 'react-redux'
 
 export const WithAuthRedirect = (Component: any) => {
-
 	class RedirectComponent extends React.Component<any, any> {
 		render() {
 			if (!this.props.isAuth) return <Redirect to='/login' />
