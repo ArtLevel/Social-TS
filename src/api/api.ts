@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { LoginFormT } from '../components/Login/Login'
 
 const instance = axios.create({
 	withCredentials: true,
@@ -42,6 +43,14 @@ export const profileAPI = {
 export const authAPI = {
 	me() {
 		return instance.get(`auth/me`)
+			.then(response => response.data)
+	},
+	login(dataForm: LoginFormT) {
+		return instance.post(`auth/login`, { ...dataForm })
+			.then(response => response.data)
+	},
+	logout() {
+		return instance.delete(`auth/login`)
 			.then(response => response.data)
 	}
 }

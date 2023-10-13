@@ -3,12 +3,14 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required } from '../../utils/validators/validators'
 
+export type LoginFormT = {
+	login: string
+	password: string
+	rememberMe: boolean
+}
+
 export const Login = () => {
-	const onSubmit = (formData: {
-		login: string
-		password: string
-		rememberMe: boolean
-	}) => {
+	const onSubmit = (formData: LoginFormT) => {
 		console.log(formData)
 	}
 
@@ -18,13 +20,7 @@ export const Login = () => {
 	</div>
 }
 
-type LoginFormPT = {
-	login: string
-	password: string
-	rememberMe: boolean
-}
-
-const LoginForm = (props: InjectedFormProps<LoginFormPT>) => {
+const LoginForm = (props: InjectedFormProps<LoginFormT>) => {
 	return <form onSubmit={props.handleSubmit}>
 		<div>
 			<Field placeholder='Login' component={Input} name='login' validate={[required]} />
@@ -44,6 +40,6 @@ const LoginForm = (props: InjectedFormProps<LoginFormPT>) => {
 	</form>
 }
 
-const LoginReduxForm = reduxForm<LoginFormPT>({
+const LoginReduxForm = reduxForm<LoginFormT>({
 	form: 'login'
 })(LoginForm)

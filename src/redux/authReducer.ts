@@ -1,6 +1,7 @@
 import { ActionsType, ActionValueType, SetAuthUserDataAT } from '../types/types'
-import { AuthType, AuthUserDataType } from '../types/AuthType'
+import { AuthType } from '../types/AuthType'
 import { authAPI } from '../api/api'
+import { LoginFormT } from '../components/Login/Login'
 
 const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
 
@@ -16,17 +17,18 @@ const authReducer = (state: AuthType = initialState, action: ActionsType): AuthT
 		case SET_USER_DATA:
 			return {
 				...state,
-				...action.data,
-				isAuth: true
+				...action.payload
 			}
 		default:
 			return state
 	}
 }
 
-export const setAuthUserData = (data: AuthUserDataType): SetAuthUserDataAT => ({
+export const setAuthUserData = (data: AuthType): SetAuthUserDataAT => ({
 	type: SET_USER_DATA,
-	data
+	payload: {
+		...data
+	}
 })
 
 export const getAuthUserData = () => {
@@ -34,7 +36,27 @@ export const getAuthUserData = () => {
 		authAPI.me().then(data => {
 			if (data.resultCode === 0) {
 				const { id, login, email } = data.data
-				dispatch(setAuthUserData({ id, login, email }))
+				dispatch(setAuthUserData({ id, login, email, isAuth: true }))
+			}
+		})
+	}
+}
+
+export const login = (formData: LoginFormT) => {
+	return (dispatch: (action: ActionsType) => void) => {
+		authAPI.login(formData).then(data => {
+			if (data.resultCode === 0) {
+				console.log('login', data)
+			}
+		})
+	}
+}
+
+export const logout = () => {
+	return (dispatch: (action: ActionsType) => void) => {
+		authAPI.logout().then(data => {
+			if (data.resultCode === 0) {
+				dispatch(setAuthUserData({ id: null, email: null, login: null, isAuth: false }))
 			}
 		})
 	}
