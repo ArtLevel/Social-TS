@@ -14,6 +14,7 @@ export type ActionValueType =
 	| 'SET_USER_DATA'
 	| 'TOGGLE_IS_FOLLOWING_PROGRESS'
 	| 'SET_STATUS'
+	| 'INIZIALIZED_SUCCESS'
 
 export type AddPostAT = {
 	type: 'ADD-POST'
@@ -81,6 +82,11 @@ export type SetStatusAT = {
 	status: string
 }
 
+export type InitializedSuccessAT = {
+	type: 'INIZIALIZED_SUCCESS',
+}
+
+
 export type ActionsType =
 	AddPostAT
 	| setUserProfileAT
@@ -94,3 +100,4 @@ export type ActionsType =
 	| SetAuthUserDataAT
 	| ToggleFollowingProgressAT
 	| SetStatusAT
+	| InitializedSuccessAT

@@ -9,16 +9,16 @@ import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
 import './App.css'
 import { connect } from 'react-redux'
-import { getAuthUserData } from './redux/authReducer'
 import { compose } from 'redux'
+import { initializeApp } from './redux/appReducer'
 
 interface IApp {
-	getAuthUserData: () => void
+	initializeApp: () => void
 }
 
 class App extends React.Component<IApp> {
 	componentDidMount() {
-		this.props.getAuthUserData()
+		this.props.initializeApp()
 	}
 
 	render() {
@@ -40,6 +40,6 @@ class App extends React.Component<IApp> {
 }
 
 export default compose<React.ComponentType>(
-	connect(null, { getAuthUserData }),
+	connect(null, { initializeApp }),
 	withRouter
 )(App)
