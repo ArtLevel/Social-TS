@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
 import DialogsContainer from './components/Dialogs/DialogsContainer'
@@ -8,40 +8,38 @@ import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
 import './App.css'
+import { connect } from 'react-redux'
+import { getAuthUserData } from './redux/authReducer'
+import { compose } from 'redux'
 
-const App = () => {
-	return (
-		<div className='app-wrapper'>
-
-			<HeaderContainer />
-			<NavBar />
-
-			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <DialogsContainer />} />
-				<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-				<Route path='/users' render={() => <UsersContainer />} />
-				<Route path='/login' render={() => <Login />} />
-			</div>
-		</div>
-	)
+interface IApp {
+	getAuthUserData: () => void
 }
 
-export default App
+class App extends React.Component<IApp> {
+	componentDidMount() {
+		this.props.getAuthUserData()
+	}
 
-// Ссылочный тип данных
-// Область памяти hip
-// Object
-// Array
-// Function
+	render() {
+		return (
+			<div className='app-wrapper'>
 
-// Примитив
-// Область памяти stack
-// string
-// number
-// boolean
-// bigint
-// symbol
-// null
+				<HeaderContainer />
+				<NavBar />
 
-// Глубокое клонирование объекта
-// structuredClone()
+				<div className='app-wrapper-content'>
+					<Route path='/dialogs' render={() => <DialogsContainer />} />
+					<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+					<Route path='/users' render={() => <UsersContainer />} />
+					<Route path='/login' render={() => <Login />} />
+				</div>
+			</div>
+		)
+	}
+}
+
+export default compose<React.ComponentType>(
+	connect(null, { getAuthUserData }),
+	withRouter
+)(App)
