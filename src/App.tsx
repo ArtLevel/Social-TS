@@ -7,13 +7,17 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
-import './App.css'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './redux/appReducer'
 import { AppRootStateT } from './redux/reduxStore'
+import { Preloader } from './components/common/Preloader/Preloader'
+import preloaderGif from './assets/images/preloader.gif'
+import './App.css'
 
 interface IApp {
+	initialized: boolean
+
 	initializeApp: () => void
 }
 
@@ -23,6 +27,8 @@ class App extends React.Component<IApp> {
 	}
 
 	render() {
+		if (!this.props.initialized) return <Preloader preloader={preloaderGif} />
+
 		return (
 			<div className='app-wrapper'>
 
