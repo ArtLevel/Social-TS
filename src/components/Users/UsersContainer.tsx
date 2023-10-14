@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { follow, getUsers, setCurrentPage, setTotalUsersCount, unfollow } from '../../redux/usersReducer'
-import { StateType, UserType } from '../../types/types'
+import { UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
 import { compose } from 'redux'
+import { AppRootStateT } from '../../redux/reduxStore'
 
 interface IUsersContainer {
 	users: UserType[]
@@ -49,7 +50,7 @@ class UsersContainer extends React.Component<IUsersContainer> {
 	}
 }
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: AppRootStateT) => {
 	return {
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,

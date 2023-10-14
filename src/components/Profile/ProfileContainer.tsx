@@ -2,11 +2,12 @@ import React from 'react'
 import { Profile } from './Profile'
 import { connect } from 'react-redux'
 
-import { ProfileType, StateType } from '../../types/types'
+import { ProfileType } from '../../types/types'
 import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
+import { AppRootStateT } from '../../redux/reduxStore'
 
 export interface IProfileContainerProps {
 	isAuth: boolean
@@ -41,7 +42,7 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 	}
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: AppRootStateT) => ({
 	profile: state.profilePage.profile,
 	status: state.profilePage.status,
 	authorizedUserId: state.auth.userId,
