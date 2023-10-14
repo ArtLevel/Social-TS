@@ -23,6 +23,9 @@ export const NavBar: FC<INavBar> = () => {
 					<NavLink to='/music' activeClassName={s.activeLink}>Music</NavLink>
 				</li>
 				<li className={s.item}>
+					<NavLink to='/users' activeClassName={s.activeLink}>Users</NavLink>
+				</li>
+				<li className={s.item}>
 					<NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink>
 				</li>
 			</ul>
