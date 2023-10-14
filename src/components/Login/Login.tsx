@@ -5,8 +5,8 @@ import { required } from '../../utils/validators/validators'
 import { connect } from 'react-redux'
 import { login } from '../../redux/authReducer'
 import { Redirect } from 'react-router-dom'
-import { StateType } from '../../types/StateType'
 import s from '../common/FormsControls/FormsControls.module.css'
+import { AppRootStateT } from '../../redux/reduxStore'
 
 export type LoginFormT = {
 	email: string
@@ -63,7 +63,7 @@ const LoginReduxForm = reduxForm<LoginFormT>({
 	form: 'login'
 })(LoginForm)
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: AppRootStateT) => ({
 	isAuth: state.auth.isAuth
 })
 

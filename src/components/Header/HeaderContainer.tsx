@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from './Header'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/authReducer'
-import { StateType } from '../../types/StateType'
+import { AppRootStateT } from '../../redux/reduxStore'
 
 interface IHeaderContainer {
 	isAuth: boolean
@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component<IHeaderContainer> {
 	}
 }
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: AppRootStateT) => ({
 	isAuth: state.auth.isAuth,
 	login: state.auth.login
 })

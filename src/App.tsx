@@ -11,6 +11,7 @@ import './App.css'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './redux/appReducer'
+import { AppRootStateT } from './redux/reduxStore'
 
 interface IApp {
 	initializeApp: () => void
@@ -39,7 +40,11 @@ class App extends React.Component<IApp> {
 	}
 }
 
+const mapStateToProps = (state: AppRootStateT) => ({
+	initialized: state.app.initialized
+})
+
 export default compose<React.ComponentType>(
-	connect(null, { initializeApp }),
+	connect(mapStateToProps, { initializeApp }),
 	withRouter
 )(App)

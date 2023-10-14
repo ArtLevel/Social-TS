@@ -25,7 +25,12 @@ export const initializedSuccess = (): InitializedSuccessAT => ({
 
 export const initializeApp = () => (dispatch: (action: ActionsType) => void) => {
 	// @ts-ignore
-	dispatch(getAuthUserData())
+	const promise = dispatch(getAuthUserData())
+
+	// @ts-ignore
+	Promise.all([promise]).then(() => {
+		dispatch(initializedSuccess())
+	})
 }
 
 export default appReducer
