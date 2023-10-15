@@ -1,5 +1,5 @@
 import {
-	ActionsType,
+	ActionsT,
 	ActionValueT,
 	FollowAT,
 	SetCurrentPageAT,
@@ -30,7 +30,7 @@ const initialState: UsersPageT = {
 	followingInProgress: []
 }
 
-const usersReducer = (state: UsersPageT = initialState, action: ActionsType): UsersPageT => {
+const usersReducer = (state: UsersPageT = initialState, action: ActionsT): UsersPageT => {
 	switch (action.type) {
 		case FOLLOW:
 			return {
@@ -82,7 +82,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 })
 
 export const requestUsers = (page: number, pageSize: number) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		dispatch(toggleIsFetching(true))
 
 		usersAPI.getUsers(page, pageSize).then(data => {
@@ -95,7 +95,7 @@ export const requestUsers = (page: number, pageSize: number) => {
 }
 
 export const follow = (userId: number) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		dispatch(toggleFollowingProgress(true, userId))
 		usersAPI.postFollow(userId).then(data => {
 			if (data.resultCode === 0) dispatch(followSuccess(userId))
@@ -105,7 +105,7 @@ export const follow = (userId: number) => {
 }
 
 export const unfollow = (userId: number) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		dispatch(toggleFollowingProgress(true, userId))
 		usersAPI.deleteFollow(userId).then(data => {
 			if (data.resultCode === 0) dispatch(unfollowSuccess(userId))

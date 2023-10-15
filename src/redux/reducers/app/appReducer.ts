@@ -1,4 +1,4 @@
-import { ActionsType, ActionValueT, AppPageT, InitializedSuccessAT } from '../../../types/types'
+import { ActionsT, ActionValueT, AppPageT, InitializedSuccessAT } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
 
 const INIZIALIZED_SUCCESS: ActionValueT = 'INIZIALIZED_SUCCESS'
@@ -7,7 +7,7 @@ const initialState: AppPageT = {
 	initialized: false
 }
 
-const appReducer = (state: AppPageT = initialState, action: ActionsType): AppPageT => {
+const appReducer = (state: AppPageT = initialState, action: ActionsT): AppPageT => {
 	switch (action.type) {
 		case INIZIALIZED_SUCCESS:
 			return {
@@ -23,7 +23,7 @@ export const initializedSuccess = (): InitializedSuccessAT => ({
 	type: INIZIALIZED_SUCCESS
 })
 
-export const initializeApp = () => (dispatch: (action: ActionsType) => void) => {
+export const initializeApp = () => (dispatch: (action: ActionsT) => void) => {
 	// @ts-ignore
 	const promise = dispatch(getAuthUserData())
 

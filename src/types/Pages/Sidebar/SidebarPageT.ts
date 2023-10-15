@@ -1,4 +1,4 @@
-import { SidebarT } from '../SidebarT'
+import { SidebarT } from './SidebarT'
 
 export type SidebarPageT = {
 	sidebar: SidebarT[]

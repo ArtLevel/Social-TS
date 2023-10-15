@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { UserT } from '../../types/Pages/UsersPageT'
+import { UserT } from '../../types/Pages/Users/UsersPageT'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'

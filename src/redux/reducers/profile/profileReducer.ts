@@ -1,5 +1,5 @@
 import {
-	ActionsType,
+	ActionsT,
 	ActionValueT,
 	AddPostAT,
 	PostT,
@@ -36,7 +36,7 @@ const initialState: ProfilePageT = {
 	status: ''
 }
 
-const profileReducer = (state: ProfilePageT = initialState, action: ActionsType): ProfilePageT => {
+const profileReducer = (state: ProfilePageT = initialState, action: ActionsT): ProfilePageT => {
 	switch (action.type) {
 		case ADD_POST: {
 			const newPost: PostT = {
@@ -62,7 +62,7 @@ export const setUserProfile = (profile: ProfileT): setUserProfileAT => ({ type: 
 export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
 
 export const getUserProfile = (userId: number) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		profileAPI.getUserProfile(userId).then(data => {
 			dispatch(setUserProfile(data))
 		})
@@ -70,7 +70,7 @@ export const getUserProfile = (userId: number) => {
 }
 
 export const getUserStatus = (userId: number) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		profileAPI.getStatus(userId).then(data => {
 			dispatch(setStatus(data))
 		})
@@ -78,7 +78,7 @@ export const getUserStatus = (userId: number) => {
 }
 
 export const updateUserStatus = (status: string) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		profileAPI.updateStatus(status).then(data => {
 			if (data.resultCode === 0) {
 				dispatch(setStatus(status))

@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { ProfileInfo } from './ProfileInfo/ProfileInfo'
 import { MyPostsContainer } from './MyPosts/MyPostsContainer'
-import { ProfileT } from '../../types/Pages/ProfilePageT'
+import { ProfileT } from '../../types/Pages/Profile/ProfilePageT'
 
 interface IProfile {
 	status: string

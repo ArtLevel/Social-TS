@@ -1,4 +1,4 @@
-import { PostT } from '../PostT'
+import { PostT } from './PostT'
 
 export type ProfileContactsT = {
 	facebook: string

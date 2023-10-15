@@ -1,5 +1,5 @@
-import { UserT } from './Pages/UsersPageT'
-import { ProfileT } from './Pages/ProfilePageT'
+import { UserT } from './Pages/Users/UsersPageT'
+import { ProfileT } from './Pages/Profile/ProfilePageT'
 
 export type ActionValueT =
 	'ADD-POST'
@@ -87,7 +87,7 @@ export type InitializedSuccessAT = {
 }
 
 
-export type ActionsType =
+export type ActionsT =
 	AddPostAT
 	| setUserProfileAT
 	| FollowAT

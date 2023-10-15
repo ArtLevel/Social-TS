@@ -1,4 +1,4 @@
-import { ActionsType, ActionValueT, SetAuthUserDataAT } from '../../../types/types'
+import { ActionsT, ActionValueT, SetAuthUserDataAT } from '../../../types/types'
 import { AuthT } from '../../../types/AuthT'
 import { authAPI } from '../../../api/api'
 import { LoginFormT } from '../../../components/Login/Login'
@@ -13,7 +13,7 @@ const initialState: AuthT = {
 	isAuth: false
 }
 
-const authReducer = (state: AuthT = initialState, action: ActionsType): AuthT => {
+const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
 	switch (action.type) {
 		case SET_USER_DATA:
 			return {
@@ -32,7 +32,7 @@ export const setAuthUserData = (data: AuthT): SetAuthUserDataAT => ({
 	}
 })
 
-export const getAuthUserData = () => (dispatch: (action: ActionsType) => void) => {
+export const getAuthUserData = () => (dispatch: (action: ActionsT) => void) => {
 	return authAPI.me().then(data => {
 		if (data.resultCode === 0) {
 			const { id, login, email } = data.data
@@ -42,7 +42,7 @@ export const getAuthUserData = () => (dispatch: (action: ActionsType) => void) =
 }
 
 export const login = (formData: LoginFormT) => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		authAPI.login(formData).then(data => {
 			if (data.resultCode === 0) {
 				// @ts-ignore
@@ -58,7 +58,7 @@ export const login = (formData: LoginFormT) => {
 }
 
 export const logout = () => {
-	return (dispatch: (action: ActionsType) => void) => {
+	return (dispatch: (action: ActionsT) => void) => {
 		authAPI.logout().then(data => {
 			if (data.resultCode === 0) {
 				dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false }))

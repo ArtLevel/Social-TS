@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import s from './ProfileInfo.module.css'
-import { ProfileT } from '../../../types/Pages/ProfilePageT'
+import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import { ProfileStatus } from './ProfileStatus'
