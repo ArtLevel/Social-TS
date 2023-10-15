@@ -1,19 +1,19 @@
-import { ActionsType, ActionValueType, SetAuthUserDataAT } from '../../../types/types'
-import { AuthType } from '../../../types/AuthType'
+import { ActionsType, ActionValueT, SetAuthUserDataAT } from '../../../types/types'
+import { AuthT } from '../../../types/AuthT'
 import { authAPI } from '../../../api/api'
 import { LoginFormT } from '../../../components/Login/Login'
 import { stopSubmit } from 'redux-form'
 
-const SET_USER_DATA: ActionValueType = 'SET_USER_DATA'
+const SET_USER_DATA: ActionValueT = 'SET_USER_DATA'
 
-const initialState: AuthType = {
+const initialState: AuthT = {
 	userId: null,
 	email: null,
 	login: null,
 	isAuth: false
 }
 
-const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
+const authReducer = (state: AuthT = initialState, action: ActionsType): AuthT => {
 	switch (action.type) {
 		case SET_USER_DATA:
 			return {
@@ -25,7 +25,7 @@ const authReducer = (state: AuthType = initialState, action: ActionsType): AuthT
 	}
 }
 
-export const setAuthUserData = (data: AuthType): SetAuthUserDataAT => ({
+export const setAuthUserData = (data: AuthT): SetAuthUserDataAT => ({
 	type: SET_USER_DATA,
 	payload: {
 		...data

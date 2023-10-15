@@ -1,18 +1,18 @@
-export type UserOfPhotos = {
+export type PhotosOfUserT = {
 	small: string
 	large: string
 }
 
-export type UserType = {
+export type UserT = {
 	name: string
 	id: number
-	photos: UserOfPhotos
+	photos: PhotosOfUserT
 	status: string
 	followed: boolean
 }
 
-export type UsersPageType = {
-	users: UserType[]
+export type UsersPageT = {
+	users: UserT[]
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number

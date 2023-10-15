@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import s from './ProfileInfo.module.css'
-import { ProfileType } from '../../../types/Pages/ProfilePageType'
+import { ProfileT } from '../../../types/Pages/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import { ProfileStatus } from './ProfileStatus'
@@ -10,7 +10,7 @@ import { ProfileStatus } from './ProfileStatus'
 
 interface IProfileInfo {
 	status: string
-	profile: ProfileType | null
+	profile: ProfileT | null
 
 	updateUserStatus: (status: string) => void
 }

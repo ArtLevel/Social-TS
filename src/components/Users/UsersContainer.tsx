@@ -7,7 +7,7 @@ import {
 	setTotalUsersCount,
 	unfollow
 } from '../../redux/reducers/users/usersReducer'
-import { UserType } from '../../types/types'
+import { UserT } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
@@ -23,7 +23,7 @@ import {
 } from '../../redux/selectors/usersSelectors'
 
 interface IUsersContainer {
-	users: UserType[]
+	users: UserT[]
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number

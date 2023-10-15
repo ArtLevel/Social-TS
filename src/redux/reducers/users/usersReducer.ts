@@ -1,6 +1,6 @@
 import {
 	ActionsType,
-	ActionValueType,
+	ActionValueT,
 	FollowAT,
 	SetCurrentPageAT,
 	SetTotalUsersCountAT,
@@ -8,20 +8,20 @@ import {
 	ToggleFollowingProgressAT,
 	ToggleIsFetchingAT,
 	UnfollowAT,
-	UsersPageType,
-	UserType
+	UsersPageT,
+	UserT
 } from '../../../types/types'
 import { usersAPI } from '../../../api/api'
 
-const FOLLOW: ActionValueType = 'FOLLOW'
-const UNFOLLOW: ActionValueType = 'UNFOLLOW'
-const SET_USERS: ActionValueType = 'SET_USERS'
-const SET_CURRENT_PAGE: ActionValueType = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT: ActionValueType = 'SET_TOTAL_USERS_COUNT'
-const TOGGLE_IS_FETCHING: ActionValueType = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS: ActionValueType = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const FOLLOW: ActionValueT = 'FOLLOW'
+const UNFOLLOW: ActionValueT = 'UNFOLLOW'
+const SET_USERS: ActionValueT = 'SET_USERS'
+const SET_CURRENT_PAGE: ActionValueT = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT: ActionValueT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING: ActionValueT = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS: ActionValueT = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
-const initialState: UsersPageType = {
+const initialState: UsersPageT = {
 	users: [],
 	pageSize: 5,
 	totalUsersCount: 0,
@@ -30,7 +30,7 @@ const initialState: UsersPageType = {
 	followingInProgress: []
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
+const usersReducer = (state: UsersPageT = initialState, action: ActionsType): UsersPageT => {
 	switch (action.type) {
 		case FOLLOW:
 			return {
@@ -63,7 +63,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
 
 export const followSuccess = (userId: number): FollowAT => ({ type: FOLLOW, userId })
 export const unfollowSuccess = (userId: number): UnfollowAT => ({ type: UNFOLLOW, userId })
-export const setUsers = (users: UserType[]): SetUsersAT => ({ type: SET_USERS, users })
+export const setUsers = (users: UserT[]): SetUsersAT => ({ type: SET_USERS, users })
 export const setCurrentPage = (currentPage: number): SetCurrentPageAT => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountAT => ({
 	type: SET_TOTAL_USERS_COUNT,

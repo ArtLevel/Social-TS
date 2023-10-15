@@ -1,20 +1,20 @@
 import {
 	ActionsType,
-	ActionValueType,
+	ActionValueT,
 	AddPostAT,
-	PostType,
-	ProfilePageType,
-	ProfileType,
+	PostT,
+	ProfilePageT,
+	ProfileT,
 	SetStatusAT,
 	setUserProfileAT
 } from '../../../types/types'
 import { profileAPI } from '../../../api/api'
 
-const ADD_POST: ActionValueType = 'ADD-POST'
-const SET_USER_PROFILE: ActionValueType = 'SET_USER_PROFILE'
-const SET_STATUS: ActionValueType = 'SET_STATUS'
+const ADD_POST: ActionValueT = 'ADD-POST'
+const SET_USER_PROFILE: ActionValueT = 'SET_USER_PROFILE'
+const SET_STATUS: ActionValueT = 'SET_STATUS'
 
-const initialState: ProfilePageType = {
+const initialState: ProfilePageT = {
 	posts: [
 		{
 			id: 1,
@@ -36,10 +36,10 @@ const initialState: ProfilePageType = {
 	status: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+const profileReducer = (state: ProfilePageT = initialState, action: ActionsType): ProfilePageT => {
 	switch (action.type) {
 		case ADD_POST: {
-			const newPost: PostType = {
+			const newPost: PostT = {
 				id: 5,
 				message: action.newPostText,
 				likesCount: 0
@@ -58,7 +58,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 	}
 }
 export const addPost = (newPostText: string): AddPostAT => ({ type: ADD_POST, newPostText })
-export const setUserProfile = (profile: ProfileType): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
+export const setUserProfile = (profile: ProfileT): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
 
 export const getUserProfile = (userId: number) => {

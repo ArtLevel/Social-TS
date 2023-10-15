@@ -1,13 +1,13 @@
-import { ActionsType, ActionValueType, AppPageType, InitializedSuccessAT } from '../../../types/types'
+import { ActionsType, ActionValueT, AppPageT, InitializedSuccessAT } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
 
-const INIZIALIZED_SUCCESS: ActionValueType = 'INIZIALIZED_SUCCESS'
+const INIZIALIZED_SUCCESS: ActionValueT = 'INIZIALIZED_SUCCESS'
 
-const initialState: AppPageType = {
+const initialState: AppPageT = {
 	initialized: false
 }
 
-const appReducer = (state: AppPageType = initialState, action: ActionsType): AppPageType => {
+const appReducer = (state: AppPageT = initialState, action: ActionsType): AppPageT => {
 	switch (action.type) {
 		case INIZIALIZED_SUCCESS:
 			return {

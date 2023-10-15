@@ -1,7 +1,7 @@
-import { UserType } from './Pages/UsersPageType'
-import { ProfileType } from './Pages/ProfilePageType'
+import { UserT } from './Pages/UsersPageT'
+import { ProfileT } from './Pages/ProfilePageT'
 
-export type ActionValueType =
+export type ActionValueT =
 	'ADD-POST'
 	| 'SEND-MESSAGE'
 	| 'FOLLOW'
@@ -23,7 +23,7 @@ export type AddPostAT = {
 
 export type setUserProfileAT = {
 	type: 'SET_USER_PROFILE'
-	profile: ProfileType
+	profile: ProfileT
 }
 
 export type FollowAT = {
@@ -38,7 +38,7 @@ export type UnfollowAT = {
 
 export type SetUsersAT = {
 	type: 'SET_USERS'
-	users: UserType[]
+	users: UserT[]
 }
 
 export type SetCurrentPageAT = {

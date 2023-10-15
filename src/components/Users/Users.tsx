@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { UserType } from '../../types/Pages/UsersPageType'
+import { UserT } from '../../types/Pages/UsersPageT'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
 
 interface IUsers {
-	users: UserType[]
+	users: UserT[]
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number

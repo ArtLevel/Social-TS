@@ -1,6 +1,6 @@
-import { PostType } from '../PostType'
+import { PostT } from '../PostT'
 
-export type ProfileContactsType = {
+export type ProfileContactsT = {
 	facebook: string
 	github: string
 	instagram: string
@@ -11,23 +11,23 @@ export type ProfileContactsType = {
 	youtube: string
 }
 
-export type ProfilePhotosType = {
+export type ProfilePhotosT = {
 	small: string
 	large: string
 }
 
-export type ProfileType = {
+export type ProfileT = {
 	aboutMe: string
-	contacts: ProfileContactsType
+	contacts: ProfileContactsT
 	fullName: string
 	lookingForAJob: boolean
 	lookingForAJobDescription: string
-	photos: ProfilePhotosType
+	photos: ProfilePhotosT
 	userId: number
 }
 
-export type ProfilePageType = {
-	posts: PostType[]
-	profile: ProfileType | null
+export type ProfilePageT = {
+	posts: PostT[]
+	profile: ProfileT | null
 	status: string
 }

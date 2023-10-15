@@ -1,8 +1,8 @@
-import { ActionsType, DialogsPageType, SendMessageAT } from '../../../types/types'
+import { ActionsType, DialogsPageT, SendMessageAT } from '../../../types/types'
 
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-const initialState: DialogsPageType = {
+const initialState: DialogsPageT = {
 	dialogs: [
 		{
 			id: 1,
@@ -33,7 +33,7 @@ const initialState: DialogsPageType = {
 	]
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
+const dialogsReducer = (state: DialogsPageT = initialState, action: ActionsType): DialogsPageT => {
 	switch (action.type) {
 		case SEND_MESSAGE: {
 			if (action.newMessageBody) return {

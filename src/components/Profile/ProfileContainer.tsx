@@ -2,7 +2,7 @@ import React from 'react'
 import { Profile } from './Profile'
 import { connect } from 'react-redux'
 
-import { ProfileType } from '../../types/types'
+import { ProfileT } from '../../types/types'
 import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/reducers/profile/profileReducer'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -13,7 +13,7 @@ export interface IProfileContainerProps {
 	isAuth: boolean
 	authorizedUserId: number
 	status: string
-	profile: ProfileType | null
+	profile: ProfileT | null
 
 	getUserProfile: (userId: number) => void
 	getUserStatus: (userId: number) => void

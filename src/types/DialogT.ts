@@ -1,4 +1,4 @@
-export type DialogType = {
+export type DialogT = {
 	id: number
 	name: string
 }
