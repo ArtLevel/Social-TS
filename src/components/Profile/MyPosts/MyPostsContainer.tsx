@@ -1,8 +1,8 @@
 import React from 'react'
-import { addPost } from '../../../redux/profileReducer'
+import { addPost } from '../../../redux/reducers/profile/profileReducer'
 import { MyPosts } from './MyPosts'
 import { connect } from 'react-redux'
-import { AppRootStateT } from '../../../redux/reduxStore'
+import { AppRootStateT } from '../../../redux/store/reduxStore'
 
 const mapStateToProps = (state: AppRootStateT) => {
 	return {

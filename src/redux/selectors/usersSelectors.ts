@@ -1,4 +1,4 @@
-import { AppRootStateT } from '../reduxStore'
+import { AppRootStateT } from '../store/reduxStore'
 
 export const getUsers = (state: AppRootStateT) => {
 	return state.usersPage.users

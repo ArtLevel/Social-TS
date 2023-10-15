@@ -1,12 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, requestUsers, setCurrentPage, setTotalUsersCount, unfollow } from '../../redux/usersReducer'
+import {
+	follow,
+	requestUsers,
+	setCurrentPage,
+	setTotalUsersCount,
+	unfollow
+} from '../../redux/reducers/users/usersReducer'
 import { UserType } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
 import { compose } from 'redux'
-import { AppRootStateT } from '../../redux/reduxStore'
+import { AppRootStateT } from '../../redux/store/reduxStore'
 import {
 	getCurrentPage,
 	getFollowingInProgress,

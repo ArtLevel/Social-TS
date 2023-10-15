@@ -1,4 +1,4 @@
-import { ActionsType, SidebarPageType } from '../types/types'
+import { ActionsType, SidebarPageType } from '../../../types/types'
 
 const initialState: SidebarPageType = {
 	sidebar: [

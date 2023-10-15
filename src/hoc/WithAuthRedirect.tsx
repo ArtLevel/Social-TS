@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { AppRootStateT } from '../redux/reduxStore'
+import { AppRootStateT } from '../redux/store/reduxStore'
 
 export const WithAuthRedirect = (Component: any) => {
 	class RedirectComponent extends React.Component<any, any> {

@@ -3,11 +3,11 @@ import { Profile } from './Profile'
 import { connect } from 'react-redux'
 
 import { ProfileType } from '../../types/types'
-import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
+import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/reducers/profile/profileReducer'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
-import { AppRootStateT } from '../../redux/reduxStore'
+import { AppRootStateT } from '../../redux/store/reduxStore'
 
 export interface IProfileContainerProps {
 	isAuth: boolean

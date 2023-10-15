@@ -1,5 +1,5 @@
-import { ActionsType, ActionValueType, AppPageType, InitializedSuccessAT } from '../types/types'
-import { getAuthUserData } from './authReducer'
+import { ActionsType, ActionValueType, AppPageType, InitializedSuccessAT } from '../../../types/types'
+import { getAuthUserData } from '../auth/authReducer'
 
 const INIZIALIZED_SUCCESS: ActionValueType = 'INIZIALIZED_SUCCESS'
 

@@ -7,8 +7,8 @@ import {
 	ProfileType,
 	SetStatusAT,
 	setUserProfileAT
-} from '../types/types'
-import { profileAPI } from '../api/api'
+} from '../../../types/types'
+import { profileAPI } from '../../../api/api'
 
 const ADD_POST: ActionValueType = 'ADD-POST'
 const SET_USER_PROFILE: ActionValueType = 'SET_USER_PROFILE'

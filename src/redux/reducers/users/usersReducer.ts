@@ -10,8 +10,8 @@ import {
 	UnfollowAT,
 	UsersPageType,
 	UserType
-} from '../types/types'
-import { usersAPI } from '../api/api'
+} from '../../../types/types'
+import { usersAPI } from '../../../api/api'
 
 const FOLLOW: ActionValueType = 'FOLLOW'
 const UNFOLLOW: ActionValueType = 'UNFOLLOW'

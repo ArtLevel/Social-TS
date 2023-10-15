@@ -3,10 +3,10 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required } from '../../utils/validators/validators'
 import { connect } from 'react-redux'
-import { login } from '../../redux/authReducer'
+import { login } from '../../redux/reducers/auth/authReducer'
 import { Redirect } from 'react-router-dom'
 import s from '../common/FormsControls/FormsControls.module.css'
-import { AppRootStateT } from '../../redux/reduxStore'
+import { AppRootStateT } from '../../redux/store/reduxStore'
 
 export type LoginFormT = {
 	email: string

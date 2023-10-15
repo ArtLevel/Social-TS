@@ -1,4 +1,4 @@
-import { ActionsType, DialogsPageType, SendMessageAT } from '../types/types'
+import { ActionsType, DialogsPageType, SendMessageAT } from '../../../types/types'
 
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
