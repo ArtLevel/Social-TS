@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 interface IProfileStatusWithHooks {
 	status: string
@@ -8,6 +8,10 @@ interface IProfileStatusWithHooks {
 export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 	const [editMode, setEditMode] = useState(false)
 	const [status, setStatus] = useState(props.status)
+
+	useEffect(() => {
+		setStatus(props.status)
+	}, [props.status])
 
 	const activateEditMode = () => setEditMode(true)
 	const disableEditMode = () => {
@@ -23,7 +27,7 @@ export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 			!editMode
 				?
 				<div>
-					<span onDoubleClick={activateEditMode}>{status || 'He doesn\'t have a status'}</span>
+					<span onDoubleClick={activateEditMode}>{status || 'No a status'}</span>
 				</div>
 				:
 				<div>
