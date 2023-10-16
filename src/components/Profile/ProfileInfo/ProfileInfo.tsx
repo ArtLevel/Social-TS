@@ -4,7 +4,7 @@ import s from './ProfileInfo.module.css'
 import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
-import { ProfileStatus } from './ProfileStatus'
+import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 
 // import ProfileStatus from './ProfileStatus'
 
@@ -23,7 +23,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 			/>
 			<div className={s.descriptionBlock}>
 				<img src={profile.photos.large} />
-				<ProfileStatus status={status} updateUserStatus={updateUserStatus} />
+				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />
