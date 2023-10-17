@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Post } from './Post/Post'
 import { PostT } from '../../../types/types'
@@ -11,20 +11,23 @@ interface IMyPostsProps {
 	addPost: (newPostText: string) => void
 }
 
-export const MyPosts: FC<IMyPostsProps> = ({ posts, addPost }) => {
-	const postEl = posts.map(p => <Post key={p.id} {...p} />)
+export class MyPosts extends React.PureComponent<IMyPostsProps> {
+	render() {
+		let { posts, addPost } = this.props
+		const postEl = posts.map(p => <Post key={p.id} {...p} />)
 
-	const onAddPost = (values: AddPostFormPT) => addPost(values.newPostText)
+		const onAddPost = (values: AddPostFormPT) => addPost(values.newPostText)
 
-	return (
-		<div className={s.postsBlock}>
-			<h3>My posts</h3>
-			<AddPostFormRedux onSubmit={onAddPost} />
+		return (
+			<div className={s.postsBlock}>
+				<h3>My posts</h3>
+				<AddPostFormRedux onSubmit={onAddPost} />
 
-			<div className={s.posts}>
-				{postEl}
+				<div className={s.posts}>
+					{postEl}
+				</div>
+
 			</div>
-
-		</div>
-	)
+		)
+	}
 }
