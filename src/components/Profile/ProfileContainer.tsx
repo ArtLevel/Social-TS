@@ -9,7 +9,7 @@ import { compose } from 'redux'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 import { AppRootStateT } from '../../redux/store/reduxStore'
 
-export interface IProfileContainerProps {
+interface IProfileContainerProps {
 	isAuth: boolean
 	authorizedUserId: number
 	status: string

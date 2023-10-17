@@ -1,11 +1,11 @@
 import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 import { FC } from 'react'
-import { DialogsPageT } from '../../types/types'
+import { AddMessageFormPT, DialogsPageT } from '../../types/types'
 import s from './Dialogs.module.css'
-import { AddMessageFormPT, AddMessageFormRedux } from './AddMessageForm'
+import { AddMessageFormRedux } from './AddMessageForm'
 
-export interface IDialogs {
+interface IDialogs {
 	dialogsPage: DialogsPageT
 	isAuth: boolean
 

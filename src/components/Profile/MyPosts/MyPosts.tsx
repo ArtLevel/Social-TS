@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import { Post } from './Post/Post'
-import { PostT } from '../../../types/types'
+import { AddPostFormPT, PostT } from '../../../types/types'
 
 import s from './MyPosts.module.css'
-import { AddPostFormPT, AddPostFormRedux } from './AddNewPostForm'
+import { AddPostFormRedux } from './AddNewPostForm'
 
 interface IMyPostsProps {
 	posts: PostT[]

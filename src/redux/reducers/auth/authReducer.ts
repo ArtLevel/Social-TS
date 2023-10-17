@@ -1,7 +1,6 @@
-import { ActionsT, ActionValueT, SetAuthUserDataAT } from '../../../types/types'
+import { ActionsT, ActionValueT, LoginFormT, SetAuthUserDataAT } from '../../../types/types'
 import { AuthT } from '../../../types/AuthT'
 import { authAPI } from '../../../api/api'
-import { LoginFormT } from '../../../components/Login/Login'
 import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA: ActionValueT = 'SET_USER_DATA'

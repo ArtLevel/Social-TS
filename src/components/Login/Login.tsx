@@ -7,12 +7,7 @@ import { login } from '../../redux/reducers/auth/authReducer'
 import { Redirect } from 'react-router-dom'
 import s from '../common/FormsControls/FormsControls.module.css'
 import { AppRootStateT } from '../../redux/store/reduxStore'
-
-export type LoginFormT = {
-	email: string
-	password: string
-	rememberMe: boolean
-}
+import { LoginFormT } from '../../types/types'
 
 interface ILogin {
 	isAuth: boolean
