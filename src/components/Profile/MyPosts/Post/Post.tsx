@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import s from './Post.module.css'
 import { PostT } from '../../../../types/types'
@@ -6,9 +6,8 @@ import { PostT } from '../../../../types/types'
 interface IPost extends PostT {
 }
 
-export class Post extends React.PureComponent<IPost> {
-	render() {
-		let { message, likesCount } = this.props
+export const Post: FC<IPost> = React.memo((props) => {
+		let { message, likesCount } = props
 
 		return (
 			<div className={s.item}>
@@ -19,5 +18,4 @@ export class Post extends React.PureComponent<IPost> {
 			</div>
 		)
 	}
-}
-
+)

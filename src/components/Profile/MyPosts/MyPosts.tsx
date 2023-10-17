@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { Post } from './Post/Post'
 import { PostT } from '../../../types/types'
@@ -11,11 +11,8 @@ interface IMyPostsProps {
 	addPost: (newPostText: string) => void
 }
 
-export class MyPosts extends React.PureComponent<IMyPostsProps> {
-	render() {
-		let { posts, addPost } = this.props
+export const MyPosts: FC<IMyPostsProps> = React.memo(({ posts, addPost }) => {
 		const postEl = posts.map(p => <Post key={p.id} {...p} />)
-
 		const onAddPost = (values: AddPostFormPT) => addPost(values.newPostText)
 
 		return (
@@ -30,4 +27,4 @@ export class MyPosts extends React.PureComponent<IMyPostsProps> {
 			</div>
 		)
 	}
-}
+)
