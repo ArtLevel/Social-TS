@@ -54,3 +54,9 @@ export default compose<React.ComponentType>(
 	connect(mapStateToProps, { initializeApp }),
 	withRouter
 )(App)
+
+// Принципы чистой функции:
+// 1. Immutability
+// 2. Return
+// 3. No side effect - не оставляет мусора во внешнем мире
+// 4. детерминированость (идетерминированость) - при одинаковых входных данных, одинаковые выходные данные
