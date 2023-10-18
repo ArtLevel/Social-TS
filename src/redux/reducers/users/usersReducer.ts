@@ -77,8 +77,8 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingAT => ({
 
 export const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressAT => ({
 	type: TOGGLE_IS_FOLLOWING_PROGRESS,
-	userId,
-	isFetching
+	isFetching,
+	userId
 })
 
 export const requestUsers = (page: number, pageSize: number) => {
