@@ -3,6 +3,7 @@ import { ProfileT } from './Pages/Profile/ProfilePageT'
 
 export type ActionValueT =
 	'ADD-POST'
+	| 'DELETE_POST'
 	| 'SEND-MESSAGE'
 	| 'FOLLOW'
 	| 'UNFOLLOW'
@@ -78,14 +79,18 @@ export type ToggleFollowingProgressAT = {
 }
 
 export type SetStatusAT = {
-	type: 'SET_STATUS',
+	type: 'SET_STATUS'
 	status: string
 }
 
 export type InitializedSuccessAT = {
-	type: 'INIZIALIZED_SUCCESS',
+	type: 'INIZIALIZED_SUCCESS'
 }
 
+export type DeletePostAC = {
+	type: 'DELETE_POST'
+	postId: number
+}
 
 export type ActionsT =
 	AddPostAT
@@ -101,3 +106,4 @@ export type ActionsT =
 	| ToggleFollowingProgressAT
 	| SetStatusAT
 	| InitializedSuccessAT
+	| DeletePostAC
