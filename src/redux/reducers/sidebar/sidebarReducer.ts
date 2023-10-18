@@ -18,7 +18,6 @@ const initialState: SidebarPageT = {
 }
 
 const sidebarReducer = (state: SidebarPageT = initialState, action: ActionsT) => {
-
 	return state
 }
 
