@@ -1,9 +1,7 @@
-import { ActionsT, ActionValueT, LoginFormT, SetAuthUserDataAT } from '../../../types/types'
+import { ActionsT, LoginFormT, SET_USER_DATA, SetAuthUserDataAT } from '../../../types/types'
 import { AuthT } from '../../../types/AuthT'
 import { authAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
-
-const SET_USER_DATA: ActionValueT = 'samurai_network/auth/SET_USERS_DATA'
 
 const initialState: AuthT = {
 	userId: null,

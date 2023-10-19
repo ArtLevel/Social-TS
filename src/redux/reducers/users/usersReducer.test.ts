@@ -7,8 +7,17 @@ import {
 	ToggleFollowingProgressAT,
 	ToggleIsFetchingAT,
 	UnfollowAT
-} from '../../../types/ActionT'
+} from '../../../types/Action/ActionT'
 import usersReducer from './usersReducer'
+import {
+	FOLLOW,
+	SET_CURRENT_PAGE,
+	SET_TOTAL_USERS_COUNT,
+	SET_USERS,
+	TOGGLE_IS_FETCHING,
+	TOGGLE_IS_FOLLOWING_PROGRESS,
+	UNFOLLOW
+} from '../../../types/Action/ActionNamesConst'
 
 let state: UsersPageT
 
@@ -56,7 +65,7 @@ beforeEach(() => {
 
 it('field of followed should be true', () => {
 	const action: FollowAT = {
-		type: 'FOLLOW',
+		type: FOLLOW,
 		userId: 1
 	}
 	const newState = usersReducer(state, action)
@@ -65,7 +74,7 @@ it('field of followed should be true', () => {
 })
 it('field of followed should be false', () => {
 	const action: UnfollowAT = {
-		type: 'UNFOLLOW',
+		type: UNFOLLOW,
 		userId: 3
 	}
 	const newState = usersReducer(state, action)
@@ -74,7 +83,7 @@ it('field of followed should be false', () => {
 })
 it('length of the users should be correct', () => {
 	const action: SetUsersAT = {
-		type: 'SET_USERS',
+		type: SET_USERS,
 		users: [
 			{
 				name: 'Nikolai',
@@ -94,7 +103,7 @@ it('length of the users should be correct', () => {
 })
 it('fields of the newUser should be correct', () => {
 	const action: SetUsersAT = {
-		type: 'SET_USERS',
+		type: SET_USERS,
 		users: [
 			{
 				name: 'Nikolai',
@@ -117,7 +126,7 @@ it('fields of the newUser should be correct', () => {
 })
 it('currentPage should be correct', () => {
 	const action: SetCurrentPageAT = {
-		type: 'SET_CURRENT_PAGE',
+		type: SET_CURRENT_PAGE,
 		currentPage: 3
 	}
 	const newState = usersReducer(state, action)
@@ -126,7 +135,7 @@ it('currentPage should be correct', () => {
 })
 it('usersCount should be correct', () => {
 	const action: SetTotalUsersCountAT = {
-		type: 'SET_TOTAL_USERS_COUNT',
+		type: SET_TOTAL_USERS_COUNT,
 		totalUsersCount: 2000
 	}
 	const newState = usersReducer(state, action)
@@ -135,7 +144,7 @@ it('usersCount should be correct', () => {
 })
 it('isFetching should be true', () => {
 	const action: ToggleIsFetchingAT = {
-		type: 'TOGGLE_IS_FETCHING',
+		type: TOGGLE_IS_FETCHING,
 		isFetching: true
 	}
 	const newState = usersReducer(state, action)
@@ -144,7 +153,7 @@ it('isFetching should be true', () => {
 })
 it('isFetching should be false', () => {
 	const action: ToggleIsFetchingAT = {
-		type: 'TOGGLE_IS_FETCHING',
+		type: TOGGLE_IS_FETCHING,
 		isFetching: false
 	}
 	const newState = usersReducer(state, action)
@@ -153,7 +162,7 @@ it('isFetching should be false', () => {
 })
 it('followingIsProgress should be correct with field of isFetching should be true', () => {
 	const action: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 2
 	}
@@ -164,7 +173,7 @@ it('followingIsProgress should be correct with field of isFetching should be tru
 })
 it(`followingIsProgress should be correct. Length of followingInProgress should be 1`, () => {
 	const action: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 2
 	}
@@ -176,12 +185,12 @@ it(`followingIsProgress should be correct. Length of followingInProgress should 
 })
 it(`followingIsProgress should be correct. Length of followingInProgress should be 2`, () => {
 	const action1: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 2
 	}
 	const action2: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 98
 	}
@@ -196,17 +205,17 @@ it(`followingIsProgress should be correct. Length of followingInProgress should 
 })
 it(`followingIsProgress should be correct with field of isFetching should be false`, () => {
 	const action1: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 2
 	}
 	const action2: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: true,
 		userId: 98
 	}
 	const action3: ToggleFollowingProgressAT = {
-		type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+		type: TOGGLE_IS_FOLLOWING_PROGRESS,
 		isFetching: false,
 		userId: 342
 	}

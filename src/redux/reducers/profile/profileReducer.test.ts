@@ -1,6 +1,7 @@
 import profileReducer, { deletePost } from './profileReducer'
-import { AddPostAT, DeletePostAC } from '../../../types/ActionT'
+import { AddPostAT, DeletePostAC } from '../../../types/Action/ActionT'
 import { ProfilePageT } from '../../../types/Pages/Profile/ProfilePageT'
+import { ADD_POST } from '../../../types/Action/ActionNamesConst'
 
 let state: ProfilePageT
 
@@ -17,20 +18,20 @@ beforeEach(() => {
 })
 
 it('length of posts should be increment', () => {
-	const action: AddPostAT = { type: 'ADD-POST', newPostText: 'Hi my best friend !' }
+	const action: AddPostAT = { type: ADD_POST, newPostText: 'Hi my best friend !' }
 	const newState = profileReducer(state, action)
 
 	expect(newState.posts.length).toBe(4)
 })
 it('message of new post should be correct', () => {
-	const action: AddPostAT = { type: 'ADD-POST', newPostText: 'Hi my best friend !' }
+	const action: AddPostAT = { type: ADD_POST, newPostText: 'Hi my best friend !' }
 
 	const newState = profileReducer(state, action)
 
 	expect(newState.posts[3].message).toBe('Hi my best friend !')
 })
 it('likesCount of new post should be correct', () => {
-	const action: AddPostAT = { type: 'ADD-POST', newPostText: 'Hi my best friend !' }
+	const action: AddPostAT = { type: ADD_POST, newPostText: 'Hi my best friend !' }
 
 	const newState = profileReducer(state, action)
 

@@ -1,7 +1,5 @@
-import { ActionsT, ActionValueT, AppPageT, InitializedSuccessAT } from '../../../types/types'
+import { ActionsT, AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
-
-const INIZIALIZED_SUCCESS: ActionValueT = 'INIZIALIZED_SUCCESS'
 
 const initialState: AppPageT = {
 	initialized: false

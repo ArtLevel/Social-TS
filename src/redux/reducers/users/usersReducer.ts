@@ -1,26 +1,24 @@
 import {
 	ActionsT,
-	ActionValueT,
+	FOLLOW,
 	FollowAT,
+	SET_CURRENT_PAGE,
+	SET_TOTAL_USERS_COUNT,
+	SET_USERS,
 	SetCurrentPageAT,
 	SetTotalUsersCountAT,
 	SetUsersAT,
+	TOGGLE_IS_FETCHING,
+	TOGGLE_IS_FOLLOWING_PROGRESS,
 	ToggleFollowingProgressAT,
 	ToggleIsFetchingAT,
+	UNFOLLOW,
 	UnfollowAT,
 	UsersPageT,
 	UserT
 } from '../../../types/types'
 import { usersAPI } from '../../../api/api'
 import { updateObjectInArray } from '../../../utils/objectHelpers'
-
-const FOLLOW: ActionValueT = 'FOLLOW'
-const UNFOLLOW: ActionValueT = 'UNFOLLOW'
-const SET_USERS: ActionValueT = 'SET_USERS'
-const SET_CURRENT_PAGE: ActionValueT = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT: ActionValueT = 'SET_TOTAL_USERS_COUNT'
-const TOGGLE_IS_FETCHING: ActionValueT = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS: ActionValueT = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 const initialState: UsersPageT = {
 	users: [],

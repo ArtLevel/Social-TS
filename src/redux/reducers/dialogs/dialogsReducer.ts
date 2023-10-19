@@ -1,6 +1,4 @@
-import { ActionsT, DialogsPageT, SendMessageAT } from '../../../types/types'
-
-const SEND_MESSAGE = 'SEND-MESSAGE'
+import { ActionsT, DialogsPageT, SEND_MESSAGE, SendMessageAT } from '../../../types/types'
 
 const initialState: DialogsPageT = {
 	dialogs: [

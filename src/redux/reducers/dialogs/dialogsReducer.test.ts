@@ -1,6 +1,7 @@
-import { SendMessageAT } from '../../../types/ActionT'
+import { SendMessageAT } from '../../../types/Action/ActionT'
 import { DialogsPageT } from '../../../types/Pages/Dialogs/DialogsPageT'
 import dialogsReducer from './dialogsReducer'
+import { SEND_MESSAGE } from '../../../types/Action/ActionNamesConst'
 
 let state: DialogsPageT
 
@@ -39,7 +40,7 @@ beforeEach(() => {
 
 it('length of the messages should be increment', () => {
 	const action: SendMessageAT = {
-		type: 'SEND-MESSAGE',
+		type: SEND_MESSAGE,
 		newMessageBody: 'Who is he?'
 	}
 	const newState = dialogsReducer(state, action)
@@ -49,7 +50,7 @@ it('length of the messages should be increment', () => {
 
 it('length of the dialogs should not be increment', () => {
 	const action: SendMessageAT = {
-		type: 'SEND-MESSAGE',
+		type: SEND_MESSAGE,
 		newMessageBody: 'Who is he?'
 	}
 	const newState = dialogsReducer(state, action)
@@ -59,7 +60,7 @@ it('length of the dialogs should not be increment', () => {
 
 it('message of the messages should be correct', () => {
 	const action: SendMessageAT = {
-		type: 'SEND-MESSAGE',
+		type: SEND_MESSAGE,
 		newMessageBody: 'Who is he?'
 	}
 	const newState = dialogsReducer(state, action)

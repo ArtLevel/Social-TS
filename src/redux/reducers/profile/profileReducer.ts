@@ -1,20 +1,18 @@
 import {
 	ActionsT,
-	ActionValueT,
+	ADD_POST,
 	AddPostAT,
+	DELETE_POST,
 	DeletePostAC,
 	PostT,
 	ProfilePageT,
 	ProfileT,
+	SET_STATUS,
+	SET_USER_PROFILE,
 	SetStatusAT,
 	setUserProfileAT
 } from '../../../types/types'
 import { profileAPI } from '../../../api/api'
-
-const ADD_POST: ActionValueT = 'ADD-POST'
-const DELETE_POST: ActionValueT = 'DELETE_POST'
-const SET_USER_PROFILE: ActionValueT = 'SET_USER_PROFILE'
-const SET_STATUS: ActionValueT = 'SET_STATUS'
 
 const initialState: ProfilePageT = {
 	posts: [
