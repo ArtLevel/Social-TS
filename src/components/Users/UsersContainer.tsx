@@ -39,11 +39,13 @@ interface IUsersContainer {
 
 class UsersContainer extends React.Component<IUsersContainer> {
 	componentDidMount() {
-		this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+		const { currentPage, pageSize } = this.props
+		this.props.requestUsers(currentPage, pageSize)
 	}
 
 	onPageChanged = (currentPage: number) => {
-		this.props.requestUsers(currentPage, this.props.pageSize)
+		const { pageSize } = this.props
+		this.props.requestUsers(currentPage, pageSize)
 	}
 
 	render() {
