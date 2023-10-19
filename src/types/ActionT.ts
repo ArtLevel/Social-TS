@@ -12,7 +12,7 @@ export type ActionValueT =
 	| 'SET_TOTAL_USERS_COUNT'
 	| 'TOGGLE_IS_FETCHING'
 	| 'SET_USER_PROFILE'
-	| 'SET_USER_DATA'
+	| 'samurai_network/auth/SET_USERS_DATA'
 	| 'TOGGLE_IS_FOLLOWING_PROGRESS'
 	| 'SET_STATUS'
 	| 'INIZIALIZED_SUCCESS'
@@ -63,7 +63,7 @@ export type SendMessageAT = {
 }
 
 export type SetAuthUserDataAT = {
-	type: 'SET_USER_DATA'
+	type: 'samurai_network/auth/SET_USERS_DATA'
 	payload: {
 		userId: null | number
 		email: null | string

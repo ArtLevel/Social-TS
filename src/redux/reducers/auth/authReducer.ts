@@ -3,7 +3,7 @@ import { AuthT } from '../../../types/AuthT'
 import { authAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
 
-const SET_USER_DATA: ActionValueT = 'SET_USER_DATA'
+const SET_USER_DATA: ActionValueT = 'samurai_network/auth/SET_USERS_DATA'
 
 const initialState: AuthT = {
 	userId: null,
@@ -31,39 +31,36 @@ export const setAuthUserData = (data: AuthT): SetAuthUserDataAT => ({
 	}
 })
 
-export const getAuthUserData = () => (dispatch: (action: ActionsT) => void) => {
-	return authAPI.me().then(data => {
-		if (data.resultCode === 0) {
-			const { id, login, email } = data.data
-			dispatch(setAuthUserData({ userId: id, login, email, isAuth: true }))
-		}
-	})
-}
+export const getAuthUserData = () => async (dispatch: (action: ActionsT) => void) => {
+	const data = await authAPI.me()
 
-export const login = (formData: LoginFormT) => {
-	return (dispatch: (action: ActionsT) => void) => {
-		authAPI.login(formData).then(data => {
-			if (data.resultCode === 0) {
-				// @ts-ignore
-				dispatch(getAuthUserData())
-			} else {
-				console.log(data)
-				const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
-				// @ts-ignore
-				dispatch(stopSubmit('login', { _error: message }))
-			}
-		})
+	if (data.resultCode === 0) {
+		const { id, login, email } = data.data
+		dispatch(setAuthUserData({ userId: id, login, email, isAuth: true }))
 	}
 }
 
-export const logout = () => {
-	return (dispatch: (action: ActionsT) => void) => {
-		authAPI.logout().then(data => {
-			if (data.resultCode === 0) {
-				dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false }))
-			}
-		})
+export const login = (formData: LoginFormT) => async (dispatch: (action: ActionsT) => void) => {
+	const data = await authAPI.login(formData)
+
+	if (data.resultCode === 0) {
+		// @ts-ignore
+		dispatch(getAuthUserData())
+	} else {
+		const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
+		// @ts-ignore
+		dispatch(stopSubmit('login', { _error: message }))
 	}
 }
+
+
+export const logout = () => async (dispatch: (action: ActionsT) => void) => {
+	const data = await authAPI.logout()
+
+	if (data.resultCode === 0) {
+		dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false }))
+	}
+}
+
 
 export default authReducer
