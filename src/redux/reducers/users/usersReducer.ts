@@ -12,6 +12,7 @@ import {
 	UserT
 } from '../../../types/types'
 import { usersAPI } from '../../../api/api'
+import { updateObjectInArray } from '../../../utils/objectHelpers'
 
 const FOLLOW: ActionValueT = 'FOLLOW'
 const UNFOLLOW: ActionValueT = 'UNFOLLOW'
@@ -35,12 +36,12 @@ const usersReducer = (state: UsersPageT = initialState, action: ActionsT): Users
 		case FOLLOW:
 			return {
 				...state,
-				users: state.users.map(u => u.id === action.userId ? { ...u, followed: true } : u)
+				users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
 			}
 		case UNFOLLOW:
 			return {
 				...state,
-				users: state.users.map(u => u.id === action.userId ? { ...u, followed: false } : u)
+				users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
 			}
 		case SET_USERS:
 			return typeof action.users === 'object' ? { ...state, users: action.users } : state
@@ -92,22 +93,22 @@ export const requestUsers = (page: number, pageSize: number) => async (dispatch:
 	dispatch(setTotalUsersCount(data.totalCount))
 }
 
-export const follow = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
+const followUnfollowFlow = async (dispatch: (action: ActionsT) => void, apiMethod: (userId: number) => Promise<any>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
 	dispatch(toggleFollowingProgress(true, userId))
+	const data = await apiMethod(userId)
 
-	const data = await usersAPI.postFollow(userId)
-
-	if (data.resultCode === 0) dispatch(followSuccess(userId))
+	if (data.resultCode === 0) {
+		dispatch(actionCreator(userId))
+	}
 	dispatch(toggleFollowingProgress(false, userId))
 }
 
-export const unfollow = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
-	dispatch(toggleFollowingProgress(true, userId))
-	
-	const data = await usersAPI.deleteFollow(userId)
+export const follow = (userId: number) => (dispatch: (action: ActionsT) => void) => {
+	followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), followSuccess, userId)
+}
 
-	if (data.resultCode === 0) dispatch(unfollowSuccess(userId))
-	dispatch(toggleFollowingProgress(false, userId))
+export const unfollow = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
+	followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), unfollowSuccess, userId)
 }
 
 export default usersReducer
