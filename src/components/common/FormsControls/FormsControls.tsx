@@ -1,5 +1,5 @@
-import { WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form'
-import { FC, HTMLInputTypeAttribute } from 'react'
+import { Field, WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form'
+import React, { FC, HTMLInputTypeAttribute } from 'react'
 import s from './FormsControls.module.css'
 
 interface IForm {
@@ -10,15 +10,15 @@ interface IForm {
 	autoFocus?: boolean
 }
 
-export const FormControl: FC<IForm> = ({ meta, children }) => {
-	const hasError = meta.touched && meta.error
+export const FormControl: FC<IForm> = ({ meta: { touched, error }, children }) => {
+	const hasError = touched && error
 
 	return (
 		<div>
 			<div className={hasError ? s.textareaError : ''}>
 				{children}
 			</div>
-			{hasError && <span className={hasError ? s.spanError : ''}>{meta.error}</span>}
+			{hasError && <span className={hasError ? s.spanError : ''}>{error}</span>}
 		</div>
 	)
 }
@@ -34,3 +34,13 @@ export const Input: FC<IForm> = ({ input, ...props }) => {
 		<input {...input} {...props} />
 	</FormControl>
 }
+
+export const createField = (placeholder: string, name: string, validators: Function[], component: FC<IForm>, props?: {
+	type: string
+}, text?: string) =>
+	<div>
+		<Field
+			placeholder={placeholder} component={component}
+			name={name} validate={validators} {...props} />
+		{text}
+	</div>
