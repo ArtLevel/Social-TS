@@ -3,6 +3,7 @@ import { UserT } from '../../types/Pages/Users/UsersPageT'
 import userPhoto from '../../assets/images/user.png'
 import s from './Users.module.css'
 import { NavLink } from 'react-router-dom'
+import { Paginator } from '../common/Paginator/Paginator'
 
 interface IUsers {
 	users: UserT[]
@@ -62,18 +63,11 @@ export const Users: FC<IUsers> = (props) => {
 		</span>
 		</div>
 	))
-	const pagesCount = Math.ceil(totalUsersCount / pageSize)
-
-	const pages = []
-	for (let i = 1; i <= pagesCount; i++) pages.push(i)
-	const pagesMapped = pages.map(p => <span key={p} onClick={() => onPageChanged(p)}
-	                                         className={currentPage === p ? s.selectedPage : ''}>{p}</span>)
 
 	return (
 		<div>
-			<div>
-				{pagesMapped}
-			</div>
+			<Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+			           onPageChanged={onPageChanged} />
 			<div>
 				{usersMapped}
 			</div>
