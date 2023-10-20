@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
 import DialogsContainer from './components/Dialogs/DialogsContainer'
@@ -7,10 +7,10 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
-import { connect } from 'react-redux'
+import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './redux/reducers/app/appReducer'
-import { AppRootStateT } from './redux/store/reduxStore'
+import store, { AppRootStateT } from './redux/store/reduxStore'
 import { Preloader } from './components/common/Preloader/Preloader'
 import preloaderGif from './assets/images/preloader.gif'
 import './App.css'
@@ -50,10 +50,20 @@ const mapStateToProps = (state: AppRootStateT) => ({
 	initialized: state.app.initialized
 })
 
-export default compose<React.ComponentType>(
+const AppContainer = compose<React.ComponentType>(
 	connect(mapStateToProps, { initializeApp }),
 	withRouter
 )(App)
+
+const MainApp = () => {
+	return <BrowserRouter>
+		<Provider store={store}>
+			<AppContainer />
+		</Provider>
+	</BrowserRouter>
+}
+
+export default MainApp
 
 // Принципы чистой функции:
 // 1. Immutability
