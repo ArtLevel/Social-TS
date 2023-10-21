@@ -10,13 +10,15 @@ interface IPaginator {
 	onPageChanged: (currentPage: number) => void
 }
 
-export const Paginator: FC<IPaginator> = ({
-	                                          totalItemsCount,
-	                                          pageSize,
-	                                          currentPage,
-	                                          onPageChanged,
-	                                          portionSize = 10
-                                          }) => {
+export const Paginator: FC<IPaginator> = (props) => {
+	const {
+		totalItemsCount,
+		pageSize,
+		currentPage,
+		portionSize = 10,
+		onPageChanged
+	} = props
+
 	const pagesCount = Math.ceil(totalItemsCount / pageSize)
 
 	const pages = []
