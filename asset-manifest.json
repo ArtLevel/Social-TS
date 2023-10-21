@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ArtLevel/Social-TS/static/css/main.7c067866.css",
+    "main.js": "/ArtLevel/Social-TS/static/js/main.918e4c03.js",
+    "static/css/168.4b2e8611.chunk.css": "/ArtLevel/Social-TS/static/css/168.4b2e8611.chunk.css",
+    "static/js/168.3d2fc84e.chunk.js": "/ArtLevel/Social-TS/static/js/168.3d2fc84e.chunk.js",
+    "static/css/526.b6b9aa60.chunk.css": "/ArtLevel/Social-TS/static/css/526.b6b9aa60.chunk.css",
+    "static/js/526.06f2aceb.chunk.js": "/ArtLevel/Social-TS/static/js/526.06f2aceb.chunk.js",
+    "static/media/preloader.gif": "/ArtLevel/Social-TS/static/media/preloader.61f2cc6d67205efe4506.gif",
+    "static/media/user.png": "/ArtLevel/Social-TS/static/media/user.74d8bb7a18cfd537b4da.png",
+    "index.html": "/ArtLevel/Social-TS/index.html",
+    "main.7c067866.css.map": "/ArtLevel/Social-TS/static/css/main.7c067866.css.map",
+    "main.918e4c03.js.map": "/ArtLevel/Social-TS/static/js/main.918e4c03.js.map",
+    "168.4b2e8611.chunk.css.map": "/ArtLevel/Social-TS/static/css/168.4b2e8611.chunk.css.map",
+    "168.3d2fc84e.chunk.js.map": "/ArtLevel/Social-TS/static/js/168.3d2fc84e.chunk.js.map",
+    "526.b6b9aa60.chunk.css.map": "/ArtLevel/Social-TS/static/css/526.b6b9aa60.chunk.css.map",
+    "526.06f2aceb.chunk.js.map": "/ArtLevel/Social-TS/static/js/526.06f2aceb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7c067866.css",
+    "static/js/main.918e4c03.js"
+  ]
+}
