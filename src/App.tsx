@@ -1,52 +1,76 @@
-import React, {FC} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter, Route, withRouter } from 'react-router-dom'
+import { NavBar } from './components/NavBar/NavBar'
 
-import {Header} from './components/Header/Header';
-import {NavBar} from './components/NavBar/NavBar';
-import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
+import UsersContainer from './components/Users/UsersContainer'
+import HeaderContainer from './components/Header/HeaderContainer'
+import Login from './components/Login/Login'
+import { connect, Provider } from 'react-redux'
+import { compose } from 'redux'
+import { initializeApp } from './redux/reducers/app/appReducer'
+import store, { AppRootStateT } from './redux/store/reduxStore'
+import { Preloader } from './components/common/Preloader/Preloader'
+import preloaderGif from './assets/images/preloader.gif'
+import { WithSuspense } from './hoc/WithSuspense'
+import './App.css'
 
-import {StateType} from './types/types';
-import './App.css';
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 interface IApp {
-	appState: StateType
-	addPost: (postMessage: string) => void
-	updateNewPostText: (newText: string) => void
+	initialized: boolean
+
+	initializeApp: () => void
 }
 
-const App: FC<IApp> = ({appState, addPost, updateNewPostText}) => {
-	return (
-		<div className="app-wrapper">
+class App extends React.Component<IApp> {
+	componentDidMount() {
+		this.props.initializeApp()
+	}
 
-			<Header/>
-			<NavBar {...appState.sidebar}/>
+	render() {
+		if (!this.props.initialized) return <Preloader preloader={preloaderGif} />
 
-			<div className='app-wrapper-content'>
-				<Route path='/dialogs' render={() => <Dialogs {...appState.messagesPage}/>}/>
-				<Route path='/profile' render={() => <Profile {...appState.profilePage} addPost={addPost} updateNewPostText={updateNewPostText}/>}/>
+		return (
+			<div className='app-wrapper'>
+
+				<HeaderContainer />
+				<NavBar />
+
+				<div className='app-wrapper-content'>
+					<Route path='/dialogs'
+					       render={WithSuspense(DialogsContainer)} />
+					<Route path='/profile/:userId?'
+					       render={WithSuspense(ProfileContainer)} />
+					<Route path='/users' render={() => <UsersContainer />} />
+					<Route path='/login' render={() => <Login />} />
+				</div>
 			</div>
-
-		</div>
-	)
+		)
+	}
 }
 
-export default App;
+const mapStateToProps = (state: AppRootStateT) => ({
+	initialized: state.app.initialized
+})
 
-// Ссылочный тип данных
-// Область памяти hip
-// Object
-// Array
-// Function
+const AppContainer = compose<React.ComponentType>(
+	connect(mapStateToProps, { initializeApp }),
+	withRouter
+)(App)
 
-// Примитив
-// Область памяти stack
-// string
-// number
-// boolean
-// bigint
-// symbol
-// null
+const MainApp = () => {
+	return <BrowserRouter>
+		<Provider store={store}>
+			<AppContainer />
+		</Provider>
+	</BrowserRouter>
+}
 
-// Глубокое клонирование объекта
-// structuredClone()
+export default MainApp
+
+// Принципы чистой функции:
+// 1. Immutability
+// 2. Return
+// 3. No side effect - не оставляет мусора во внешнем мире
+// 4. детерминированость (идетерминированость) - при одинаковых входных данных, одинаковые выходные данные

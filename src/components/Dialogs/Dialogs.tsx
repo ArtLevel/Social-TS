@@ -1,25 +1,23 @@
+import { DialogItem } from './DialogItem/DialogItem'
+import { Message } from './Message/Message'
+import { FC } from 'react'
+import { AddMessageFormPT, DialogsPageT } from '../../types/types'
 import s from './Dialogs.module.css'
-import {DialogItem} from './DialogItem/DialogItem';
-import {Message} from './Message/Message';
-import {DialogType, MessageType} from '../../types/types';
-import {createRef, FC} from 'react';
+import { AddMessageFormRedux } from './AddMessageForm'
 
 interface IDialogs {
-	dialogs: DialogType[]
-	messages: MessageType[]
+	dialogsPage: DialogsPageT
+	isAuth: boolean
+
+	sendMessage: (newMessageBody: string) => void
 }
 
-export const Dialogs: FC<IDialogs> = ({dialogs, messages}) => {
-	const newMessageEl = createRef<HTMLTextAreaElement>()
+export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, sendMessage }) => {
+	const dialogsEl = dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
+	const messagesEl = dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
 
-	const dialogsEl = dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
-	const messagesEl = messages.map(m => <Message key={m.id} message={m.message}/>)
-
-	const addMessage = () => {
-		if (newMessageEl.current) {
-			const text = newMessageEl.current.value
-			console.log(text)
-		}
+	const onSendMessageClick = (values: AddMessageFormPT) => {
+		sendMessage(values.newMessageBody)
 	}
 
 	return (
@@ -29,9 +27,8 @@ export const Dialogs: FC<IDialogs> = ({dialogs, messages}) => {
 			</div>
 			<div className={s.messages}>
 				{messagesEl}
+				<AddMessageFormRedux onSubmit={onSendMessageClick} />
 			</div>
-			<textarea ref={newMessageEl}></textarea>
-			<button onClick={addMessage}>Add message</button>
 		</div>
 	)
 }

@@ -1,24 +1,22 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react'
 
-import {MyPosts} from './MyPosts/MyPosts';
-import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {PostType} from '../../types/types';
-
-import s from './Profile.module.css';
+import { ProfileInfo } from './ProfileInfo/ProfileInfo'
+import { MyPostsContainer } from './MyPosts/MyPostsContainer'
+import { ProfileT } from '../../types/Pages/Profile/ProfilePageT'
 
 interface IProfile {
-	posts: PostType[]
-	newPostText: string
-	addPost: (postMessage: string) => void
-	updateNewPostText: (newText: string) => void
+	status: string
+	profile: ProfileT | null
+
+	updateUserStatus: (status: string) => void
 }
 
-export const Profile: FC<IProfile> = ({posts, addPost, newPostText, updateNewPostText}) => {
+export const Profile: FC<IProfile> = (props) => {
 	return (
 		<div>
 
-			<ProfileInfo/>
-			<MyPosts posts={posts} addPost={addPost} newPostText={newPostText} updateNewPostText={updateNewPostText}/>
+			<ProfileInfo {...props} />
+			<MyPostsContainer />
 
 		</div>
 	)

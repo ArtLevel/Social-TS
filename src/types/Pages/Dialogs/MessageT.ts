@@ -1,4 +1,4 @@
-export type MessageType = {
+export type MessageT = {
 	id: number
 	message: string
 }
