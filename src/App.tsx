@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
@@ -11,6 +11,7 @@ import { initializeApp } from './redux/reducers/app/appReducer'
 import store, { AppRootStateT } from './redux/store/reduxStore'
 import { Preloader } from './components/common/Preloader/Preloader'
 import preloaderGif from './assets/images/preloader.gif'
+import { WithSuspense } from './hoc/WithSuspense'
 import './App.css'
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
@@ -37,17 +38,10 @@ class App extends React.Component<IApp> {
 				<NavBar />
 
 				<div className='app-wrapper-content'>
-					<Route path='/dialogs' render={() => {
-						return <Suspense
-							fallback={<Preloader preloader={preloaderGif} />}>
-							<DialogsContainer />
-						</Suspense>
-					}} />
-					<Route path='/profile/:userId?' render={() => {
-						return <Suspense fallback={<Preloader preloader={preloaderGif} />}>
-							<ProfileContainer />
-						</Suspense>
-					}} />
+					<Route path='/dialogs'
+					       render={WithSuspense(DialogsContainer)} />
+					<Route path='/profile/:userId?'
+					       render={WithSuspense(ProfileContainer)} />
 					<Route path='/users' render={() => <UsersContainer />} />
 					<Route path='/login' render={() => <Login />} />
 				</div>
