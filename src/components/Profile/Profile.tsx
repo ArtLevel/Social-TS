@@ -8,6 +8,7 @@ interface IProfile {
 	status: string
 	profile: ProfileT | null
 	isOwner: boolean
+	savePhoto: (photoFile: any) => void
 
 	updateUserStatus: (status: string) => void
 }

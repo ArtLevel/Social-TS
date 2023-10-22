@@ -6,9 +6,12 @@ import {
 	DeletePostAC,
 	PostT,
 	ProfilePageT,
+	ProfilePhotosT,
 	ProfileT,
+	SET_PHOTO_SUCCESS,
 	SET_STATUS,
 	SET_USER_PROFILE,
+	SetPhotoSuccessAT,
 	SetStatusAT,
 	setUserProfileAT
 } from '../../../types/types'
@@ -58,6 +61,11 @@ const profileReducer = (state: ProfilePageT = initialState, action: ActionsT): P
 				...state,
 				status: action.status
 			}
+		case SET_PHOTO_SUCCESS:
+			if (state.profile) {
+				return { ...state, profile: { ...state.profile, photos: action.photos } }
+			}
+			return state
 		default:
 			return state
 	}
@@ -66,6 +74,10 @@ export const addPost = (newPostText: string): AddPostAT => ({ type: ADD_POST, ne
 export const deletePost = (postId: number): DeletePostAC => ({ type: DELETE_POST, postId })
 export const setUserProfile = (profile: ProfileT): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
+export const setPhotoSuccess = (photos: ProfilePhotosT): SetPhotoSuccessAT => ({
+	type: SET_PHOTO_SUCCESS,
+	photos
+})
 
 export const getUserProfile = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
 	const data = await profileAPI.getUserProfile(userId)
@@ -81,6 +93,13 @@ export const updateUserStatus = (status: string) => async (dispatch: (action: Ac
 	const data = await profileAPI.updateStatus(status)
 	if (data.resultCode === 0) {
 		dispatch(setStatus(status))
+	}
+}
+
+export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT) => void) => {
+	const data = await profileAPI.savePhoto(photoFile)
+	if (data.resultCode === 0) {
+		dispatch(setPhotoSuccess(data.data.photos))
 	}
 }
 
