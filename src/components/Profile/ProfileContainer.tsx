@@ -25,7 +25,7 @@ interface IRouteComponentParams {
 }
 
 class ProfileContainer extends React.Component<IProfileContainerProps & RouteComponentProps<IRouteComponentParams>> {
-	componentDidMount() {
+	refreshProfile() {
 		let userId = parseInt(this.props.match.params.userId)
 
 		if (!userId) userId = this.props.authorizedUserId
@@ -34,10 +34,20 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 		this.props.getUserStatus(userId)
 	}
 
+	componentDidMount() {
+		this.refreshProfile()
+	}
+
+	componentDidUpdate(prevProps: Readonly<IProfileContainerProps & RouteComponentProps<IRouteComponentParams>>, prevState: Readonly<{}>, snapshot?: any) {
+		if (this.props.match.params.userId !== prevProps.match.params.userId) {
+			this.refreshProfile()
+		}
+	}
+
 	render() {
 		return (
 			<Profile {...this.props} profile={this.props.profile} status={this.props.status}
-			         updateUserStatus={this.props.updateUserStatus} />
+			         updateUserStatus={this.props.updateUserStatus} isOwner={!this.props.match.params.userId} />
 		)
 	}
 }

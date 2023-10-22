@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, withRouter } from 'react-router-dom'
+import { HashRouter, Route, withRouter } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
 import UsersContainer from './components/Users/UsersContainer'
@@ -60,11 +60,11 @@ const AppContainer = compose<React.ComponentType>(
 )(App)
 
 const MainApp = () => {
-	return <BrowserRouter>
+	return <HashRouter>
 		<Provider store={store}>
 			<AppContainer />
 		</Provider>
-	</BrowserRouter>
+	</HashRouter>
 }
 
 export default MainApp

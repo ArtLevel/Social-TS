@@ -7,6 +7,7 @@ import { ProfileT } from '../../types/Pages/Profile/ProfilePageT'
 interface IProfile {
 	status: string
 	profile: ProfileT | null
+	isOwner: boolean
 
 	updateUserStatus: (status: string) => void
 }
