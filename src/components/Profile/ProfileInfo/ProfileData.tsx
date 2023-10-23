@@ -4,10 +4,18 @@ import { Contact } from './ProfileContact'
 
 interface IProfileData {
 	profile: ProfileT
+	isOwner: boolean
+
+	activateEditMode: () => void
 }
 
-export const ProfileData: FC<IProfileData> = ({ profile }) => {
+export const ProfileData: FC<IProfileData> = ({ profile, isOwner, activateEditMode }) => {
 	return <div>
+		{isOwner && <div>
+			<button onClick={activateEditMode}>
+				SetEditMode
+			</button>
+		</div>}
 		<div>
 			<b>
 				Full Name:

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 
 import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
@@ -7,6 +7,7 @@ import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 import userPhoto from '../../../assets/images/user.png'
 import s from './ProfileInfo.module.css'
 import { ProfileData } from './ProfileData'
+import { ProfileDataFormPT, ProfileDataReduxForm } from './ProfileDataForm'
 
 interface IProfileInfo {
 	status: string
@@ -18,14 +19,22 @@ interface IProfileInfo {
 }
 
 export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatus, isOwner, savePhoto }) => {
+	const [editMode, setEditMode] = useState(false)
+
 	const mainPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.currentTarget.files && e.currentTarget.files.length === 1) {
 			savePhoto(e.currentTarget.files[0])
 		}
 	}
 
-	// @ts-ignore
-	// @ts-ignore
+	const activateEditMode = () => {
+		setEditMode(true)
+	}
+
+	const onSubmit = (formData: ProfileDataFormPT) => {
+		
+	}
+
 	return profile ? (
 		<div>
 			<img
@@ -35,7 +44,8 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 				<img src={profile?.photos.large || userPhoto} className={s.mainPhoto} />
 				{isOwner && <input type='file' onChange={mainPhotoSelectedHandler} />}
 
-				<ProfileData profile={profile} />
+				{editMode ? <ProfileDataReduxForm onSubmit={onSubmit} /> :
+					<ProfileData profile={profile} isOwner={isOwner} activateEditMode={activateEditMode} />}
 
 				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />
 			</div>
