@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FC } from 'react'
 
-import s from './ProfileInfo.module.css'
 import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 import userPhoto from '../../../assets/images/user.png'
+import s from './ProfileInfo.module.css'
+import { ProfileData } from './ProfileData'
 
 interface IProfileInfo {
 	status: string
@@ -23,6 +24,8 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 		}
 	}
 
+	// @ts-ignore
+	// @ts-ignore
 	return profile ? (
 		<div>
 			<img
@@ -31,8 +34,12 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 			<div className={s.descriptionBlock}>
 				<img src={profile?.photos.large || userPhoto} className={s.mainPhoto} />
 				{isOwner && <input type='file' onChange={mainPhotoSelectedHandler} />}
+
+				<ProfileData profile={profile} />
+
 				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />
 }
+

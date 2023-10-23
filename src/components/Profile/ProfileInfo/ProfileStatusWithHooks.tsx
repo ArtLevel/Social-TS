@@ -27,7 +27,7 @@ export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 			!editMode
 				?
 				<div>
-					<span onDoubleClick={activateEditMode}>{status || 'No a status'}</span>
+					<span onDoubleClick={activateEditMode}>Status: {status || 'No a status'}</span>
 				</div>
 				:
 				<div>
