@@ -16,6 +16,9 @@ import {
 	setUserProfileAT
 } from '../../../types/types'
 import { profileAPI } from '../../../api/api'
+import { ProfileDataFormValuesT } from '../../../components/Profile/ProfileInfo/ProfileDataForm'
+import { AppRootStateT } from '../../store/reduxStore'
+import { stopSubmit } from 'redux-form'
 
 const initialState: ProfilePageT = {
 	posts: [
@@ -100,6 +103,28 @@ export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT)
 	const data = await profileAPI.savePhoto(photoFile)
 	if (data.resultCode === 0) {
 		dispatch(setPhotoSuccess(data.data.photos))
+	}
+}
+
+export const saveProfile = (formData: ProfileDataFormValuesT) => async (dispatch: (action: ActionsT) => void, getState: () => AppRootStateT) => {
+	const userId = getState().auth.userId
+	const data = await profileAPI.saveProfile(formData)
+
+	if (data.resultCode === 0) {
+		if (userId) {
+			// @ts-ignore
+			dispatch(getUserProfile(userId))
+		}
+	} else {
+		// dispatch(stopSubmit('editProfile',
+		// 	{
+		// 		'contacts': {
+		// 			'facebook': data.messages[0] // need to fix
+		// 		}
+		// 	}
+		// ))
+		dispatch(stopSubmit('editProfile', { _error: data.messages[0] }))
+		return Promise.reject(data.messages[0])
 	}
 }
 

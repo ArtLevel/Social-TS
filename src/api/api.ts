@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { LoginFormT } from '../types/types'
+import { ProfileDataFormValuesT } from '../components/Profile/ProfileInfo/ProfileDataForm'
 
 const instance = axios.create({
 	withCredentials: true,
@@ -47,6 +48,10 @@ export const profileAPI = {
 				'Content-Type': 'multipart/form-data'
 			}
 		})
+			.then(response => response.data)
+	},
+	saveProfile(formData: ProfileDataFormValuesT) {
+		return instance.put('profile', formData)
 			.then(response => response.data)
 	}
 }

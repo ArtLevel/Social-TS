@@ -33,11 +33,9 @@ const LoginForm: FC<InjectedFormProps<LoginFormT>> = ({ handleSubmit, error }) =
 		{createField('Password', 'password', [required], Input, { type: 'password' })}
 		{createField('Password', 'rememberMe', [], Input, { type: 'checkbox' }, 'Remember me')}
 		{
-			error
-				? <div className={s.formSummaryError}>
-					{error}
-				</div>
-				: ''
+			error && <div className={s.formSummaryError}>
+				{error}
+			</div>
 		}
 		<div>
 			<button>

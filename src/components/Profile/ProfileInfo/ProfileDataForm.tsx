@@ -1,21 +1,32 @@
 import React from 'react'
 import { createField, Input, Textarea } from '../../common/FormsControls/FormsControls'
 import { InjectedFormProps, reduxForm } from 'redux-form'
+import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
+import s from './ProfileInfo.module.css'
 
-export type ProfileDataFormPT = {
+export type ProfileDataFormValuesT = {
 	fullName: string
 	lookingForAJob: boolean
 	lookingForAJobDescription: string
 	aboutMe: string
 }
 
-const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormPT>) => {
+type ProfileDataFormPT = {
+	profile: ProfileT
+}
+
+const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormValuesT, ProfileDataFormPT> & ProfileDataFormPT) => {
 	return <form onSubmit={props.handleSubmit}>
 		<div>
 			<button onClick={() => {
 			}}>save
 			</button>
 		</div>
+		{
+			props.error && <div className={s.formSummaryError}>
+				{props.error}
+			</div>
+		}
 		<div>
 			<b>
 				Full Name:
@@ -40,10 +51,23 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormPT>) => {
 			</b>
 			{createField('About me', 'aboutMe', [], Textarea)}
 		</div>
+		<div>
+			<b>
+				Contacts:
+			</b>
+			{
+				Object.keys(props.profile.contacts)
+					.map(key =>
+						<div key={key} className={s.contact}>
+							<b>{key}:</b> {createField(key, 'contacts.' + key, [], Input)}
+						</div>
+					)
+			}
+		</div>
 	</form>
 }
 
-export const ProfileDataReduxForm = reduxForm<ProfileDataFormPT>(
+export const ProfileDataReduxForm = reduxForm<ProfileDataFormValuesT, ProfileDataFormPT>(
 	{ form: 'editProfile' }
 )
 (ProfileDataForm)

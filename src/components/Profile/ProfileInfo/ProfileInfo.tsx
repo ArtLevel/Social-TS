@@ -7,7 +7,7 @@ import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 import userPhoto from '../../../assets/images/user.png'
 import s from './ProfileInfo.module.css'
 import { ProfileData } from './ProfileData'
-import { ProfileDataFormPT, ProfileDataReduxForm } from './ProfileDataForm'
+import { ProfileDataFormValuesT, ProfileDataReduxForm } from './ProfileDataForm'
 
 interface IProfileInfo {
 	status: string
@@ -16,9 +16,17 @@ interface IProfileInfo {
 
 	savePhoto: (photoFile: any) => void
 	updateUserStatus: (status: string) => void
+	saveProfile: (formData: ProfileDataFormValuesT) => void
 }
 
-export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatus, isOwner, savePhoto }) => {
+export const ProfileInfo: FC<IProfileInfo> = ({
+	                                              profile,
+	                                              status,
+	                                              updateUserStatus,
+	                                              isOwner,
+	                                              savePhoto,
+	                                              saveProfile
+                                              }) => {
 	const [editMode, setEditMode] = useState(false)
 
 	const mainPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +39,11 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 		setEditMode(true)
 	}
 
-	const onSubmit = (formData: ProfileDataFormPT) => {
-		
+	const onSubmit = (formData: ProfileDataFormValuesT) => {
+		// @ts-ignore
+		saveProfile(formData).then(() => {
+			setEditMode(false)
+		})
 	}
 
 	return profile ? (
@@ -44,7 +55,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ profile, status, updateUserStatu
 				<img src={profile?.photos.large || userPhoto} className={s.mainPhoto} />
 				{isOwner && <input type='file' onChange={mainPhotoSelectedHandler} />}
 
-				{editMode ? <ProfileDataReduxForm onSubmit={onSubmit} /> :
+				{editMode ? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} /> :
 					<ProfileData profile={profile} isOwner={isOwner} activateEditMode={activateEditMode} />}
 
 				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />
