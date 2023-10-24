@@ -48,43 +48,58 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessAT
 })
 
 export const getAuthUserData = () => async (dispatch: (action: ActionsT) => void) => {
-	const data = await authAPI.me()
+	try {
+		const data = await authAPI.me()
 
-	if (data.resultCode === 0) {
-		const { id, login, email } = data.data
-		dispatch(setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
+		if (data.resultCode === 0) {
+			const { id, login, email } = data.data
+			dispatch(setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
+		}
+	} catch (err) {
+		console.error(err)
 	}
 }
-
 export const login = (formData: LoginFormT) => async (dispatch: (action: ActionsT) => void) => {
-	const data = await authAPI.login(formData)
-	
-	if (data.resultCode === 0) {
-		// @ts-ignore
-		dispatch(getAuthUserData())
-	} else {
-		if (data.resultCode === 10) {
+	try {
+		const data = await authAPI.login(formData)
+
+		if (data.resultCode === 0) {
 			// @ts-ignore
-			dispatch(getCaptchaUrl())
+			dispatch(getAuthUserData())
+		} else {
+			if (data.resultCode === 10) {
+				// @ts-ignore
+				dispatch(getCaptchaUrl())
+			}
+			const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
+			// @ts-ignore
+			dispatch(stopSubmit('login', { _error: message }))
 		}
-		const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
-		// @ts-ignore
-		dispatch(stopSubmit('login', { _error: message }))
+	} catch (err) {
+		console.error(err)
 	}
 }
 
 export const logout = () => async (dispatch: (action: ActionsT) => void) => {
-	const data = await authAPI.logout()
+	try {
+		const data = await authAPI.logout()
 
-	if (data.resultCode === 0) {
-		dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
+		if (data.resultCode === 0) {
+			dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
+		}
+	} catch (err) {
+		console.error(err)
 	}
 }
 
 export const getCaptchaUrl = () => async (dispatch: (action: ActionsT) => void) => {
-	const data = await securityAPI.getCaptchaUrl()
-	const captchaUrl = data.url
+	try {
+		const data = await securityAPI.getCaptchaUrl()
+		const captchaUrl = data.url
 
-	dispatch(getCaptchaUrlSuccess(captchaUrl))
+		dispatch(getCaptchaUrlSuccess(captchaUrl))
+	} catch (err) {
+		console.error(err)
+	}
 }
 export default authReducer

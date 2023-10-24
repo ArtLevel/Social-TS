@@ -83,48 +83,64 @@ export const setPhotoSuccess = (photos: ProfilePhotosT): SetPhotoSuccessAT => ({
 })
 
 export const getUserProfile = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
-	const data = await profileAPI.getUserProfile(userId)
-	dispatch(setUserProfile(data))
+	try {
+		const data = await profileAPI.getUserProfile(userId)
+		dispatch(setUserProfile(data))
+	} catch (err) {
+		console.error(err)
+	}
 }
-
 export const getUserStatus = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
-	const data = await profileAPI.getStatus(userId)
-	dispatch(setStatus(data))
+	try {
+		const data = await profileAPI.getStatus(userId)
+		dispatch(setStatus(data))
+	} catch (err) {
+		console.error(err)
+	}
 }
-
 export const updateUserStatus = (status: string) => async (dispatch: (action: ActionsT) => void) => {
-	const data = await profileAPI.updateStatus(status)
-	if (data.resultCode === 0) {
-		dispatch(setStatus(status))
-	}
-}
-
-export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT) => void) => {
-	const data = await profileAPI.savePhoto(photoFile)
-	if (data.resultCode === 0) {
-		dispatch(setPhotoSuccess(data.data.photos))
-	}
-}
-
-export const saveProfile = (formData: ProfileDataFormValuesT) => async (dispatch: (action: ActionsT) => void, getState: () => AppRootStateT) => {
-	const userId = getState().auth.userId
-	const data = await profileAPI.saveProfile(formData)
-
-	if (data.resultCode === 0) {
-		if (userId) {
-			// @ts-ignore
-			dispatch(getUserProfile(userId))
+	try {
+		const data = await profileAPI.updateStatus(status)
+		if (data.resultCode === 0) {
+			dispatch(setStatus(status))
 		}
-	} else {
-		// dispatch(stopSubmit('editProfile',
-		// 	{
-		// 		'contacts': {
-		// 			'facebook': data.messages[0] // need to fix
-		// 		}
-		// 	}
-		// ))
-		dispatch(stopSubmit('editProfile', { _error: data.messages[0] }))
-		return Promise.reject(data.messages[0])
+	} catch (err) {
+		console.error(err)
+	}
+}
+export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT) => void) => {
+	try {
+		const data = await profileAPI.savePhoto(photoFile)
+		if (data.resultCode === 0) {
+			dispatch(setPhotoSuccess(data.data.photos))
+		}
+	} catch (err) {
+		console.error(err)
+	}
+}
+export const saveProfile = (formData: ProfileDataFormValuesT) => async (dispatch: (action: ActionsT) => void, getState: () => AppRootStateT) => {
+	try {
+		const userId = getState().auth.userId
+		const data = await profileAPI.saveProfile(formData)
+
+		if (data.resultCode === 0) {
+			if (userId) {
+				// @ts-ignore
+				dispatch(getUserProfile(userId))
+			}
+		} else {
+			// dispatch(stopSubmit('editProfile',
+			// 	{
+			// 		'contacts': {
+			// 			'facebook': data.messages[0] // need to fix
+			// 		}
+			// 	}
+			// ))
+			dispatch(stopSubmit('editProfile', { _error: data.messages[0] }))
+			return Promise.reject(data.messages[0])
+		}
+	} catch (err) {
+		console.error(err)
 	}
 }
 
