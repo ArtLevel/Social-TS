@@ -19,14 +19,16 @@ interface IProfileInfo {
 	saveProfile: (formData: ProfileDataFormValuesT) => void
 }
 
-export const ProfileInfo: FC<IProfileInfo> = ({
-	                                              profile,
-	                                              status,
-	                                              updateUserStatus,
-	                                              isOwner,
-	                                              savePhoto,
-	                                              saveProfile
-                                              }) => {
+export const ProfileInfo: FC<IProfileInfo> = (props) => {
+	const {
+		profile,
+		status,
+		isOwner,
+		savePhoto,
+		saveProfile,
+		updateUserStatus
+	} = props
+
 	const [editMode, setEditMode] = useState(false)
 
 	const mainPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {

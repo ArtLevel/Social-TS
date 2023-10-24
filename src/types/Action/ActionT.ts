@@ -19,7 +19,7 @@ export type SET_TOTAL_USERS_COUNT_T = 'samurai_network/users/SET_TOTAL_USERS_COU
 export type TOGGLE_IS_FETCHING_T = 'samurai_network/users/TOGGLE_IS_FETCHING'
 
 export type TOGGLE_IS_FOLLOWING_PROGRESS_T = 'samurai_network/users/TOGGLE_IS_FOLLOWING_PROGRESS'
-
+export type GET_CAPTCHA_URL_SUCCESS_T = 'samurai_network/auth/GET_CAPTCHA_URL_SUCCESS'
 
 export type ActionValueT =
 	ADD_POST_T
@@ -37,6 +37,7 @@ export type ActionValueT =
 	| SET_STATUS_T
 	| INIZIALIZED_SUCCESS_T
 	| SET_PHOTO_SUCCESS_T
+	| GET_CAPTCHA_URL_SUCCESS_T
 
 export type AddPostAT = {
 	type: ADD_POST_T
@@ -118,6 +119,11 @@ export type SetPhotoSuccessAT = {
 	photos: ProfilePhotosT
 }
 
+export type GetCaptchaUrlSuccessAT = {
+	type: GET_CAPTCHA_URL_SUCCESS_T
+	captchaUrl: string
+}
+
 export type ActionsT =
 	AddPostAT
 	| setUserProfileAT
@@ -134,3 +140,4 @@ export type ActionsT =
 	| InitializedSuccessAT
 	| DeletePostAC
 	| SetPhotoSuccessAT
+	| GetCaptchaUrlSuccessAT

@@ -1,6 +1,7 @@
 export type AuthT = {
-	userId: null | number
-	email: null | string
-	login: null | string
+	userId: number | null
+	email: string | null
+	login: string | null
 	isAuth: boolean
+	captchaUrl: string | null
 }

@@ -11,10 +11,15 @@ import { LoginFormT } from '../../types/types'
 
 interface ILogin {
 	isAuth: boolean
+	captchaUrl: string | null
 	login: (dataForm: LoginFormT) => void
 }
 
-const Login: FC<ILogin> = ({ isAuth, login }) => {
+interface ILoginForm {
+	captchaUrl: string | null
+}
+
+const Login: FC<ILogin> = ({ isAuth, login, captchaUrl }) => {
 	const onSubmit = (formData: LoginFormT) => {
 		login(formData)
 	}
@@ -23,15 +28,20 @@ const Login: FC<ILogin> = ({ isAuth, login }) => {
 
 	return <div>
 		<h1>Login</h1>
-		<LoginReduxForm onSubmit={onSubmit} />
+		<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
 	</div>
 }
 
-const LoginForm: FC<InjectedFormProps<LoginFormT>> = ({ handleSubmit, error }) => {
+const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = ({ handleSubmit, error, captchaUrl }) => {
+	console.log(captchaUrl)
 	return <form onSubmit={handleSubmit}>
 		{createField('Email', 'email', [required], Input)}
 		{createField('Password', 'password', [required], Input, { type: 'password' })}
 		{createField('Password', 'rememberMe', [], Input, { type: 'checkbox' }, 'Remember me')}
+
+		{captchaUrl && <img src={captchaUrl} />}
+		
+		{captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
 		{
 			error && <div className={s.formSummaryError}>
 				{error}
@@ -45,11 +55,12 @@ const LoginForm: FC<InjectedFormProps<LoginFormT>> = ({ handleSubmit, error }) =
 	</form>
 }
 
-const LoginReduxForm = reduxForm<LoginFormT>({
+const LoginReduxForm = reduxForm<LoginFormT, ILoginForm>({
 	form: 'login'
 })(LoginForm)
 
 const mapStateToProps = (state: AppRootStateT) => ({
+	captchaUrl: state.auth.captchaUrl,
 	isAuth: state.auth.isAuth
 })
 
