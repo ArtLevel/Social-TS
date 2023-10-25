@@ -8,3 +8,5 @@ ReactDOM.render(
 	<MainApp />,
 	document.getElementById('root')
 )
+
+// Completed ReactJS 1.0
