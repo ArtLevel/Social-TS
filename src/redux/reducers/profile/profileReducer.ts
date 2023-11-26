@@ -22,7 +22,6 @@ import { Dispatch } from 'redux'
 
 type ActionsT = AddPostAT | DeletePostAT | setUserProfileAT | SetStatusAT | SetPhotoSuccessAT
 
-
 const initialState: ProfilePageT = {
 	posts: [
 		{
@@ -110,7 +109,7 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
 			dispatch(setStatus(status))
 		}
 	} catch (err) {
-		console.error(err)
+		console.warn(err)
 	}
 }
 export const savePhoto = (photoFile: any) => async (dispatch: Dispatch) => {

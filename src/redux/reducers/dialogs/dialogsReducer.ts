@@ -2,7 +2,6 @@ import { DialogsPageT, SEND_MESSAGE, SendMessageAT } from '../../../types/types'
 
 type ActionsT = SendMessageAT
 
-
 const initialState: DialogsPageT = {
 	dialogs: [
 		{
