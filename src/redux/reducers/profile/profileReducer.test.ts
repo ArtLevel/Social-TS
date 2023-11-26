@@ -1,5 +1,5 @@
 import profileReducer, { deletePost } from './profileReducer'
-import { AddPostAT, DeletePostAC } from '../../../types/Action/ActionT'
+import { AddPostAT, DeletePostAT } from '../../../types/Action/ActionTypes'
 import { ProfilePageT } from '../../../types/Pages/Profile/ProfilePageT'
 import { ADD_POST } from '../../../types/Action/ActionNamesConst'
 
@@ -38,14 +38,14 @@ it('likesCount of new post should be correct', () => {
 	expect(newState.posts[3].likesCount).toBe(0)
 })
 it('after deleting length of posts should be decrement', () => {
-	const action: DeletePostAC = deletePost(2)
+	const action: DeletePostAT = deletePost(2)
 
 	const newState = profileReducer(state, action)
 
 	expect(newState.posts.length).toBe(2)
 })
 it(`after deleting length of posts should not be decrement if postId is incorrect`, () => {
-	const action: DeletePostAC = deletePost(1000)
+	const action: DeletePostAT = deletePost(1000)
 
 	const newState = profileReducer(state, action)
 

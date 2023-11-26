@@ -1,4 +1,7 @@
-import { ActionsT, DialogsPageT, SEND_MESSAGE, SendMessageAT } from '../../../types/types'
+import { DialogsPageT, SEND_MESSAGE, SendMessageAT } from '../../../types/types'
+
+type ActionsT = SendMessageAT
+
 
 const initialState: DialogsPageT = {
 	dialogs: [
@@ -45,8 +48,8 @@ const dialogsReducer = (state: DialogsPageT = initialState, action: ActionsT): D
 	}
 }
 
-export const sendMessage = (newMessageBody: string): SendMessageAT =>
-	({ type: SEND_MESSAGE, newMessageBody })
+export const sendMessage = (newMessageBody: string) =>
+	({ type: SEND_MESSAGE, newMessageBody } as const)
 
 
 export default dialogsReducer

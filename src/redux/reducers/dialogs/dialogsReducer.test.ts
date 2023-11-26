@@ -1,4 +1,4 @@
-import { SendMessageAT } from '../../../types/Action/ActionT'
+import { SendMessageAT } from '../../../types/Action/ActionTypes'
 import { DialogsPageT } from '../../../types/Pages/Dialogs/DialogsPageT'
 import dialogsReducer from './dialogsReducer'
 import { SEND_MESSAGE } from '../../../types/Action/ActionNamesConst'

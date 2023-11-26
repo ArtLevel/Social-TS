@@ -7,7 +7,7 @@ import {
 	ToggleFollowingProgressAT,
 	ToggleIsFetchingAT,
 	UnfollowAT
-} from '../../../types/Action/ActionT'
+} from '../../../types/Action/ActionTypes'
 import usersReducer from './usersReducer'
 import {
 	FOLLOW,

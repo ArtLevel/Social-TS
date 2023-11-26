@@ -1,9 +1,8 @@
 import {
-	ActionsT,
 	ADD_POST,
 	AddPostAT,
 	DELETE_POST,
-	DeletePostAC,
+	DeletePostAT,
 	PostT,
 	ProfilePageT,
 	ProfilePhotosT,
@@ -19,6 +18,10 @@ import { profileAPI } from '../../../api/api'
 import { ProfileDataFormValuesT } from '../../../components/Profile/ProfileInfo/ProfileDataForm'
 import { AppRootStateT } from '../../store/reduxStore'
 import { stopSubmit } from 'redux-form'
+import { Dispatch } from 'redux'
+
+type ActionsT = AddPostAT | DeletePostAT | setUserProfileAT | SetStatusAT | SetPhotoSuccessAT
+
 
 const initialState: ProfilePageT = {
 	posts: [
@@ -73,16 +76,18 @@ const profileReducer = (state: ProfilePageT = initialState, action: ActionsT): P
 			return state
 	}
 }
-export const addPost = (newPostText: string): AddPostAT => ({ type: ADD_POST, newPostText })
-export const deletePost = (postId: number): DeletePostAC => ({ type: DELETE_POST, postId })
-export const setUserProfile = (profile: ProfileT): setUserProfileAT => ({ type: SET_USER_PROFILE, profile })
-export const setStatus = (status: string): SetStatusAT => ({ type: SET_STATUS, status })
-export const setPhotoSuccess = (photos: ProfilePhotosT): SetPhotoSuccessAT => ({
+export const addPost = (newPostText: string) => ({ type: ADD_POST, newPostText } as const)
+export const deletePost = (postId: number) => ({ type: DELETE_POST, postId } as const)
+export const setUserProfile = (profile: ProfileT) => ({ type: SET_USER_PROFILE, profile } as const)
+export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
+export const setPhotoSuccess = (photos: ProfilePhotosT) => ({
 	type: SET_PHOTO_SUCCESS,
 	photos
-})
+} as const)
 
-export const getUserProfile = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
+
+// THUNK
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
 	try {
 		const data = await profileAPI.getUserProfile(userId)
 		dispatch(setUserProfile(data))
@@ -90,7 +95,7 @@ export const getUserProfile = (userId: number) => async (dispatch: (action: Acti
 		console.error(err)
 	}
 }
-export const getUserStatus = (userId: number) => async (dispatch: (action: ActionsT) => void) => {
+export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
 	try {
 		const data = await profileAPI.getStatus(userId)
 		dispatch(setStatus(data))
@@ -98,7 +103,7 @@ export const getUserStatus = (userId: number) => async (dispatch: (action: Actio
 		console.error(err)
 	}
 }
-export const updateUserStatus = (status: string) => async (dispatch: (action: ActionsT) => void) => {
+export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
 	try {
 		const data = await profileAPI.updateStatus(status)
 		if (data.resultCode === 0) {
@@ -108,7 +113,7 @@ export const updateUserStatus = (status: string) => async (dispatch: (action: Ac
 		console.error(err)
 	}
 }
-export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT) => void) => {
+export const savePhoto = (photoFile: any) => async (dispatch: Dispatch) => {
 	try {
 		const data = await profileAPI.savePhoto(photoFile)
 		if (data.resultCode === 0) {
@@ -118,7 +123,7 @@ export const savePhoto = (photoFile: any) => async (dispatch: (action: ActionsT)
 		console.error(err)
 	}
 }
-export const saveProfile = (formData: ProfileDataFormValuesT) => async (dispatch: (action: ActionsT) => void, getState: () => AppRootStateT) => {
+export const saveProfile = (formData: ProfileDataFormValuesT) => async (dispatch: Dispatch, getState: () => AppRootStateT) => {
 	try {
 		const userId = getState().auth.userId
 		const data = await profileAPI.saveProfile(formData)

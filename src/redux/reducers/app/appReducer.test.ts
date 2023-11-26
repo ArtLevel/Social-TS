@@ -1,5 +1,5 @@
 import { AppPageT } from '../../../types/Pages/App/AppPageT'
-import { InitializedSuccessAT } from '../../../types/Action/ActionT'
+import { InitializedSuccessAT } from '../../../types/Action/ActionTypes'
 import appReducer from './appReducer'
 import { INIZIALIZED_SUCCESS } from '../../../types/Action/ActionNamesConst'
 

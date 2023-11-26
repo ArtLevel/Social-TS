@@ -1,5 +1,4 @@
 import {
-	ActionsT,
 	GET_CAPTCHA_URL_SUCCESS,
 	GetCaptchaUrlSuccessAT,
 	LoginFormT,
@@ -9,6 +8,11 @@ import {
 import { AuthT } from '../../../types/AuthT'
 import { authAPI, securityAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
+import { Dispatch } from 'redux'
+
+type ActionsT =
+	| SetAuthUserDataAT
+	| GetCaptchaUrlSuccessAT
 
 const initialState: AuthT = {
 	userId: null,
@@ -35,19 +39,21 @@ const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
 	}
 }
 
-export const setAuthUserData = (data: AuthT): SetAuthUserDataAT => ({
+export const setAuthUserData = (data: AuthT) => ({
 	type: SET_USER_DATA,
 	payload: {
 		...data
 	}
-})
+} as const)
 
-export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessAT => ({
+export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
 	type: GET_CAPTCHA_URL_SUCCESS,
 	captchaUrl
-})
+} as const)
 
-export const getAuthUserData = () => async (dispatch: (action: ActionsT) => void) => {
+
+// THUNK
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
 	try {
 		const data = await authAPI.me()
 
@@ -59,7 +65,7 @@ export const getAuthUserData = () => async (dispatch: (action: ActionsT) => void
 		console.error(err)
 	}
 }
-export const login = (formData: LoginFormT) => async (dispatch: (action: ActionsT) => void) => {
+export const login = (formData: LoginFormT) => async (dispatch: Dispatch) => {
 	try {
 		const data = await authAPI.login(formData)
 
@@ -80,7 +86,7 @@ export const login = (formData: LoginFormT) => async (dispatch: (action: Actions
 	}
 }
 
-export const logout = () => async (dispatch: (action: ActionsT) => void) => {
+export const logout = () => async (dispatch: Dispatch) => {
 	try {
 		const data = await authAPI.logout()
 
@@ -92,7 +98,7 @@ export const logout = () => async (dispatch: (action: ActionsT) => void) => {
 	}
 }
 
-export const getCaptchaUrl = () => async (dispatch: (action: ActionsT) => void) => {
+export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
 	try {
 		const data = await securityAPI.getCaptchaUrl()
 		const captchaUrl = data.url

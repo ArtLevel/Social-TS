@@ -1,5 +1,8 @@
-import { ActionsT, AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
+import { AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
+import { Dispatch } from 'redux'
+
+type ActionsT = InitializedSuccessAT
 
 const initialState: AppPageT = {
 	initialized: false
@@ -17,11 +20,12 @@ const appReducer = (state: AppPageT = initialState, action: ActionsT): AppPageT 
 	}
 }
 
-export const initializedSuccess = (): InitializedSuccessAT => ({
+export const initializedSuccess = () => ({
 	type: INIZIALIZED_SUCCESS
-})
+} as const)
 
-export const initializeApp = () => (dispatch: (action: ActionsT) => void) => {
+// THUNK
+export const initializeApp = () => (dispatch: Dispatch) => {
 	// @ts-ignore
 	const promise = dispatch(getAuthUserData())
 
