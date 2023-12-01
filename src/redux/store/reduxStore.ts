@@ -6,7 +6,7 @@ import usersReducer from '../reducers/users/usersReducer'
 import authReducer from '../reducers/auth/authReducer'
 import appReducer from '../reducers/app/appReducer'
 import { reducer as formReducer } from 'redux-form'
-import thunkMiddleware, { ThunkDispatch } from 'redux-thunk'
+import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 const reducers = combineReducers({
@@ -25,10 +25,11 @@ const store = createStore(reducers, composeEnhancers(
 	applyMiddleware(thunkMiddleware)
 ))
 
-export type AppThunkDispatch = ThunkDispatch<AppRootStateT, any, AnyAction>
+export type AppThunkDispatchT = ThunkDispatch<AppRootStateT, any, AnyAction>
+export type AppThunkActionT = ThunkAction<Promise<void>, AppRootStateT, unknown, AnyAction>
 export type AppRootStateT = ReturnType<typeof reducers>
 
-export const useAppDispatch = () => useDispatch<AppThunkDispatch>()
+export const useAppDispatch = () => useDispatch<AppThunkDispatchT>()
 export const useAppSelector: TypedUseSelectorHook<AppRootStateT> = useSelector
 
 // @ts-ignore

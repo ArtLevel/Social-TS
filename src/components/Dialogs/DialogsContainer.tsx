@@ -18,4 +18,3 @@ export default compose<React.ComponentType>(
 	}),
 	WithAuthRedirect
 )(Dialogs)
-

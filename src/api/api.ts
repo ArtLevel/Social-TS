@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { LoginFormT, ProfilePhotosT, ProfileT } from '../types/types'
 import { ProfileDataFormValuesT } from '../components/Profile/ProfileInfo/ProfileDataForm'
-import { ResponseT, ResponseUsersT } from '../types/API/APITypes'
+import { MeResponseT, ResponseT, ResponseUsersT } from '../types/API/APITypes'
 
 const instance = axios.create({
 	withCredentials: true,
@@ -59,11 +59,11 @@ export const profileAPI = {
 
 export const authAPI = {
 	me() {
-		return instance.get<ResponseT<{ id: number, email: string, login: string }>>(`auth/me`)
+		return instance.get<ResponseT<MeResponseT>>(`auth/me`)
 			.then(response => response.data)
 	},
 	login(dataForm: LoginFormT) {
-		return instance.post<ResponseT<{ userId: 2 }>>(`auth/login`, {
+		return instance.post<ResponseT<{ userId: number }>>(`auth/login`, {
 			email: dataForm.email,
 			password: dataForm.password,
 			rememberMe: dataForm.rememberMe,
@@ -76,6 +76,7 @@ export const authAPI = {
 			.then(response => response.data)
 	}
 }
+
 export const securityAPI = {
 	getCaptchaUrl() {
 		return instance.get<{ url: string }>('security/get-captcha-url')

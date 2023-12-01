@@ -9,6 +9,8 @@ import { AuthT } from '../../../types/AuthT'
 import { authAPI, securityAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
 import { Dispatch } from 'redux'
+import { AppThunkActionT } from '../../store/reduxStore'
+import { ResultCodes, ResultCodesForCaptcha } from '../../../types/API/APITypes'
 
 type ActionsT =
 	| SetAuthUserDataAT
@@ -53,11 +55,11 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
 
 
 // THUNK
-export const getAuthUserData = () => async (dispatch: Dispatch) => {
+export const getAuthUserData = (): AppThunkActionT => async (dispatch: Dispatch) => {
 	try {
 		const data = await authAPI.me()
 
-		if (data.resultCode === 0) {
+		if (data.resultCode === ResultCodes.SUCCESS) {
 			const { id, login, email } = data.data
 			dispatch(setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
 		}
@@ -65,15 +67,15 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
 		console.error(err)
 	}
 }
-export const login = (formData: LoginFormT) => async (dispatch: Dispatch) => {
+export const login = (formData: LoginFormT): AppThunkActionT => async (dispatch: any) => {
 	try {
 		const data = await authAPI.login(formData)
 
-		if (data.resultCode === 0) {
+		if (data.resultCode === ResultCodes.SUCCESS) {
 			// @ts-ignore
 			dispatch(getAuthUserData())
 		} else {
-			if (data.resultCode === 10) {
+			if (data.resultCode === ResultCodesForCaptcha.CAPTCHA_IS_REQUIRED) {
 				// @ts-ignore
 				dispatch(getCaptchaUrl())
 			}
@@ -81,16 +83,17 @@ export const login = (formData: LoginFormT) => async (dispatch: Dispatch) => {
 			// @ts-ignore
 			dispatch(stopSubmit('login', { _error: message }))
 		}
+
 	} catch (err) {
 		console.error(err)
 	}
 }
 
-export const logout = () => async (dispatch: Dispatch) => {
+export const logout = (): AppThunkActionT => async (dispatch: Dispatch) => {
 	try {
 		const data = await authAPI.logout()
 
-		if (data.resultCode === 0) {
+		if (data.resultCode === ResultCodes.SUCCESS) {
 			dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
 		}
 	} catch (err) {
@@ -98,7 +101,7 @@ export const logout = () => async (dispatch: Dispatch) => {
 	}
 }
 
-export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
+export const getCaptchaUrl = (): AppThunkActionT => async (dispatch: Dispatch) => {
 	try {
 		const data = await securityAPI.getCaptchaUrl()
 		const captchaUrl = data.url

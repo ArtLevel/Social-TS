@@ -12,8 +12,17 @@ export type ResponseT<D = {}> = {
 	data: D
 }
 
-// {
-// 	id: 2,
-// 		email: 'blabla@bla.bla',
-// 	login: 'samurai'
-// }
+export type MeResponseT = {
+	id: number
+	email: string
+	login: string
+}
+
+export enum ResultCodes {
+	SUCCESS = 0,
+	ERROR = 1,
+}
+
+export enum ResultCodesForCaptcha {
+	CAPTCHA_IS_REQUIRED = 10
+}

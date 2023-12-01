@@ -32,7 +32,7 @@ export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 				:
 				<div>
 					<input onChange={onStatusChange} onBlur={disableEditMode} value={status}
-					       autoFocus />
+								 autoFocus />
 				</div>
 		}
 	</div>

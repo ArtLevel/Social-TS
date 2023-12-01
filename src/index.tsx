@@ -9,4 +9,4 @@ ReactDOM.render(
 	document.getElementById('root')
 )
 
-// Completed ReactJS 1.0
+// Samurai Way 2.0
