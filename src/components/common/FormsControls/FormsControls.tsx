@@ -35,7 +35,7 @@ export const Input: FC<IForm> = ({ input, ...props }) => {
 	</FormControl>
 }
 
-export const createField = (placeholder: string, name: string, validators: Function[], component: FC<IForm>, props?: {
+export const createField = (placeholder: string | undefined, name: string, validators: Function[], component: FC<IForm>, props?: {
 	type: string
 }, text?: string) =>
 	<div>

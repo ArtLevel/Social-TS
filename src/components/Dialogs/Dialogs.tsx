@@ -7,16 +7,15 @@ import { AddMessageFormRedux } from './AddMessageForm'
 
 interface IDialogs {
 	dialogsPage: DialogsPageT
-	isAuth: boolean
 
 	sendMessage: (newMessageBody: string) => void
 }
 
-export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, sendMessage }) => {
+export const Dialogs: FC<IDialogs> = ({ dialogsPage, sendMessage }) => {
 	const dialogsEl = dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
 	const messagesEl = dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
 
-	const onSendMessageClick = (values: AddMessageFormPT) => {
+	const addNewMessage = (values: AddMessageFormPT) => {
 		sendMessage(values.newMessageBody)
 	}
 
@@ -27,7 +26,7 @@ export const Dialogs: FC<IDialogs> = ({ dialogsPage, isAuth, sendMessage }) => {
 			</div>
 			<div className={s.messages}>
 				{messagesEl}
-				<AddMessageFormRedux onSubmit={onSendMessageClick} />
+				<AddMessageFormRedux onSubmit={addNewMessage} />
 			</div>
 		</div>
 	)

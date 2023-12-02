@@ -23,6 +23,9 @@ interface IApp {
 	initializeApp: () => void
 }
 
+const SuspendDialogs = WithSuspense(DialogsContainer)
+const SuspendProfile = WithSuspense(ProfileContainer)
+
 class App extends React.Component<IApp> {
 	catchAllUnhandledErrors = (someError: PromiseRejectionEvent) => {
 		alert('some error' + someError)
@@ -49,11 +52,11 @@ class App extends React.Component<IApp> {
 				<div className='app-wrapper-content'>
 					<Switch>
 						<Route exact path='/'
-						       render={() => <Redirect to='/profile' />} />
+									 render={() => <Redirect to='/profile' />} />
 						<Route path='/dialogs'
-						       render={WithSuspense(DialogsContainer)} />
+									 render={() => <SuspendDialogs />} />
 						<Route path='/profile/:userId?'
-						       render={WithSuspense(ProfileContainer)} />
+									 render={() => <SuspendProfile />} />
 						<Route path='/users' render={() => <UsersContainer />} />
 						<Route path='/login' render={() => <Login />} />
 						<Route path='*' render={() => <div>Error 404</div>} />

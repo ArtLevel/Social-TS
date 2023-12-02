@@ -6,11 +6,9 @@ import { Dialogs } from './Dialogs'
 import { compose } from 'redux'
 import { AppRootStateT } from '../../redux/store/reduxStore'
 
-const mapStateToProps = (state: AppRootStateT) => {
-	return {
-		dialogsPage: state.dialogsPage
-	}
-}
+const mapStateToProps = (state: AppRootStateT) => ({
+	dialogsPage: state.dialogsPage
+})
 
 export default compose<React.ComponentType>(
 	connect(mapStateToProps, {
