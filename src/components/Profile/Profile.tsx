@@ -9,10 +9,10 @@ interface IProfile {
 	status: string
 	profile: ProfileT | null
 	isOwner: boolean
-	savePhoto: (photoFile: any) => void
+	savePhoto: (photoFile: File) => void
 
 	updateUserStatus: (status: string) => void
-	saveProfile: (formData: ProfileDataFormValuesT) => void
+	saveProfile: (formData: ProfileDataFormValuesT) => Promise<void>
 }
 
 export const Profile: FC<IProfile> = (props) => {

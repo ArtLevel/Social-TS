@@ -1,5 +1,6 @@
 import { AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
+import { AppThunkActionT } from '../../store/reduxStore'
 
 type ActionsT = InitializedSuccessAT
 
@@ -24,7 +25,7 @@ export const initializedSuccess = () => ({
 } as const)
 
 // THUNK
-export const initializeApp = () => (dispatch: any) => {
+export const initializeApp = (): AppThunkActionT => async (dispatch) => {
 	const promise = dispatch(getAuthUserData())
 
 	Promise.all([promise]).then(() => {

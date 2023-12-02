@@ -16,9 +16,8 @@ import {
 } from '../../../types/types'
 import { profileAPI } from '../../../api/api'
 import { ProfileDataFormValuesT } from '../../../components/Profile/ProfileInfo/ProfileDataForm'
-import { AppRootStateT, AppThunkActionT } from '../../store/reduxStore'
+import { AppThunkActionT } from '../../store/reduxStore'
 import { stopSubmit } from 'redux-form'
-import { Dispatch } from 'redux'
 import { ResultCodes } from '../../../types/API/APITypes'
 
 type ActionsT = AddPostAT | DeletePostAT | setUserProfileAT | SetStatusAT | SetPhotoSuccessAT
@@ -87,7 +86,7 @@ export const setPhotoSuccess = (photos: ProfilePhotosT) => ({
 
 
 // THUNK
-export const getUserProfile = (userId: number): AppThunkActionT => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.getUserProfile(userId)
 		dispatch(setUserProfile(data))
@@ -95,15 +94,16 @@ export const getUserProfile = (userId: number): AppThunkActionT => async (dispat
 		console.error(err)
 	}
 }
-export const getUserStatus = (userId: number): AppThunkActionT => async (dispatch: Dispatch) => {
+export const getUserStatus = (userId: number): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.getStatus(userId)
 		dispatch(setStatus(data))
 	} catch (err) {
 		console.error(err)
 	}
+
 }
-export const updateUserStatus = (status: string): AppThunkActionT => async (dispatch: Dispatch) => {
+export const updateUserStatus = (status: string): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.updateStatus(status)
 		if (data.resultCode === ResultCodes.SUCCESS) {
@@ -113,7 +113,7 @@ export const updateUserStatus = (status: string): AppThunkActionT => async (disp
 		console.warn(err)
 	}
 }
-export const savePhoto = (photoFile: any): AppThunkActionT => async (dispatch: Dispatch) => {
+export const savePhoto = (photoFile: File): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.savePhoto(photoFile)
 		if (data.resultCode === ResultCodes.SUCCESS) {
@@ -123,7 +123,8 @@ export const savePhoto = (photoFile: any): AppThunkActionT => async (dispatch: D
 		console.error(err)
 	}
 }
-export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT => async (dispatch: any, getState: () => AppRootStateT) => {
+
+export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT => async (dispatch, getState) => {
 	try {
 		const userId = getState().auth.userId
 		const data = await profileAPI.saveProfile(formData)
@@ -131,6 +132,8 @@ export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT =
 		if (data.resultCode === ResultCodes.SUCCESS) {
 			if (userId) {
 				dispatch(getUserProfile(userId))
+			} else {
+				throw new Error('userId can\'t be null')
 			}
 		} else {
 			dispatch(stopSubmit('editProfile', { _error: data.messages[0] }))
@@ -140,6 +143,5 @@ export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT =
 		console.error(err)
 	}
 }
-
 
 export default profileReducer

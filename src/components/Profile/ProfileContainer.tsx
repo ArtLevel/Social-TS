@@ -22,11 +22,11 @@ interface IProfileContainerProps {
 	status: string
 	profile: ProfileT | null
 
-	savePhoto: (photoFile: any) => void
+	savePhoto: (photoFile: File) => void
 	getUserProfile: (userId: number) => void
 	getUserStatus: (userId: number) => void
 	updateUserStatus: (status: string) => void
-	saveProfile: (formData: ProfileDataFormValuesT) => void
+	saveProfile: (formData: ProfileDataFormValuesT) => Promise<void>
 }
 
 interface IRouteComponentParams {
@@ -56,8 +56,8 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 	render() {
 		return (
 			<Profile {...this.props} profile={this.props.profile} status={this.props.status}
-			         updateUserStatus={this.props.updateUserStatus} isOwner={!this.props.match.params.userId}
-			         savePhoto={this.props.savePhoto} saveProfile={this.props.saveProfile} />
+							 updateUserStatus={this.props.updateUserStatus} isOwner={!this.props.match.params.userId}
+							 savePhoto={this.props.savePhoto} saveProfile={this.props.saveProfile} />
 		)
 	}
 }

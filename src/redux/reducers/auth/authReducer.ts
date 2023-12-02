@@ -8,7 +8,6 @@ import {
 import { AuthT } from '../../../types/AuthT'
 import { authAPI, securityAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
-import { Dispatch } from 'redux'
 import { AppThunkActionT } from '../../store/reduxStore'
 import { ResultCodes, ResultCodesForCaptcha } from '../../../types/API/APITypes'
 
@@ -55,7 +54,7 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
 
 
 // THUNK
-export const getAuthUserData = (): AppThunkActionT => async (dispatch: Dispatch) => {
+export const getAuthUserData = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await authAPI.me()
 
@@ -67,7 +66,7 @@ export const getAuthUserData = (): AppThunkActionT => async (dispatch: Dispatch)
 		console.error(err)
 	}
 }
-export const login = (formData: LoginFormT): AppThunkActionT => async (dispatch: any) => {
+export const login = (formData: LoginFormT): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await authAPI.login(formData)
 
@@ -86,7 +85,7 @@ export const login = (formData: LoginFormT): AppThunkActionT => async (dispatch:
 	}
 }
 
-export const logout = (): AppThunkActionT => async (dispatch: Dispatch) => {
+export const logout = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await authAPI.logout()
 
@@ -98,7 +97,7 @@ export const logout = (): AppThunkActionT => async (dispatch: Dispatch) => {
 	}
 }
 
-export const getCaptchaUrl = (): AppThunkActionT => async (dispatch: Dispatch) => {
+export const getCaptchaUrl = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await securityAPI.getCaptchaUrl()
 		const captchaUrl = data.url

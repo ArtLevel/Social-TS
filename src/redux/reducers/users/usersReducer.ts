@@ -108,7 +108,7 @@ export const requestUsers = (page: number, pageSize: number): AppThunkActionT =>
 	}
 }
 
-const _followUnfollowFlow = async (dispatch: Dispatch, apiMethod: (userId: number) => Promise<any>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (userId: number) => Promise<any>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
 	dispatch(toggleFollowingProgress(true, userId))
 
 	try {
@@ -123,11 +123,11 @@ const _followUnfollowFlow = async (dispatch: Dispatch, apiMethod: (userId: numbe
 	}
 }
 
-export const follow = (userId: number): AppThunkActionT => async (dispatch: Dispatch) => {
+export const follow = (userId: number): AppThunkActionT => async (dispatch) => {
 	_followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), followSuccess, userId)
 }
 
-export const unfollow = (userId: number): AppThunkActionT => async (dispatch: Dispatch) => {
+export const unfollow = (userId: number): AppThunkActionT => async (dispatch) => {
 	_followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), unfollowSuccess, userId)
 }
 

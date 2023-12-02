@@ -14,9 +14,9 @@ interface IProfileInfo {
 	profile: ProfileT | null
 	isOwner: boolean
 
-	savePhoto: (photoFile: any) => void
+	savePhoto: (photoFile: File) => void
 	updateUserStatus: (status: string) => void
-	saveProfile: (formData: ProfileDataFormValuesT) => void
+	saveProfile: (formData: ProfileDataFormValuesT) => Promise<void>
 }
 
 export const ProfileInfo: FC<IProfileInfo> = (props) => {
@@ -42,7 +42,6 @@ export const ProfileInfo: FC<IProfileInfo> = (props) => {
 	}
 
 	const onSubmit = (formData: ProfileDataFormValuesT) => {
-		// @ts-ignore
 		saveProfile(formData).then(() => {
 			setEditMode(false)
 		})
