@@ -132,4 +132,3 @@ export const unfollow = (userId: number): AppThunkActionT => async (dispatch: Di
 }
 
 export default usersReducer
-

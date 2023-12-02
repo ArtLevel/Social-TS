@@ -1,7 +1,14 @@
 import axios from 'axios'
 import { LoginFormT, ProfilePhotosT, ProfileT } from '../types/types'
 import { ProfileDataFormValuesT } from '../components/Profile/ProfileInfo/ProfileDataForm'
-import { MeResponseT, ResponseT, ResponseUsersT } from '../types/API/APITypes'
+import {
+	LoginResponseDT,
+	MeResponseT,
+	ResponseT,
+	ResponseUsersT,
+	ResultCodes,
+	ResultCodesForCaptcha
+} from '../types/API/APITypes'
 
 const instance = axios.create({
 	withCredentials: true,
@@ -14,31 +21,30 @@ const instance = axios.create({
 export const usersAPI = {
 	getUsers(currentPage: number = 1, pageSize: number = 10) {
 		return instance.get<ResponseUsersT>(`users?page=${currentPage}&count=${pageSize}`)
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	deleteFollow(userId: number) {
 		return instance.delete<ResponseT>(`follow/${userId}`)
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	postFollow(userId: number) {
 		return instance.post<ResponseT>(`follow/${userId}`)
-			.then(response => response.data)
+			.then(res => res.data)
 	}
 }
-
 export const profileAPI = {
 	getUserProfile(userId: number) {
 		return instance.get<ProfileT>(`profile/${userId}`)
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	getStatus(userId: number) {
 		return instance.get<string>(`profile/status/${userId}`)
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	updateStatus(status: string) {
 		return instance.put<ResponseT>(`profile/status`, {
 			status
-		}).then(response => response.data)
+		}).then(res => res.data)
 	},
 	savePhoto(photoFile: any) {
 		const formData = new FormData()
@@ -49,37 +55,35 @@ export const profileAPI = {
 				'Content-Type': 'multipart/form-data'
 			}
 		})
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	saveProfile(formData: ProfileDataFormValuesT) {
-		return instance.put<ResponseT>('profile', formData)
-			.then(response => response.data)
+		return instance.put<ResponseT<ProfileT>>('profile', formData)
+			.then(res => res.data)
 	}
 }
-
 export const authAPI = {
 	me() {
 		return instance.get<ResponseT<MeResponseT>>(`auth/me`)
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	login(dataForm: LoginFormT) {
-		return instance.post<ResponseT<{ userId: number }>>(`auth/login`, {
+		return instance.post<ResponseT<LoginResponseDT, ResultCodes & ResultCodesForCaptcha>>(`auth/login`, {
 			email: dataForm.email,
 			password: dataForm.password,
 			rememberMe: dataForm.rememberMe,
 			captcha: dataForm.captcha
 		})
-			.then(response => response.data)
+			.then(res => res.data)
 	},
 	logout() {
 		return instance.delete<ResponseT>(`auth/login`)
-			.then(response => response.data)
+			.then(res => res.data)
 	}
 }
-
 export const securityAPI = {
 	getCaptchaUrl() {
 		return instance.get<{ url: string }>('security/get-captcha-url')
-			.then((response) => response.data)
+			.then((res) => res.data)
 	}
 }

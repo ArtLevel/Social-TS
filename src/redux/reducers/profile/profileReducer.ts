@@ -123,14 +123,13 @@ export const savePhoto = (photoFile: any): AppThunkActionT => async (dispatch: D
 		console.error(err)
 	}
 }
-export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT => async (dispatch: Dispatch, getState: () => AppRootStateT) => {
+export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT => async (dispatch: any, getState: () => AppRootStateT) => {
 	try {
 		const userId = getState().auth.userId
 		const data = await profileAPI.saveProfile(formData)
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
 			if (userId) {
-				// @ts-ignore
 				dispatch(getUserProfile(userId))
 			}
 		} else {

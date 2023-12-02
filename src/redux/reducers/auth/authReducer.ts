@@ -72,15 +72,12 @@ export const login = (formData: LoginFormT): AppThunkActionT => async (dispatch:
 		const data = await authAPI.login(formData)
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
-			// @ts-ignore
 			dispatch(getAuthUserData())
 		} else {
 			if (data.resultCode === ResultCodesForCaptcha.CAPTCHA_IS_REQUIRED) {
-				// @ts-ignore
 				dispatch(getCaptchaUrl())
 			}
 			const message = data.messages.length > 0 ? data.messages[0] : 'Some Error'
-			// @ts-ignore
 			dispatch(stopSubmit('login', { _error: message }))
 		}
 
