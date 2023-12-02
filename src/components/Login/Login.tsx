@@ -9,9 +9,12 @@ import s from '../common/FormsControls/FormsControls.module.css'
 import { AppRootStateT } from '../../redux/store/reduxStore'
 import { LoginFormT } from '../../types/types'
 
-interface ILogin {
+interface IMapStateP {
 	isAuth: boolean
 	captchaUrl: string | null
+}
+
+interface ILogin extends IMapStateP {
 	login: (dataForm: LoginFormT) => void
 }
 
@@ -31,16 +34,15 @@ const Login: FC<ILogin> = ({ isAuth, login, captchaUrl }) => {
 		<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
 	</div>
 }
-
-const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = ({ handleSubmit, error, captchaUrl }) => {
-	console.log(captchaUrl)
+const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = (props) => {
+	const { handleSubmit, error, captchaUrl } = props
 	return <form onSubmit={handleSubmit}>
 		{createField('Email', 'email', [required], Input)}
 		{createField('Password', 'password', [required], Input, { type: 'password' })}
 		{createField('Password', 'rememberMe', [], Input, { type: 'checkbox' }, 'Remember me')}
 
 		{captchaUrl && <img src={captchaUrl} />}
-		
+
 		{captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
 		{
 			error && <div className={s.formSummaryError}>
@@ -59,7 +61,7 @@ const LoginReduxForm = reduxForm<LoginFormT, ILoginForm>({
 	form: 'login'
 })(LoginForm)
 
-const mapStateToProps = (state: AppRootStateT) => ({
+const mapStateToProps = (state: AppRootStateT): IMapStateP => ({
 	captchaUrl: state.auth.captchaUrl,
 	isAuth: state.auth.isAuth
 })
