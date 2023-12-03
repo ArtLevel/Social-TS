@@ -123,7 +123,6 @@ export const savePhoto = (photoFile: File): AppThunkActionT => async (dispatch) 
 		console.error(err)
 	}
 }
-
 export const saveProfile = (formData: ProfileDataFormValuesT): AppThunkActionT => async (dispatch, getState) => {
 	try {
 		const userId = getState().auth.userId
