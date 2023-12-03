@@ -9,3 +9,4 @@ export const Preloader: FC<IPreloader> = ({ preloader }) => {
 		<img src={preloader} alt={preloader} />
 	</div>
 }
+

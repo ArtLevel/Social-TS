@@ -8,7 +8,7 @@ export type ResponseUsersT = {
 
 export type ResponseT<D = {}, RC = ResultCodes> = {
 	resultCode: RC
-	messages: string
+	messages: string[]
 	data: D
 }
 

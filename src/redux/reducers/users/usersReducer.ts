@@ -20,7 +20,7 @@ import { usersAPI } from '../../../api/api'
 import { updateObjectInArray } from '../../../utils/objectHelpers'
 import { Dispatch } from 'redux'
 import { AppThunkActionT } from '../../store/reduxStore'
-import { ResultCodes } from '../../../types/API/APITypes'
+import { ResponseT, ResultCodes } from '../../../types/API/APITypes'
 
 type ActionsT =
 	FollowAT
@@ -100,15 +100,15 @@ export const requestUsers = (page: number, pageSize: number): AppThunkActionT =>
 		const data = await usersAPI.getUsers(page, pageSize)
 
 		dispatch(setCurrentPage(page))
-		dispatch(toggleIsFetching(false))
 		dispatch(setUsers(data.items))
 		dispatch(setTotalUsersCount(data.totalCount))
+		dispatch(toggleIsFetching(false))
 	} catch (err) {
 		console.error(err)
 	}
 }
 
-const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (userId: number) => Promise<any>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (userId: number) => Promise<ResponseT>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
 	dispatch(toggleFollowingProgress(true, userId))
 
 	try {
@@ -124,11 +124,11 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (use
 }
 
 export const follow = (userId: number): AppThunkActionT => async (dispatch) => {
-	_followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), followSuccess, userId)
+	await _followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), followSuccess, userId)
 }
 
 export const unfollow = (userId: number): AppThunkActionT => async (dispatch) => {
-	_followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), unfollowSuccess, userId)
+	await _followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), unfollowSuccess, userId)
 }
 
 export default usersReducer
