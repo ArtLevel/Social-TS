@@ -13,6 +13,10 @@ beforeEach(() => {
 	dispatchMock.mockClear()
 	getStateMock.mockClear()
 	profileAPIMock.getUserProfile.mockClear()
+	profileAPIMock.saveProfile.mockClear()
+	profileAPIMock.savePhoto.mockClear()
+	profileAPIMock.updateStatus.mockClear()
+	profileAPIMock.getStatus.mockClear()
 })
 
 it('success getUserProfile TC should be correct', async () => {
