@@ -3,9 +3,11 @@ import {
 	FOLLOW,
 	FollowAT,
 	SET_CURRENT_PAGE,
+	SET_FILTER_OF_USERS_SEARCH_FORM,
 	SET_TOTAL_USERS_COUNT,
 	SET_USERS,
 	SetCurrentPageAT,
+	SetFilterOfUsersSearchFormAT,
 	SetTotalUsersCountAT,
 	SetUsersAT,
 	TOGGLE_IS_FETCHING,
@@ -14,7 +16,8 @@ import {
 	ToggleIsFetchingAT,
 	UNFOLLOW,
 	UnfollowAT,
-	UsersPageT
+	UsersPageT,
+	UsersSearchFormT
 } from '../../../types/types'
 import { usersAPI } from '../../../api/api'
 import { updateObjectInArray } from '../../../utils/objectHelpers'
@@ -30,6 +33,7 @@ type ActionsT =
 	| SetTotalUsersCountAT
 	| ToggleIsFetchingAT
 	| ToggleFollowingProgressAT
+	| SetFilterOfUsersSearchFormAT
 
 const initialState: UsersPageT = {
 	users: [],
@@ -37,7 +41,11 @@ const initialState: UsersPageT = {
 	totalUsersCount: 0,
 	currentPage: 1,
 	isFetching: true,
-	followingInProgress: []
+	followingInProgress: [],
+	filter: {
+		term: '',
+		friend: null
+	}
 }
 
 const usersReducer = (state: UsersPageT = initialState, action: ActionsT): UsersPageT => {
@@ -66,20 +74,25 @@ const usersReducer = (state: UsersPageT = initialState, action: ActionsT): Users
 				...state,
 				followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId] : state.followingInProgress.filter(id => id !== action.userId)
 			}
+		case SET_FILTER_OF_USERS_SEARCH_FORM: {
+			return { ...state, filter: action.payload }
+		}
 		default:
 			return state
 	}
 }
 
 // THUNK
-export const requestUsers = (page: number, pageSize: number, term: string): AppThunkActionT => async (dispatch: Dispatch) => {
+export const requestUsers = (page: number, pageSize: number, filter: UsersSearchFormT): AppThunkActionT => async (dispatch: Dispatch) => {
 	dispatch(actions.toggleIsFetching(true))
 
 	try {
-		const data = await usersAPI.getUsers(page, pageSize)
-
+		const data = await usersAPI.getUsers(page, pageSize, filter)
 		dispatch(actions.setCurrentPage(page))
 		dispatch(actions.setUsers(data.items))
+
+		dispatch(actions.setFilterOfUsersSearchForm(filter))
+
 		dispatch(actions.setTotalUsersCount(data.totalCount))
 		dispatch(actions.toggleIsFetching(false))
 	} catch (err) {

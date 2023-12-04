@@ -11,6 +11,7 @@ export type UnfollowAT = ReturnType<typeof actions.unfollowSuccess>
 export type SetUsersAT = ReturnType<typeof actions.setUsers>
 export type SetCurrentPageAT = ReturnType<typeof actions.setCurrentPage>
 export type SetTotalUsersCountAT = ReturnType<typeof actions.setTotalUsersCount>
+export type SetFilterOfUsersSearchFormAT = ReturnType<typeof actions.setFilterOfUsersSearchForm>
 
 export type ToggleIsFetchingAT = ReturnType<typeof actions.toggleIsFetching>
 

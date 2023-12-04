@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { UserT } from '../../types/Pages/Users/UsersPageT'
+import { UsersSearchFormT, UserT } from '../../types/Pages/Users/UsersPageT'
 import { Paginator } from '../common/Paginator/Paginator'
 import { User } from './User'
 import { UsersSearchForm } from './UsersSearchForm'
@@ -14,6 +14,7 @@ interface IUsers {
 	onPageChanged: (currentPage: number) => void
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
+	onFilterChanged: (filter: UsersSearchFormT) => void
 }
 
 export const Users: FC<IUsers> = (props) => {
@@ -25,7 +26,8 @@ export const Users: FC<IUsers> = (props) => {
 		followingInProgress,
 		onPageChanged,
 		follow,
-		unfollow
+		unfollow,
+		onFilterChanged
 	} = props
 
 	const unfollowHandler = (userId: number) => {
@@ -42,7 +44,7 @@ export const Users: FC<IUsers> = (props) => {
 
 	return (
 		<div>
-			<UsersSearchForm />
+			<UsersSearchForm onFilterChanged={onFilterChanged} />
 			<Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
 								 onPageChanged={onPageChanged} portionSize={10} />
 			<div>

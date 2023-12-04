@@ -18,4 +18,10 @@ export type UsersPageT = {
 	currentPage: number
 	isFetching: boolean
 	followingInProgress: number[]
+	filter: UsersSearchFormT
+}
+
+export type UsersSearchFormT = {
+	term: string
+	friend: null | boolean
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LoginFormT, ProfilePhotosT, ProfileT } from '../types/types'
+import { LoginFormT, ProfilePhotosT, ProfileT, UsersSearchFormT } from '../types/types'
 import { ProfileDataFormValuesT } from '../components/Profile/ProfileInfo/ProfileDataForm'
 import {
 	LoginResponseDT,
@@ -19,8 +19,9 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-	getUsers(currentPage: number = 1, pageSize: number = 10) {
-		return instance.get<ResponseUsersT>(`users?page=${currentPage}&count=${pageSize}`)
+	getUsers(currentPage: number = 1, pageSize: number = 10, filter: UsersSearchFormT = { friend: null, term: '' }) {
+		const friend = filter.friend !== null ? `&friend=${filter.friend}` : ''
+		return instance.get<ResponseUsersT>(`users?page=${currentPage}&count=${pageSize}&term=${filter.term}${friend}`)
 			.then(res => res.data)
 	},
 	deleteFollow(userId: number) {

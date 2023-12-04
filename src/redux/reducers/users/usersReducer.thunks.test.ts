@@ -54,7 +54,7 @@ it('success unFollow TC should be correct', async () => {
 it('success requestUsers TC should be correct', async () => {
 	const page = 1
 	const pageSize = 10
-	const thunk = requestUsers(page, pageSize, '')
+	const thunk = requestUsers(page, pageSize, { term: 'Grigory', friend: null })
 
 	const result: ResponseUsersT = {
 		items: [
@@ -97,7 +97,7 @@ it('success requestUsers TC should be correct', async () => {
 
 	await thunk(dispatchMock, getStateMock, {})
 
-	expect(dispatchMock).toBeCalledTimes(5)
+	expect(dispatchMock).toBeCalledTimes(6)
 	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleIsFetching(true))
 	expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.setCurrentPage(page))
 	expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.setUsers([
@@ -132,6 +132,7 @@ it('success requestUsers TC should be correct', async () => {
 			followed: true
 		}
 	]))
-	expect(dispatchMock).toHaveBeenNthCalledWith(4, actions.setTotalUsersCount(23100))
-	expect(dispatchMock).toHaveBeenNthCalledWith(5, actions.toggleIsFetching(false))
+	expect(dispatchMock).toHaveBeenNthCalledWith(4, actions.setFilterOfUsersSearchForm({ term: 'Grigory', friend: null }))
+	expect(dispatchMock).toHaveBeenNthCalledWith(5, actions.setTotalUsersCount(23100))
+	expect(dispatchMock).toHaveBeenNthCalledWith(6, actions.toggleIsFetching(false))
 })

@@ -1,4 +1,4 @@
-import { UserT } from '../Pages/Users/UsersPageT'
+import { UsersSearchFormT, UserT } from '../Pages/Users/UsersPageT'
 import { ProfilePhotosT, ProfileT } from '../Pages/Profile/ProfilePageT'
 import { AuthT } from '../AuthT'
 
@@ -18,12 +18,17 @@ export const TOGGLE_IS_FETCHING = 'samurai_network/users/TOGGLE_IS_FETCHING'
 export const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai_network/users/TOGGLE_IS_FOLLOWING_PROGRESS'
 export const SET_PHOTO_SUCCESS = 'samurai_network/profile/SET_PHOTO_SUCCESS'
 export const GET_CAPTCHA_URL_SUCCESS = 'samurai_network/auth/GET_CAPTCHA_URL_SUCCESS'
+export const SET_FILTER_OF_USERS_SEARCH_FORM = 'samurai_network/users/SET_FILTER_OF_USERS_SEARCH_FORM'
 
 export const actions = {
 	followSuccess: (userId: number) => ({ type: FOLLOW, userId } as const),
 	unfollowSuccess: (userId: number) => ({ type: UNFOLLOW, userId } as const),
 	setUsers: (users: UserT[]) => ({ type: SET_USERS, users } as const),
 	setCurrentPage: (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const),
+	setFilterOfUsersSearchForm: (filter: UsersSearchFormT) => ({
+		type: SET_FILTER_OF_USERS_SEARCH_FORM,
+		payload: filter
+	} as const),
 	setTotalUsersCount: (totalUsersCount: number) => ({
 		type: SET_TOTAL_USERS_COUNT,
 		totalUsersCount

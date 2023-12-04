@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { follow, requestUsers, unfollow } from '../../redux/reducers/users/usersReducer'
-import { actions, UserT } from '../../types/types'
+import { actions, UsersSearchFormT, UserT } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
@@ -13,10 +13,12 @@ import {
 	getIsFetching,
 	getPageSize,
 	getTotalUsersCount,
-	getUsers
+	getUsers,
+	getUsersFilter
 } from '../../redux/selectors/usersSelectors'
 
 interface IUsersContainer {
+	filter: UsersSearchFormT
 	users: UserT[]
 	pageSize: number
 	totalUsersCount: number
@@ -26,20 +28,25 @@ interface IUsersContainer {
 
 	setCurrentPage: (currentPage: number) => void
 	setTotalUsersCount: (totalCount: number) => void
-	requestUsers: (currentPage: number, pageSize: number, term: string) => void
+	requestUsers: (currentPage: number, pageSize: number, filter: UsersSearchFormT) => void
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 }
 
 class UsersContainer extends React.Component<IUsersContainer> {
 	componentDidMount() {
-		const { currentPage, pageSize } = this.props
-		this.props.requestUsers(currentPage, pageSize, '')
+		const { currentPage, pageSize, filter } = this.props
+		this.props.requestUsers(currentPage, pageSize, filter)
 	}
 
 	onPageChanged = (currentPage: number) => {
+		const { pageSize, filter } = this.props
+		this.props.requestUsers(currentPage, pageSize, filter)
+	}
+
+	onFilterChanged = (filter: UsersSearchFormT) => {
 		const { pageSize } = this.props
-		this.props.requestUsers(currentPage, pageSize, '')
+		this.props.requestUsers(1, pageSize, filter)
 	}
 
 	render() {
@@ -52,7 +59,7 @@ class UsersContainer extends React.Component<IUsersContainer> {
 			<>
 				{
 					isFetching ? <Preloader preloader={preloaderGif} /> :
-						<Users {...this.props} onPageChanged={this.onPageChanged}
+						<Users {...this.props} onPageChanged={this.onPageChanged} onFilterChanged={this.onFilterChanged}
 						/>
 				}
 			</>
@@ -62,6 +69,7 @@ class UsersContainer extends React.Component<IUsersContainer> {
 
 const mapStateToProps = (state: AppRootStateT) => {
 	return {
+		filter: getUsersFilter(state),
 		users: getUsers(state),
 		pageSize: getPageSize(state),
 		totalUsersCount: getTotalUsersCount(state),
