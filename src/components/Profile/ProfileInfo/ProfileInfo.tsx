@@ -1,6 +1,4 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-
-import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
@@ -8,32 +6,26 @@ import userPhoto from '../../../assets/images/user.png'
 import s from './ProfileInfo.module.css'
 import { ProfileData } from './ProfileData'
 import { ProfileDataFormValuesT, ProfileDataReduxForm } from './ProfileDataForm'
+import { useAppDispatch, useAppSelector } from '../../../redux/store/reduxStore'
+import { savePhoto, saveProfile, updateUserStatus } from '../../../redux/reducers/profile/profileReducer'
 
 interface IProfileInfo {
-	status: string
-	profile: ProfileT | null
 	isOwner: boolean
-
-	savePhoto: (photoFile: File) => void
-	updateUserStatus: (status: string) => void
-	saveProfile: (formData: ProfileDataFormValuesT) => Promise<void>
 }
 
-export const ProfileInfo: FC<IProfileInfo> = (props) => {
+export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 	const {
 		profile,
-		status,
-		isOwner,
-		savePhoto,
-		saveProfile,
-		updateUserStatus
-	} = props
+		status
+	} = useAppSelector(state => state.profilePage)
+
+	const dispatch = useAppDispatch()
 
 	const [editMode, setEditMode] = useState(false)
 
 	const mainPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.currentTarget.files && e.currentTarget.files.length === 1) {
-			savePhoto(e.currentTarget.files[0])
+			dispatch(savePhoto(e.currentTarget.files[0]))
 		}
 	}
 
@@ -42,9 +34,13 @@ export const ProfileInfo: FC<IProfileInfo> = (props) => {
 	}
 
 	const onSubmit = (formData: ProfileDataFormValuesT) => {
-		saveProfile(formData).then(() => {
+		dispatch(saveProfile(formData)).then(() => {
 			setEditMode(false)
 		})
+	}
+
+	const updateUserStatusHandler = (newStatus: string) => {
+		dispatch(updateUserStatus(newStatus))
 	}
 
 	return profile ? (
@@ -59,7 +55,7 @@ export const ProfileInfo: FC<IProfileInfo> = (props) => {
 				{editMode ? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} /> :
 					<ProfileData profile={profile} isOwner={isOwner} activateEditMode={activateEditMode} />}
 
-				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />
+				<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatusHandler} />
 			</div>
 		</div>
 	) : <Preloader preloader={preloaderGif} />

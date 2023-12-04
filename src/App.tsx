@@ -1,14 +1,13 @@
-import React from 'react'
-import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import React, { FC, useEffect } from 'react'
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
 import UsersContainer from './components/Users/UsersPage'
-import HeaderContainer from './components/Header/HeaderContainer'
+import HeaderPage from './components/Header/HeaderPage'
 import Login from './components/Login/Login'
-import { connect, Provider } from 'react-redux'
-import { compose } from 'redux'
+import { Provider } from 'react-redux'
 import { initializeApp } from './redux/reducers/app/appReducer'
-import store, { AppRootStateT } from './redux/store/reduxStore'
+import store, { useAppDispatch, useAppSelector } from './redux/store/reduxStore'
 import { Preloader } from './components/common/Preloader/Preloader'
 import preloaderGif from './assets/images/preloader.gif'
 import { WithSuspense } from './hoc/WithSuspense'
@@ -18,68 +17,60 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 interface IApp {
-	initialized: boolean
 
-	initializeApp: () => void
 }
 
 const SuspendDialogs = WithSuspense(DialogsContainer)
 const SuspendProfile = WithSuspense(ProfileContainer)
 
-class App extends React.Component<IApp> {
-	catchAllUnhandledErrors = (someError: PromiseRejectionEvent) => {
+const App: FC<IApp> = () => {
+	const { initialized } = useAppSelector(state => state.app)
+
+	useEffect(() => {
+		dispatch(initializeApp())
+		window.addEventListener('unhandledrejection', catchAllUnhandledErrors)
+
+		return () => {
+			window.removeEventListener('unhandledrejection', catchAllUnhandledErrors)
+		}
+	}, [])
+
+	const catchAllUnhandledErrors = (someError: PromiseRejectionEvent) => {
 		alert('some error' + someError)
 	}
 
-	componentDidMount() {
-		this.props.initializeApp()
-		window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-	}
+	const dispatch = useAppDispatch()
 
-	componentWillUnmount() {
-		window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-	}
+	if (!initialized) return <Preloader preloader={preloaderGif} />
 
-	render() {
-		if (!this.props.initialized) return <Preloader preloader={preloaderGif} />
+	return (
+		<div className='app-wrapper'>
 
-		return (
-			<div className='app-wrapper'>
+			<HeaderPage />
+			<NavBar />
 
-				<HeaderContainer />
-				<NavBar />
-
-				<div className='app-wrapper-content'>
-					<Switch>
-						<Route exact path='/'
-									 render={() => <Redirect to='/profile' />} />
-						<Route path='/dialogs'
-									 render={() => <SuspendDialogs />} />
-						<Route path='/profile/:userId?'
-									 render={() => <SuspendProfile />} />
-						<Route path='/users' render={() => <UsersContainer pageTitle='Samuaii' />} />
-						<Route path='/login' render={() => <Login />} />
-						<Route path='*' render={() => <div>Error 404</div>} />
-					</Switch>
-				</div>
+			<div className='app-wrapper-content'>
+				<Switch>
+					<Route exact path='/'
+								 render={() => <Redirect to='/profile' />} />
+					<Route path='/dialogs'
+								 render={() => <SuspendDialogs />} />
+					<Route path='/profile/:userId?'
+								 render={() => <SuspendProfile />} />
+					<Route path='/users' render={() => <UsersContainer pageTitle='Samuaii' />} />
+					<Route path='/login' render={() => <Login />} />
+					<Route path='*' render={() => <div>Error 404</div>} />
+				</Switch>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
-const mapStateToProps = (state: AppRootStateT) => ({
-	initialized: state.app.initialized
-})
-
-const AppContainer = compose<React.ComponentType>(
-	connect(mapStateToProps, { initializeApp }),
-	withRouter
-)(App)
 
 const MainApp = () => {
 	return <HashRouter>
 		<Provider store={store}>
-			<AppContainer />
+			<App />
 		</Provider>
 	</HashRouter>
 }

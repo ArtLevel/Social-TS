@@ -1,18 +1,10 @@
 import React, { FC } from 'react'
 
 import { ProfileInfo } from './ProfileInfo/ProfileInfo'
-import { MyPostsContainer } from './MyPosts/MyPostsContainer'
-import { ProfileT } from '../../types/Pages/Profile/ProfilePageT'
-import { ProfileDataFormValuesT } from './ProfileInfo/ProfileDataForm'
+import { MyPostsPage } from './MyPosts/MyPostsPage'
 
 interface IProfile {
-	status: string
-	profile: ProfileT | null
 	isOwner: boolean
-	savePhoto: (photoFile: File) => void
-
-	updateUserStatus: (status: string) => void
-	saveProfile: (formData: ProfileDataFormValuesT) => Promise<void>
 }
 
 export const Profile: FC<IProfile> = (props) => {
@@ -20,7 +12,7 @@ export const Profile: FC<IProfile> = (props) => {
 		<div>
 
 			<ProfileInfo {...props} />
-			<MyPostsContainer />
+			<MyPostsPage />
 
 		</div>
 	)

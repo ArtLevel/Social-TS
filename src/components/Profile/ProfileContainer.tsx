@@ -55,9 +55,8 @@ class ProfileContainer extends React.Component<IProfileContainerProps & RouteCom
 
 	render() {
 		return (
-			<Profile {...this.props} profile={this.props.profile} status={this.props.status}
-							 updateUserStatus={this.props.updateUserStatus} isOwner={!this.props.match.params.userId}
-							 savePhoto={this.props.savePhoto} saveProfile={this.props.saveProfile} />
+			<Profile {...this.props} isOwner={!this.props.match.params.userId}
+			/>
 		)
 	}
 }

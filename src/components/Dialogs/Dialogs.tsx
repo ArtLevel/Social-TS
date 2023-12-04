@@ -1,22 +1,24 @@
 import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 import { FC } from 'react'
-import { AddMessageFormPT, DialogsPageT } from '../../types/types'
+import { AddMessageFormPT } from '../../types/types'
+import { actions } from '../../types/Action/ActionNamesConst'
 import s from './Dialogs.module.css'
 import { AddMessageFormRedux } from './AddMessageForm'
+import { useAppDispatch, useAppSelector } from '../../redux/store/reduxStore'
 
 interface IDialogs {
-	dialogsPage: DialogsPageT
-
-	sendMessage: (newMessageBody: string) => void
 }
 
-export const Dialogs: FC<IDialogs> = ({ dialogsPage, sendMessage }) => {
-	const dialogsEl = dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
-	const messagesEl = dialogsPage.messages.map(m => <Message key={m.id} message={m.message} />)
+export const Dialogs: FC<IDialogs> = () => {
+	const { dialogs, messages } = useAppSelector(state => state.dialogsPage)
+	const dispatch = useAppDispatch()
+
+	const dialogsEl = dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
+	const messagesEl = messages.map(m => <Message key={m.id} message={m.message} />)
 
 	const addNewMessage = (values: AddMessageFormPT) => {
-		sendMessage(values.newMessageBody)
+		dispatch(actions.sendMessage(values.newMessageBody))
 	}
 
 	return (
