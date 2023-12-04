@@ -2,7 +2,7 @@ import React from 'react'
 import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { NavBar } from './components/NavBar/NavBar'
 
-import UsersContainer from './components/Users/UsersContainer'
+import UsersContainer from './components/Users/UsersPage'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
 import { connect, Provider } from 'react-redux'
@@ -57,7 +57,7 @@ class App extends React.Component<IApp> {
 									 render={() => <SuspendDialogs />} />
 						<Route path='/profile/:userId?'
 									 render={() => <SuspendProfile />} />
-						<Route path='/users' render={() => <UsersContainer />} />
+						<Route path='/users' render={() => <UsersContainer pageTitle='Samuaii' />} />
 						<Route path='/login' render={() => <Login />} />
 						<Route path='*' render={() => <div>Error 404</div>} />
 					</Switch>
@@ -85,9 +85,3 @@ const MainApp = () => {
 }
 
 export default MainApp
-
-// Принципы чистой функции:
-// 1. Immutability
-// 2. Return
-// 3. No side effect - не оставляет мусора во внешнем мире
-// 4. детерминированость (идетерминированость) - при одинаковых входных данных, одинаковые выходные данные

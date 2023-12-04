@@ -2,29 +2,26 @@ import React, { FC } from 'react'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import { createField, Input } from '../common/FormsControls/FormsControls'
 import { required } from '../../utils/validators/validators'
-import { connect } from 'react-redux'
 import { login } from '../../redux/reducers/auth/authReducer'
 import { Redirect } from 'react-router-dom'
 import s from '../common/FormsControls/FormsControls.module.css'
-import { AppRootStateT } from '../../redux/store/reduxStore'
 import { LoginFormT } from '../../types/types'
+import { useAppDispatch, useAppSelector } from '../../redux/store/reduxStore'
 
-interface IMapStateP {
-	isAuth: boolean
-	captchaUrl: string | null
-}
+interface ILogin {
 
-interface ILogin extends IMapStateP {
-	login: (dataForm: LoginFormT) => void
 }
 
 interface ILoginForm {
 	captchaUrl: string | null
 }
 
-const Login: FC<ILogin> = ({ isAuth, login, captchaUrl }) => {
+const Login: FC<ILogin> = () => {
+	const { isAuth, captchaUrl } = useAppSelector(state => state.auth)
+	const dispatch = useAppDispatch()
+
 	const onSubmit = (formData: LoginFormT) => {
-		login(formData)
+		dispatch(login(formData))
 	}
 
 	if (isAuth) return <Redirect to='/profile' />
@@ -61,9 +58,4 @@ const LoginReduxForm = reduxForm<LoginFormT, ILoginForm>({
 	form: 'login'
 })(LoginForm)
 
-const mapStateToProps = (state: AppRootStateT): IMapStateP => ({
-	captchaUrl: state.auth.captchaUrl,
-	isAuth: state.auth.isAuth
-})
-
-export default connect(mapStateToProps, { login })(Login)
+export default Login

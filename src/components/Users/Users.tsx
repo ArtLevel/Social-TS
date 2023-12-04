@@ -1,40 +1,43 @@
 import React, { FC } from 'react'
-import { UsersSearchFormT, UserT } from '../../types/Pages/Users/UsersPageT'
+import { UsersSearchFormT } from '../../types/Pages/Users/UsersPageT'
 import { Paginator } from '../common/Paginator/Paginator'
 import { User } from './User'
 import { UsersSearchForm } from './UsersSearchForm'
+import { useAppDispatch, useAppSelector } from '../../redux/store/reduxStore'
+import { follow, requestUsers, unfollow } from '../../redux/reducers/users/usersReducer'
 
 interface IUsers {
-	users: UserT[]
-	pageSize: number
-	totalUsersCount: number
-	currentPage: number
-	followingInProgress: number[]
-
-	onPageChanged: (currentPage: number) => void
-	follow: (userId: number) => void
-	unfollow: (userId: number) => void
-	onFilterChanged: (filter: UsersSearchFormT) => void
 }
 
 export const Users: FC<IUsers> = (props) => {
+	const dispatch = useAppDispatch()
+
 	const {
+		filter
+	} = useAppSelector(state => state.usersPage)
+
+	const {
+		totalUsersCount,
 		users,
 		pageSize,
-		totalUsersCount,
 		currentPage,
-		followingInProgress,
-		onPageChanged,
-		follow,
-		unfollow,
-		onFilterChanged
-	} = props
+		followingInProgress
+	} = useAppSelector(state => state.usersPage)
+
+	const onPageChanged = (currentPage: number) => {
+		dispatch(requestUsers(currentPage, pageSize, filter))
+	}
+
+	const onFilterChanged = (filter: UsersSearchFormT) => {
+		dispatch(requestUsers(1, pageSize, filter))
+	}
+
 
 	const unfollowHandler = (userId: number) => {
-		unfollow(userId)
+		dispatch(unfollow(userId))
 	}
 	const followHandler = (userId: number) => {
-		follow(userId)
+		dispatch(follow(userId))
 	}
 
 	const usersMapped = users.map(u => (
