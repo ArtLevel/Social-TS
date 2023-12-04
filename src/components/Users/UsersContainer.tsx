@@ -16,6 +16,7 @@ import {
 	getUsers,
 	getUsersFilter
 } from '../../redux/selectors/usersSelectors'
+import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 
 interface IUsersContainer {
 	filter: UsersSearchFormT
@@ -88,5 +89,6 @@ export default compose<React.ComponentType>(
 			requestUsers,
 			follow,
 			unfollow
-		}
-	))(UsersContainer)
+		}),
+	WithAuthRedirect
+)(UsersContainer)
