@@ -1,4 +1,4 @@
-import { AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
+import { actions, AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
 import { AppThunkActionT } from '../../store/reduxStore'
 
@@ -20,16 +20,12 @@ const appReducer = (state: AppPageT = initialState, action: ActionsT): AppPageT 
 	}
 }
 
-export const initializedSuccess = () => ({
-	type: INIZIALIZED_SUCCESS
-} as const)
-
 // THUNK
 export const initializeApp = (): AppThunkActionT => async (dispatch) => {
 	const promise = dispatch(getAuthUserData())
 
 	Promise.all([promise]).then(() => {
-		dispatch(initializedSuccess())
+		dispatch(actions.initializedSuccess())
 	})
 }
 

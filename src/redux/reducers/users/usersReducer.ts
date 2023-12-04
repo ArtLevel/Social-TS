@@ -1,4 +1,5 @@
 import {
+	actions,
 	FOLLOW,
 	FollowAT,
 	SET_CURRENT_PAGE,
@@ -13,8 +14,7 @@ import {
 	ToggleIsFetchingAT,
 	UNFOLLOW,
 	UnfollowAT,
-	UsersPageT,
-	UserT
+	UsersPageT
 } from '../../../types/types'
 import { usersAPI } from '../../../api/api'
 import { updateObjectInArray } from '../../../utils/objectHelpers'
@@ -71,45 +71,24 @@ const usersReducer = (state: UsersPageT = initialState, action: ActionsT): Users
 	}
 }
 
-export const followSuccess = (userId: number) => ({ type: FOLLOW, userId } as const)
-export const unfollowSuccess = (userId: number) => ({ type: UNFOLLOW, userId } as const)
-export const setUsers = (users: UserT[]) => ({ type: SET_USERS, users } as const)
-export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const)
-export const setTotalUsersCount = (totalUsersCount: number) => ({
-	type: SET_TOTAL_USERS_COUNT,
-	totalUsersCount
-} as const)
-
-export const toggleIsFetching = (isFetching: boolean) => ({
-	type: TOGGLE_IS_FETCHING,
-	isFetching
-} as const)
-
-export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
-	type: TOGGLE_IS_FOLLOWING_PROGRESS,
-	isFetching,
-	userId
-} as const)
-
-
 // THUNK
-export const requestUsers = (page: number, pageSize: number): AppThunkActionT => async (dispatch: Dispatch) => {
-	dispatch(toggleIsFetching(true))
+export const requestUsers = (page: number, pageSize: number, term: string): AppThunkActionT => async (dispatch: Dispatch) => {
+	dispatch(actions.toggleIsFetching(true))
 
 	try {
 		const data = await usersAPI.getUsers(page, pageSize)
 
-		dispatch(setCurrentPage(page))
-		dispatch(setUsers(data.items))
-		dispatch(setTotalUsersCount(data.totalCount))
-		dispatch(toggleIsFetching(false))
+		dispatch(actions.setCurrentPage(page))
+		dispatch(actions.setUsers(data.items))
+		dispatch(actions.setTotalUsersCount(data.totalCount))
+		dispatch(actions.toggleIsFetching(false))
 	} catch (err) {
 		console.error(err)
 	}
 }
 
 const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (userId: number) => Promise<ResponseT>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
-	dispatch(toggleFollowingProgress(true, userId))
+	dispatch(actions.toggleFollowingProgress(true, userId))
 
 	try {
 		const data = await apiMethod(userId)
@@ -117,18 +96,18 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (use
 		if (data.resultCode === ResultCodes.SUCCESS) {
 			dispatch(actionCreator(userId))
 		}
-		dispatch(toggleFollowingProgress(false, userId))
+		dispatch(actions.toggleFollowingProgress(false, userId))
 	} catch (err) {
 		console.error(err)
 	}
 }
 
 export const follow = (userId: number): AppThunkActionT => async (dispatch) => {
-	await _followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), followSuccess, userId)
+	await _followUnfollowFlow(dispatch, usersAPI.postFollow.bind(userId), actions.followSuccess, userId)
 }
 
 export const unfollow = (userId: number): AppThunkActionT => async (dispatch) => {
-	await _followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), unfollowSuccess, userId)
+	await _followUnfollowFlow(dispatch, usersAPI.deleteFollow.bind(userId), actions.unfollowSuccess, userId)
 }
 
 export default usersReducer

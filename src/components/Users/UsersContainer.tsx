@@ -1,13 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-	follow,
-	requestUsers,
-	setCurrentPage,
-	setTotalUsersCount,
-	unfollow
-} from '../../redux/reducers/users/usersReducer'
-import { UserT } from '../../types/types'
+import { follow, requestUsers, unfollow } from '../../redux/reducers/users/usersReducer'
+import { actions, UserT } from '../../types/types'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
@@ -32,7 +26,7 @@ interface IUsersContainer {
 
 	setCurrentPage: (currentPage: number) => void
 	setTotalUsersCount: (totalCount: number) => void
-	requestUsers: (currentPage: number, pageSize: number) => void
+	requestUsers: (currentPage: number, pageSize: number, term: string) => void
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 }
@@ -40,12 +34,12 @@ interface IUsersContainer {
 class UsersContainer extends React.Component<IUsersContainer> {
 	componentDidMount() {
 		const { currentPage, pageSize } = this.props
-		this.props.requestUsers(currentPage, pageSize)
+		this.props.requestUsers(currentPage, pageSize, '')
 	}
 
 	onPageChanged = (currentPage: number) => {
 		const { pageSize } = this.props
-		this.props.requestUsers(currentPage, pageSize)
+		this.props.requestUsers(currentPage, pageSize, '')
 	}
 
 	render() {
@@ -81,8 +75,8 @@ export default compose<React.ComponentType>(
 	connect(
 		mapStateToProps,
 		{
-			setCurrentPage,
-			setTotalUsersCount,
+			setCurrentPage: actions.setCurrentPage,
+			setTotalUsersCount: actions.setTotalUsersCount,
 			requestUsers,
 			follow,
 			unfollow

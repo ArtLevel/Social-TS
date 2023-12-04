@@ -1,7 +1,8 @@
 import { profileAPI } from '../../../api/api'
-import { getUserProfile, getUserStatus, setStatus, setUserProfile, updateUserStatus } from './profileReducer'
+import { getUserProfile, getUserStatus, updateUserStatus } from './profileReducer'
 import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import { ResponseT, ResultCodes } from '../../../types/API/APITypes'
+import { actions } from '../../../types/Action/ActionNamesConst'
 
 jest.mock('../../../api/api')
 const profileAPIMock = profileAPI as jest.Mocked<typeof profileAPI>
@@ -12,6 +13,7 @@ const getStateMock = jest.fn()
 beforeEach(() => {
 	dispatchMock.mockClear()
 	getStateMock.mockClear()
+
 	profileAPIMock.getUserProfile.mockClear()
 	profileAPIMock.saveProfile.mockClear()
 	profileAPIMock.savePhoto.mockClear()
@@ -36,7 +38,7 @@ it('success getUserProfile TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, setUserProfile(result))
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setUserProfile(result))
 })
 it('success getUserStatus TC should be correct', async () => {
 	const thunk = getUserStatus(21)
@@ -47,7 +49,7 @@ it('success getUserStatus TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, setStatus(result))
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setStatus(result))
 })
 it('success updateUserStatus TC should be correct', async () => {
 	const thunk = updateUserStatus('It\'s a new status')
@@ -62,7 +64,7 @@ it('success updateUserStatus TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, setStatus('It\'s a new status'))
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setStatus('It\'s a new status'))
 })
 
 // it('success saveProfile TC should be correct', async () => {

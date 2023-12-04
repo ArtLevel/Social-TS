@@ -1,12 +1,11 @@
 import {
+	actions,
 	ADD_POST,
 	AddPostAT,
 	DELETE_POST,
 	DeletePostAT,
 	PostT,
 	ProfilePageT,
-	ProfilePhotosT,
-	ProfileT,
 	SET_PHOTO_SUCCESS,
 	SET_STATUS,
 	SET_USER_PROFILE,
@@ -75,21 +74,11 @@ const profileReducer = (state: ProfilePageT = initialState, action: ActionsT): P
 			return state
 	}
 }
-export const addPost = (newPostText: string) => ({ type: ADD_POST, newPostText } as const)
-export const deletePost = (postId: number) => ({ type: DELETE_POST, postId } as const)
-export const setUserProfile = (profile: ProfileT) => ({ type: SET_USER_PROFILE, profile } as const)
-export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
-export const setPhotoSuccess = (photos: ProfilePhotosT) => ({
-	type: SET_PHOTO_SUCCESS,
-	photos
-} as const)
-
-
 // THUNK
 export const getUserProfile = (userId: number): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.getUserProfile(userId)
-		dispatch(setUserProfile(data))
+		dispatch(actions.setUserProfile(data))
 	} catch (err) {
 		console.error(err)
 	}
@@ -97,7 +86,7 @@ export const getUserProfile = (userId: number): AppThunkActionT => async (dispat
 export const getUserStatus = (userId: number): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await profileAPI.getStatus(userId)
-		dispatch(setStatus(data))
+		dispatch(actions.setStatus(data))
 	} catch (err) {
 		console.error(err)
 	}
@@ -107,7 +96,7 @@ export const updateUserStatus = (status: string): AppThunkActionT => async (disp
 	try {
 		const data = await profileAPI.updateStatus(status)
 		if (data.resultCode === ResultCodes.SUCCESS) {
-			dispatch(setStatus(status))
+			dispatch(actions.setStatus(status))
 		}
 	} catch (err) {
 		console.warn(err)
@@ -117,7 +106,7 @@ export const savePhoto = (photoFile: File): AppThunkActionT => async (dispatch) 
 	try {
 		const data = await profileAPI.savePhoto(photoFile)
 		if (data.resultCode === ResultCodes.SUCCESS) {
-			dispatch(setPhotoSuccess(data.data.photos))
+			dispatch(actions.setPhotoSuccess(data.data.photos))
 		}
 	} catch (err) {
 		console.error(err)

@@ -1,17 +1,7 @@
-import {
-	follow,
-	followSuccess,
-	requestUsers,
-	setCurrentPage,
-	setTotalUsersCount,
-	setUsers,
-	toggleFollowingProgress,
-	toggleIsFetching,
-	unfollow,
-	unfollowSuccess
-} from './usersReducer'
+import { follow, requestUsers, unfollow } from './usersReducer'
 import { usersAPI } from '../../../api/api'
 import { ResponseT, ResponseUsersT, ResultCodes } from '../../../types/API/APITypes'
+import { actions } from '../../../types/Action/ActionNamesConst'
 
 jest.mock('../../../api/api')
 const userAPIMock = usersAPI as jest.Mocked<typeof usersAPI>
@@ -22,6 +12,7 @@ const getStateMock = jest.fn()
 beforeEach(() => {
 	dispatchMock.mockClear()
 	getStateMock.mockClear()
+
 	userAPIMock.postFollow.mockClear()
 	userAPIMock.deleteFollow.mockClear()
 })
@@ -39,9 +30,9 @@ it('success follow TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(3)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 3))
-	expect(dispatchMock).toHaveBeenNthCalledWith(2, followSuccess(3))
-	expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 3))
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleFollowingProgress(true, 3))
+	expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.followSuccess(3))
+	expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.toggleFollowingProgress(false, 3))
 })
 it('success unFollow TC should be correct', async () => {
 	const thunk = unfollow(1)
@@ -56,14 +47,15 @@ it('success unFollow TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(3)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
-	expect(dispatchMock).toHaveBeenNthCalledWith(2, unfollowSuccess(1))
-	expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleFollowingProgress(true, 1))
+	expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.unfollowSuccess(1))
+	expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.toggleFollowingProgress(false, 1))
 })
 it('success requestUsers TC should be correct', async () => {
 	const page = 1
 	const pageSize = 10
-	const thunk = requestUsers(page, pageSize)
+	const thunk = requestUsers(page, pageSize, '')
+
 	const result: ResponseUsersT = {
 		items: [
 			{
@@ -106,9 +98,9 @@ it('success requestUsers TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(5)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleIsFetching(true))
-	expect(dispatchMock).toHaveBeenNthCalledWith(2, setCurrentPage(page))
-	expect(dispatchMock).toHaveBeenNthCalledWith(3, setUsers([
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleIsFetching(true))
+	expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.setCurrentPage(page))
+	expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.setUsers([
 		{
 			name: 'Alex',
 			id: 1,
@@ -140,6 +132,6 @@ it('success requestUsers TC should be correct', async () => {
 			followed: true
 		}
 	]))
-	expect(dispatchMock).toHaveBeenNthCalledWith(4, setTotalUsersCount(23100))
-	expect(dispatchMock).toHaveBeenNthCalledWith(5, toggleIsFetching(false))
+	expect(dispatchMock).toHaveBeenNthCalledWith(4, actions.setTotalUsersCount(23100))
+	expect(dispatchMock).toHaveBeenNthCalledWith(5, actions.toggleIsFetching(false))
 })

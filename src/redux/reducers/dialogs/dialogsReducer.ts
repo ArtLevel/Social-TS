@@ -47,8 +47,4 @@ const dialogsReducer = (state: DialogsPageT = initialState, action: ActionsT): D
 	}
 }
 
-export const sendMessage = (newMessageBody: string) =>
-	({ type: SEND_MESSAGE, newMessageBody } as const)
-
-
 export default dialogsReducer

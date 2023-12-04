@@ -1,42 +1,24 @@
-import {
-	addPost,
-	deletePost,
-	setPhotoSuccess,
-	setStatus,
-	setUserProfile
-} from '../../redux/reducers/profile/profileReducer'
-import {
-	followSuccess,
-	setCurrentPage,
-	setTotalUsersCount,
-	setUsers,
-	toggleFollowingProgress,
-	toggleIsFetching,
-	unfollowSuccess
-} from '../../redux/reducers/users/usersReducer'
-import { sendMessage } from '../../redux/reducers/dialogs/dialogsReducer'
-import { getCaptchaUrlSuccess, setAuthUserData } from '../../redux/reducers/auth/authReducer'
-import { initializedSuccess } from '../../redux/reducers/app/appReducer'
+import { actions } from './ActionNamesConst'
 
-export type AddPostAT = ReturnType<typeof addPost>
+export type AddPostAT = ReturnType<typeof actions.addPost>
 
-export type DeletePostAT = ReturnType<typeof deletePost>
+export type DeletePostAT = ReturnType<typeof actions.deletePost>
 
-export type setUserProfileAT = ReturnType<typeof setUserProfile>
+export type setUserProfileAT = ReturnType<typeof actions.setUserProfile>
 
-export type FollowAT = ReturnType<typeof followSuccess>
-export type UnfollowAT = ReturnType<typeof unfollowSuccess>
-export type SetUsersAT = ReturnType<typeof setUsers>
-export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
-export type SetTotalUsersCountAT = ReturnType<typeof setTotalUsersCount>
+export type FollowAT = ReturnType<typeof actions.followSuccess>
+export type UnfollowAT = ReturnType<typeof actions.unfollowSuccess>
+export type SetUsersAT = ReturnType<typeof actions.setUsers>
+export type SetCurrentPageAT = ReturnType<typeof actions.setCurrentPage>
+export type SetTotalUsersCountAT = ReturnType<typeof actions.setTotalUsersCount>
 
-export type ToggleIsFetchingAT = ReturnType<typeof toggleIsFetching>
+export type ToggleIsFetchingAT = ReturnType<typeof actions.toggleIsFetching>
 
-export type SendMessageAT = ReturnType<typeof sendMessage>
-export type SetAuthUserDataAT = ReturnType<typeof setAuthUserData>
-export type ToggleFollowingProgressAT = ReturnType<typeof toggleFollowingProgress>
+export type SendMessageAT = ReturnType<typeof actions.sendMessage>
+export type SetAuthUserDataAT = ReturnType<typeof actions.setAuthUserData>
+export type ToggleFollowingProgressAT = ReturnType<typeof actions.toggleFollowingProgress>
 
-export type SetStatusAT = ReturnType<typeof setStatus>
-export type InitializedSuccessAT = ReturnType<typeof initializedSuccess>
-export type SetPhotoSuccessAT = ReturnType<typeof setPhotoSuccess>
-export type GetCaptchaUrlSuccessAT = ReturnType<typeof getCaptchaUrlSuccess>
+export type SetStatusAT = ReturnType<typeof actions.setStatus>
+export type InitializedSuccessAT = ReturnType<typeof actions.initializedSuccess>
+export type SetPhotoSuccessAT = ReturnType<typeof actions.setPhotoSuccess>
+export type GetCaptchaUrlSuccessAT = ReturnType<typeof actions.getCaptchaUrlSuccess>

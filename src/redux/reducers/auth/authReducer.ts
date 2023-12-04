@@ -1,4 +1,5 @@
 import {
+	actions,
 	GET_CAPTCHA_URL_SUCCESS,
 	GetCaptchaUrlSuccessAT,
 	LoginFormT,
@@ -40,19 +41,6 @@ const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
 	}
 }
 
-export const setAuthUserData = (data: AuthT) => ({
-	type: SET_USER_DATA,
-	payload: {
-		...data
-	}
-} as const)
-
-export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
-	type: GET_CAPTCHA_URL_SUCCESS,
-	captchaUrl
-} as const)
-
-
 // THUNK
 export const getAuthUserData = (): AppThunkActionT => async (dispatch) => {
 	try {
@@ -60,7 +48,7 @@ export const getAuthUserData = (): AppThunkActionT => async (dispatch) => {
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
 			const { id, login, email } = data.data
-			dispatch(setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
+			dispatch(actions.setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
 		}
 	} catch (err) {
 		console.error(err)
@@ -90,7 +78,7 @@ export const logout = (): AppThunkActionT => async (dispatch) => {
 		const data = await authAPI.logout()
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
-			dispatch(setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
+			dispatch(actions.setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
 		}
 	} catch (err) {
 		console.error(err)
@@ -102,7 +90,7 @@ export const getCaptchaUrl = (): AppThunkActionT => async (dispatch) => {
 		const data = await securityAPI.getCaptchaUrl()
 		const captchaUrl = data.url
 
-		dispatch(getCaptchaUrlSuccess(captchaUrl))
+		dispatch(actions.getCaptchaUrlSuccess(captchaUrl))
 	} catch (err) {
 		console.error(err)
 	}

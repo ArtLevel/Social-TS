@@ -1,6 +1,7 @@
 import { authAPI, securityAPI } from '../../../api/api'
-import { getAuthUserData, getCaptchaUrl, getCaptchaUrlSuccess, logout, setAuthUserData } from './authReducer'
+import { getAuthUserData, getCaptchaUrl, logout } from './authReducer'
 import { MeResponseT, ResponseT, ResultCodes } from '../../../types/API/APITypes'
+import { actions } from '../../../types/Action/ActionNamesConst'
 
 jest.mock('../../../api/api')
 const authAPIMock = authAPI as jest.Mocked<typeof authAPI>
@@ -37,7 +38,7 @@ it('success getAuthUserData TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, setAuthUserData({
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setAuthUserData({
 		login: result.data.login,
 		email: result.data.email,
 		userId: result.data.id,
@@ -58,7 +59,7 @@ it('success logout TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, setAuthUserData(
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setAuthUserData(
 		{
 			userId: null,
 			email: null,
@@ -77,7 +78,7 @@ it('success getCaptchaUrl TC should be correct', async () => {
 	await thunk(dispatchMock, getStateMock, {})
 
 	expect(dispatchMock).toBeCalledTimes(1)
-	expect(dispatchMock).toHaveBeenNthCalledWith(1, getCaptchaUrlSuccess(
+	expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.getCaptchaUrlSuccess(
 		'https://captcha123'
 	))
 })

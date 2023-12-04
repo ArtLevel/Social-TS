@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { UserT } from '../../types/Pages/Users/UsersPageT'
 import { Paginator } from '../common/Paginator/Paginator'
 import { User } from './User'
+import { UsersSearchForm } from './UsersSearchForm'
 
 interface IUsers {
 	users: UserT[]
@@ -36,16 +37,19 @@ export const Users: FC<IUsers> = (props) => {
 
 	const usersMapped = users.map(u => (
 		<User key={u.id} followingInProgress={followingInProgress} user={u} followHandler={followHandler}
-		      unfollowHandler={unfollowHandler} />
+					unfollowHandler={unfollowHandler} />
 	))
 
 	return (
 		<div>
+			<UsersSearchForm />
 			<Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
-			           onPageChanged={onPageChanged} portionSize={10} />
+								 onPageChanged={onPageChanged} portionSize={10} />
 			<div>
 				{usersMapped}
 			</div>
 		</div>
 	)
 }
+
+
