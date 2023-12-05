@@ -25,14 +25,14 @@ export const User: FC<IUser> = (props) => {
 		<span>
 			<div>
 				<NavLink to={`/profile/${user.id}`}><img src={user.photos.small ? user.photos.small : userPhoto}
-				                                         className={s.userPhoto} /></NavLink>
+																								 className={s.userPhoto} /></NavLink>
 			</div>
 			<div>
 				{user.followed
 					? <button onClick={() => unfollowHandler(user.id)}
-					          disabled={followingInProgress.some(id => id === user.id)}>Unfollow</button>
+										disabled={followingInProgress.some(id => id === user.id)}>Unfollow</button>
 					: <button onClick={() => followHandler(user.id)}
-					          disabled={followingInProgress.some(id => id === user.id)}>Follow</button>}
+										disabled={followingInProgress.some(id => id === user.id)}>Follow</button>}
 			</div>
 		</span>
 			<span>

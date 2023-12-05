@@ -1,14 +1,16 @@
 import { Field, Form, Formik } from 'formik'
 import React, { FC } from 'react'
 import { UsersSearchFormT } from '../../types/types'
+import { useAppSelector } from '../../redux/store/reduxStore'
 
 interface IUsersSearchForm {
 	onFilterChanged: (filter: UsersSearchFormT) => void
 }
 
+type FriendFormT = 'true' | 'false' | 'null'
 type FormT = {
 	term: string,
-	friend: 'true' | 'false' | 'null'
+	friend: FriendFormT
 }
 
 const usersSearchFormValidate = (values: FormT) => {
@@ -18,6 +20,9 @@ const usersSearchFormValidate = (values: FormT) => {
 
 export const UsersSearchForm: FC<IUsersSearchForm> = (props) => {
 	const { onFilterChanged } = props
+	const {
+		filter
+	} = useAppSelector(state => state.usersPage)
 
 	const submit = (values: FormT, { setSubmitting }: { setSubmitting: (value: boolean) => void }) => {
 
@@ -32,7 +37,8 @@ export const UsersSearchForm: FC<IUsersSearchForm> = (props) => {
 
 	return <div>
 		<Formik
-			initialValues={{ term: '', friend: 'null' }}
+			enableReinitialize
+			initialValues={{ term: filter.term, friend: String(filter.friend) as FriendFormT }}
 			validate={usersSearchFormValidate}
 			onSubmit={submit}
 		>

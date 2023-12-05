@@ -1,10 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
 import s from './Paginator.module.css'
+import { useAppSelector } from '../../../redux/store/reduxStore'
 
 interface IPaginator {
-	totalItemsCount: number
-	pageSize: number
-	currentPage: number
 	portionSize?: number
 
 	onPageChanged: (currentPage: number) => void
@@ -12,14 +10,12 @@ interface IPaginator {
 
 export const Paginator: FC<IPaginator> = (props) => {
 	const {
-		totalItemsCount,
-		pageSize,
-		currentPage,
 		portionSize = 10,
 		onPageChanged
 	} = props
+	const { currentPage, pageSize, totalUsersCount } = useAppSelector(state => state.usersPage)
 
-	const pagesCount = Math.ceil(totalItemsCount / pageSize)
+	const pagesCount = Math.ceil(totalUsersCount / pageSize)
 
 	const pages = []
 	for (let i = 1; i <= pagesCount; i++) {
