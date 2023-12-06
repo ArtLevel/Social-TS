@@ -9,7 +9,6 @@ import { WithSuspense } from './hoc/WithSuspense'
 import Login from './components/Login/Login'
 import UsersPage from './components/Users/UsersPage'
 
-
 import 'antd/dist/antd.css'
 import { Breadcrumb, Button, Layout, Menu } from 'antd'
 import { LaptopOutlined, UserOutlined } from '@ant-design/icons'
@@ -19,6 +18,7 @@ import './App.css'
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
 const { SubMenu } = Menu
 const { Content, Footer, Sider } = Layout
@@ -29,6 +29,7 @@ interface IApp {
 
 const SuspendDialogs = WithSuspense(DialogsContainer)
 const SuspendProfile = WithSuspense(ProfileContainer)
+const SuspendChatPage = WithSuspense(ChatPage)
 
 const App: FC<IApp> = () => {
 	const { initialized } = useAppSelector(state => state.app)
@@ -72,7 +73,8 @@ const App: FC<IApp> = () => {
 								<Menu.Item key='2'><Link to='/dialogs'>Message</Link></Menu.Item>
 							</SubMenu>
 							<SubMenu key='sub2' icon={<LaptopOutlined />} title='Other Users'>
-								<Menu.Item key='5'><Link to='/users'>Users</Link></Menu.Item>
+								<Menu.Item key='3'><Link to='/users'>Users</Link></Menu.Item>
+								<Menu.Item key='4'><Link to='/chat'>Chat</Link></Menu.Item>
 							</SubMenu>
 						</Menu>
 					</Sider>
@@ -86,6 +88,7 @@ const App: FC<IApp> = () => {
 										 render={() => <SuspendProfile />} />
 							<Route path='/users' render={() => <UsersPage pageTitle='Samuaii' />} />
 							<Route path='/login' render={() => <Login />} />
+							<Route path='/chat' render={() => <SuspendChatPage />} />
 							<Route path='*' render={() => <div>Error 404 <Button type='default'>Ok</Button></div>} />
 						</Switch>
 					</Content>
@@ -95,7 +98,6 @@ const App: FC<IApp> = () => {
 		</Layout>
 	)
 }
-
 
 const MainApp = () => {
 	return <HashRouter>
