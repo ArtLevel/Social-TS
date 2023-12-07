@@ -23,3 +23,4 @@ export type SetStatusAT = ReturnType<typeof actions.setStatus>
 export type InitializedSuccessAT = ReturnType<typeof actions.initializedSuccess>
 export type SetPhotoSuccessAT = ReturnType<typeof actions.setPhotoSuccess>
 export type GetCaptchaUrlSuccessAT = ReturnType<typeof actions.getCaptchaUrlSuccess>
+export type MessagesReceivedAT = ReturnType<typeof actions.messagesReceived>
