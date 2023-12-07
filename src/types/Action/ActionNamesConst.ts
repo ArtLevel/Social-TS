@@ -1,7 +1,8 @@
 import { UsersSearchFormT, UserT } from '../Pages/Users/UsersPageT'
 import { ProfilePhotosT, ProfileT } from '../Pages/Profile/ProfilePageT'
 import { AuthT } from '../AuthT'
-import { ChatMessageT } from '../../pages/Chat/ChatPage'
+import { ChatMessageAPIType } from '../../pages/Chat/ChatPage'
+import { StatusOfChatT } from '../Pages/Chat/ChatPageT'
 
 export const INIZIALIZED_SUCCESS = 'samurai_network/app/INIZIALIZED_SUCCESS'
 export const SET_USER_DATA = 'samurai_network/auth/SET_USERS_DATA'
@@ -21,6 +22,8 @@ export const SET_PHOTO_SUCCESS = 'samurai_network/profile/SET_PHOTO_SUCCESS'
 export const GET_CAPTCHA_URL_SUCCESS = 'samurai_network/auth/GET_CAPTCHA_URL_SUCCESS'
 export const SET_FILTER_OF_USERS_SEARCH_FORM = 'samurai_network/users/SET_FILTER_OF_USERS_SEARCH_FORM'
 export const MESSAGES_RECEIVED = 'samurai_network/chat/MESSAGES_RECEIVED'
+export const STATUS_CHANGED_OF_CHAT = 'samurai_network/chat/STATUS_CHANGED_OF_CHAT'
+export const STOP_MESSAGES_LISTENING_OF_CHAT = 'samurai_network/chat/STOP_MESSAGES_LISTENING_OF_CHAT'
 
 export const actions = {
 	followSuccess: (userId: number) => ({ type: FOLLOW, userId } as const),
@@ -67,8 +70,15 @@ export const actions = {
 	initializedSuccess: () => ({
 		type: INIZIALIZED_SUCCESS
 	} as const),
-	messagesReceived: (messages: ChatMessageT[]) => ({
+	messagesReceived: (messages: ChatMessageAPIType[]) => ({
 		type: MESSAGES_RECEIVED,
 		payload: { messages }
+	} as const),
+	setStatusOfChat: (status: StatusOfChatT) => ({
+		type: STATUS_CHANGED_OF_CHAT,
+		payload: { status }
+	} as const),
+	stopMessagesListeningOfChat: () => ({
+		type: STOP_MESSAGES_LISTENING_OF_CHAT
 	} as const)
 }

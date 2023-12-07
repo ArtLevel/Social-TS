@@ -1,39 +1,84 @@
-import { ChatMessageT } from '../pages/Chat/ChatPage'
+import { ChatMessageAPIType } from '../pages/Chat/ChatPage'
+import { StatusOfChatT } from '../types/Pages/Chat/ChatPageT'
 
-type SubscriberT = (messages: ChatMessageT[]) => void
+type MessagesReceivedSubscriberT = (messages: ChatMessageAPIType[]) => void
+type StatusChangedSubscriberT = (status: StatusOfChatT) => void
 
-let subscribers = [] as SubscriberT[]
+type EventNamesT = 'messages-received' | 'status-changed'
+
+let subscribers = {
+	'messages-received': [] as MessagesReceivedSubscriberT[],
+	'status-changed': [] as StatusChangedSubscriberT[]
+}
 
 let ws: WebSocket | null = null
 
 const closeHandler = () => {
-	console.log('CLOSE WS')
+	notifySubscribersAboutStatus('pending')
 	setTimeout(createChannel, 3000)
 }
 
 const messageHandler = (e: MessageEvent) => {
 	const newMessages = JSON.parse(e.data)
-	subscribers.forEach(s => s(newMessages))
+	subscribers['messages-received'].forEach(s => s(newMessages))
+}
+
+const openHandler = () => {
+	notifySubscribersAboutStatus('ready')
+}
+
+const onlineHandler = () => {
+	notifySubscribersAboutStatus('ready')
+	createChannel()
+	console.log('WI-FI works !!!')
+}
+
+const errorHandler = () => {
+	notifySubscribersAboutStatus('error')
+	console.error('WI-FI does not work')
+}
+
+const cleanUp = () => {
+	window?.removeEventListener('offline', closeHandler)
+	window?.removeEventListener('online', onlineHandler)
+
+	ws?.removeEventListener('message', messageHandler)
+	ws?.removeEventListener('open', openHandler)
+	ws?.removeEventListener('error', errorHandler)
+}
+
+const notifySubscribersAboutStatus = (status: StatusOfChatT) => {
+	subscribers['status-changed'].forEach(s => s(status))
 }
 
 const createChannel = () => {
-	ws?.removeEventListener('close', closeHandler)
+	cleanUp()
 	ws?.close()
 
 	ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-	ws.addEventListener('close', closeHandler)
+
+	notifySubscribersAboutStatus('pending')
+
+	window.addEventListener('offline', closeHandler)
+	window.addEventListener('online', onlineHandler)
+
 	ws.addEventListener('message', messageHandler)
+	ws.addEventListener('open', openHandler)
+	ws.addEventListener('error', errorHandler)
 }
 
 export const chatAPI = {
-	subscribe(callback: SubscriberT) {
-		subscribers.push(callback)
+	subscribe(eventName: EventNamesT, callback: MessagesReceivedSubscriberT | StatusChangedSubscriberT) {
+		// @ts-ignore
+		subscribers[eventName].push(callback)
 		return () => {
-			subscribers = subscribers.filter(s => s !== callback)
+			// @ts-ignore
+			subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
 		}
 	},
-	unsubscribe(callback: SubscriberT) {
-		subscribers = subscribers.filter(s => s !== callback)
+	unsubscribe(eventName: EventNamesT, callback: MessagesReceivedSubscriberT | StatusChangedSubscriberT) {
+		// @ts-ignore
+		subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
 	},
 	sendMessage(message: string) {
 		ws?.send(message)
@@ -42,9 +87,10 @@ export const chatAPI = {
 		createChannel()
 	},
 	stop() {
-		subscribers = []
-		ws?.removeEventListener('close', closeHandler)
-		ws?.removeEventListener('message', messageHandler)
+		subscribers['messages-received'] = []
+		subscribers['status-changed'] = []
+
+		cleanUp()
 		ws?.close()
 	}
 }

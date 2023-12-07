@@ -1,26 +1,27 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 import { Button } from 'antd'
 import { useDispatch } from 'react-redux'
 import { sendMessage, startMessagesListening, stopMessagesListening } from '../../redux/reducers/chat/chatReducer'
 import { useAppSelector } from '../../redux/store/reduxStore'
 
-export type ChatMessageT = {
+export type ChatMessageAPIType = {
 	message: string
 	photo: string
 	userId: number
 	userName: string
 }
 
-const ChatPage: FC = () => {
+const ChatPage: FC = React.memo(() => {
 	return (
 		<div>
 			<Chat />
 		</div>
 	)
-}
+})
 
-const Chat: FC = () => {
+const Chat: FC = React.memo(() => {
+	const status = useAppSelector(state => state.chat.status)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -32,25 +33,49 @@ const Chat: FC = () => {
 	}, [])
 
 	return <div>
+		{
+			status === 'error' && <div>PLEASE REFRESH PAGE. WIFI doesn't work</div>
+		}
 		<Messages />
 		<AddMessageFormChatPage />
 	</div>
-}
+})
 
-const Messages = () => {
+const Messages = React.memo(() => {
+	const [isAutoScroll, setIsAutoScroll] = useState(true)
+	const messagesAnchorRef = useRef<HTMLDivElement>(null)
+
 	const messages = useAppSelector(state => state.chat.messages)
 
+	useEffect(() => {
+		if (isAutoScroll) {
+			messagesAnchorRef.current?.scrollIntoView({ behavior: 'smooth' })
+		}
+	}, [messages])
 
-	return <div style={{ height: '400px', overflowY: 'auto' }}>
-		{messages.map((m, index) => <Message key={index} message={m} />)}
+	const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+		const element = e.currentTarget
+
+		if (Math.abs(element.scrollHeight - element.scrollTop) - element.clientHeight < 300) {
+			!isAutoScroll && setIsAutoScroll(true)
+		} else {
+			isAutoScroll && setIsAutoScroll(false)
+		}
+	}
+
+	return <div style={{ height: '400px', overflowY: 'auto' }} onScroll={scrollHandler}>
+		{messages.map((m, i) => <Message key={m.id} message={m} />)}
+		<div ref={messagesAnchorRef}></div>
 	</div>
-}
+})
 
 interface IMessage {
-	message: ChatMessageT
+	message: ChatMessageAPIType
 }
 
-const Message: FC<IMessage> = ({ message }) => {
+const Message: FC<IMessage> = React.memo(({ message }) => {
+	console.log('message')
+
 	return <div>
 		<img src={message.photo} />
 		<b>{message.userName}</b>
@@ -58,14 +83,14 @@ const Message: FC<IMessage> = ({ message }) => {
 		{message.message}
 		<hr />
 	</div>
-}
+})
 
 interface IAddMessageFormChatPage {
 }
 
-const AddMessageFormChatPage: FC<IAddMessageFormChatPage> = () => {
+const AddMessageFormChatPage: FC<IAddMessageFormChatPage> = React.memo(() => {
 	const [message, setMessage] = useState('')
-	const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+	const status = useAppSelector(state => state.chat.status)
 
 	const dispatch = useDispatch()
 
@@ -83,9 +108,9 @@ const AddMessageFormChatPage: FC<IAddMessageFormChatPage> = () => {
 			<textarea value={message} onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
 		</div>
 		<div>
-			<Button onClick={sendMessageHandler} disabled={false}>Send</Button>
+			<Button onClick={sendMessageHandler} disabled={status !== 'ready'}>Send</Button>
 		</div>
 	</div>
-}
+})
 
 export default WithAuthRedirect(ChatPage)

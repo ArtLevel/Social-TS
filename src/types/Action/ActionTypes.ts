@@ -24,3 +24,5 @@ export type InitializedSuccessAT = ReturnType<typeof actions.initializedSuccess>
 export type SetPhotoSuccessAT = ReturnType<typeof actions.setPhotoSuccess>
 export type GetCaptchaUrlSuccessAT = ReturnType<typeof actions.getCaptchaUrlSuccess>
 export type MessagesReceivedAT = ReturnType<typeof actions.messagesReceived>
+export type SetStatusOfChatAT = ReturnType<typeof actions.setStatusOfChat>
+export type StopMessagesListeningOfChatAT = ReturnType<typeof actions.stopMessagesListeningOfChat>
