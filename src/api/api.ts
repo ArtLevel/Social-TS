@@ -24,6 +24,10 @@ export const usersAPI = {
 		return instance.get<ResponseUsersT>(`users?page=${currentPage}&count=${pageSize}&term=${filter.term}${friend}`)
 			.then(res => res.data)
 	},
+	getFriends() {
+		return instance.get<ResponseUsersT>(`users?friend=true`)
+			.then(res => res.data)
+	},
 	deleteFollow(userId: number) {
 		return instance.delete<ResponseT>(`follow/${userId}`)
 			.then(res => res.data)

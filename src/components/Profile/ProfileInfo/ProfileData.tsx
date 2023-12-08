@@ -1,21 +1,14 @@
 import { ProfileT } from '../../../types/Pages/Profile/ProfilePageT'
 import React, { FC } from 'react'
+import { Container } from '../../styled/Helpers.styled'
 import { Contact } from './ProfileContact'
 
 interface IProfileData {
 	profile: ProfileT
-	isOwner: boolean
-
-	activateEditMode: () => void
 }
 
-export const ProfileData: FC<IProfileData> = ({ profile, isOwner, activateEditMode }) => {
-	return <div>
-		{isOwner && <div>
-			<button onClick={activateEditMode}>
-				SetEditMode
-			</button>
-		</div>}
+export const ProfileData: FC<IProfileData> = ({ profile }) => {
+	return <Container>
 		<div>
 			<b>
 				Full Name:
@@ -52,5 +45,5 @@ export const ProfileData: FC<IProfileData> = ({ profile, isOwner, activateEditMo
 						contactValue={profile.contacts[key]} />)
 			}
 		</div>
-	</div>
+	</Container>
 }

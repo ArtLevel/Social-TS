@@ -100,6 +100,16 @@ export const requestUsers = (page: number, pageSize: number, filter: UsersSearch
 	}
 }
 
+export const getMyFriends = (): AppThunkActionT => async (dispatch) => {
+	try {
+		const data = await usersAPI.getFriends()
+		
+		dispatch(actions.setUsers(data.items))
+	} catch (err) {
+		console.error(err)
+	}
+}
+
 const _followUnfollowFlow = async (dispatch: Dispatch<ActionsT>, apiMethod: (userId: number) => Promise<ResponseT>, actionCreator: (userId: number) => FollowAT | UnfollowAT, userId: number) => {
 	dispatch(actions.toggleFollowingProgress(true, userId))
 

@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 interface IProfileStatusWithHooks {
 	status: string
 	updateUserStatus: (status: string) => void
 }
 
-export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
+export const ProfileStatus: FC<IProfileStatusWithHooks> = (props) => {
 	const [editMode, setEditMode] = useState(false)
 	const [status, setStatus] = useState(props.status)
 
@@ -22,7 +23,7 @@ export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 		setStatus(e.currentTarget.value)
 	}
 
-	return <div>
+	return <Status>
 		{
 			!editMode
 				?
@@ -35,5 +36,12 @@ export const ProfileStatusWithHooks: FC<IProfileStatusWithHooks> = (props) => {
 								 autoFocus />
 				</div>
 		}
-	</div>
+	</Status>
 }
+
+const Status = styled.div`
+    width: 100%;
+    height: 30px;
+
+`
+

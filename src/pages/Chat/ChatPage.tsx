@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
-import { Button } from 'antd'
 import { useDispatch } from 'react-redux'
 import { sendMessage, startMessagesListening, stopMessagesListening } from '../../redux/reducers/chat/chatReducer'
 import { useAppSelector } from '../../redux/store/reduxStore'
@@ -108,7 +107,7 @@ const AddMessageFormChatPage: FC<IAddMessageFormChatPage> = React.memo(() => {
 			<textarea value={message} onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
 		</div>
 		<div>
-			<Button onClick={sendMessageHandler} disabled={status !== 'ready'}>Send</Button>
+			<button onClick={sendMessageHandler} disabled={status !== 'ready'}>Send</button>
 		</div>
 	</div>
 })
