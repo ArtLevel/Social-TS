@@ -14,7 +14,6 @@ import UsersPage from './components/Users/UsersPage'
 import Login from './components/Login/Login'
 import styled from 'styled-components'
 import { NavBar } from './components/NavBar/NavBar'
-import { theme } from './styles/Theme'
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -85,20 +84,19 @@ const MainApp = () => {
 }
 
 const Grid = styled.div`
-    height: 80vh;
-
     display: grid;
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 1fr;
-    grid-column-gap: 0px;
+    grid-column-gap: 50px;
     grid-row-gap: 0px;
+
+    margin: 30px 0 0 0;
 `
 
 const Item = styled.div`
     width: 100%;
     height: 100%;
 
-    background-color: ${theme.colors.secondaryBgColor};
 `
 
 export default MainApp

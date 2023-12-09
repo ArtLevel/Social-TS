@@ -2,11 +2,11 @@ import React, { FC } from 'react'
 
 import { Post } from './Post/Post'
 import { AddPostFormPT } from '../../../types/types'
-
-import s from './MyPosts.module.css'
-import { AddPostFormRedux } from './AddNewPostForm'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/reduxStore'
 import { actions } from '../../../types/Action/ActionNamesConst'
+import styled from 'styled-components'
+import { theme } from '../../../styles/Theme'
+import { AddPostFormRedux } from './AddNewPostForm'
 
 interface IMyPostsProps {
 }
@@ -21,15 +21,32 @@ export const MyPosts: FC<IMyPostsProps> = React.memo(() => {
 		}
 
 		return (
-			<div className={s.postsBlock}>
-				<h3>My posts</h3>
+			<StyledPosts>
 				<AddPostFormRedux onSubmit={onAddPost} />
 
-				<div className={s.posts}>
+				<PostsBlock>
 					{postEl}
-				</div>
+				</PostsBlock>
 
-			</div>
+			</StyledPosts>
 		)
 	}
 )
+
+const StyledPosts = styled.div`
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    padding: 20px;
+
+    background-color: ${theme.colors.primaryBgColor};
+    margin-bottom: 50px;
+`
+
+const PostsBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+`

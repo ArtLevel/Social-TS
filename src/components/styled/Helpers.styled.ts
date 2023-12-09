@@ -21,7 +21,7 @@ export const Button = styled.button`
     height: 30px;
 
     color: ${theme.colors.fontColor};
-    background-color: ${theme.colors.accentColor};
+    background-color: ${theme.colors.primaryAccentColor};
 
     border-radius: 5px;
     border: none;
@@ -30,7 +30,7 @@ export const Button = styled.button`
     transition: all 0.4s ease;
 
     &:hover {
-        color: ${theme.colors.accentColor};
+        color: ${theme.colors.primaryAccentColor};
         background-color: ${theme.colors.fontColor};
     }
 `
@@ -57,7 +57,7 @@ export const Avatar = styled.img<IAvatar>`
 
     border-radius: 50%;
 
-    background-color: ${theme.colors.accentColor};
+    background-color: ${theme.colors.primaryAccentColor};
 
     object-fit: cover;
     cursor: pointer;
@@ -70,7 +70,7 @@ export const Icon = styled.img`
     padding: 5px;
     border-radius: 5px;
 
-    background-color: ${theme.colors.accentColor};
+    background-color: ${theme.colors.primaryAccentColor};
 
     cursor: pointer;
 

@@ -51,7 +51,7 @@ const profileReducer = (state: ProfilePageT = initialState, action: ActionsT): P
 				message: action.newPostText,
 				likesCount: 0
 			}
-			return { ...state, posts: [...state.posts, newPost] }
+			return { ...state, posts: [newPost, ...state.posts] }
 		}
 		case DELETE_POST:
 			return {

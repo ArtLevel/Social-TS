@@ -23,12 +23,12 @@ export const NavBar: FC<INavBar> = () => {
 }
 
 const Menu = styled.nav`
-    height: 100%;
-
     grid-area: nav;
 
-    background-color: burlywood;
+    background-color: ${theme.colors.primaryBgColor};
     padding: 20px;
+
+    border-radius: 5px;
 `
 
 const MenuItem = styled.li`
@@ -57,7 +57,7 @@ const MenuList = styled.ul`
         cursor: pointer;
 
         &:hover {
-            background-color: ${theme.colors.accentColor};
+            background-color: ${theme.colors.primaryAccentColor};
 
             ${MenuItem} {
                 color: ${theme.colors.fontColor};
@@ -66,6 +66,6 @@ const MenuList = styled.ul`
     }
 
     a.activeLink {
-        color: ${theme.colors.accentColor};
+        color: ${theme.colors.primaryAccentColor};
     }
 `

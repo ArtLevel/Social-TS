@@ -28,14 +28,14 @@ it('message of new post should be correct', () => {
 
 	const newState = profileReducer(state, action)
 
-	expect(newState.posts[3].message).toBe('Hi my best friend !')
+	expect(newState.posts[0].message).toBe('Hi my best friend !')
 })
 it('likesCount of new post should be correct', () => {
 	const action: AddPostAT = { type: ADD_POST, newPostText: 'Hi my best friend !' }
 
 	const newState = profileReducer(state, action)
 
-	expect(newState.posts[3].likesCount).toBe(0)
+	expect(newState.posts[0].likesCount).toBe(0)
 })
 it('after deleting length of posts should be decrement', () => {
 	const action: DeletePostAT = actions.deletePost(2)

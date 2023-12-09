@@ -71,6 +71,9 @@ const Header = styled.div`
 
     padding: 0 20px;
     background-color: ${theme.colors.primaryBgColor};
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 `
 
 const HeaderMenu = styled.div`
