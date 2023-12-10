@@ -7,7 +7,7 @@ import { ProfileData } from './ProfileData'
 import { ProfileDataFormValuesT, ProfileDataReduxForm } from './ProfileDataForm'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/reduxStore'
 import { savePhoto, saveProfile, updateUserStatus } from '../../../redux/reducers/profile/profileReducer'
-import { Avatar, Icon } from '../../styled/Helpers.styled'
+import { Avatar, BlockTitle, Icon } from '../../styled/Helpers.styled'
 import styled from 'styled-components'
 import { theme } from '../../../styles/Theme'
 import photo from '../../../assets/images/photo.svg'
@@ -219,22 +219,6 @@ const StyledSocialLinks = styled.div`
 
 const AboutMeWrapper = styled.div`
     height: 200px !important;
-`
-
-const BlockTitle = styled.div`
-    width: 100%;
-    height: 50px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: ${theme.colors.secondaryBgColor};
-
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    font-size: 18px;
 `
 
 const MyFriend = styled.div`

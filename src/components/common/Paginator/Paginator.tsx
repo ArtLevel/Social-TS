@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
-import s from './Paginator.module.css'
 import { useAppSelector } from '../../../redux/store/reduxStore'
+import styled, { css } from 'styled-components'
+import { Button } from '../../styled/Helpers.styled'
+import { theme } from '../../../styles/Theme'
 
 interface IPaginator {
 	portionSize?: number
@@ -27,9 +29,10 @@ export const Paginator: FC<IPaginator> = (props) => {
 	const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
 	const rightPortionPageNumber = portionNumber * portionSize
 
-	const pagesMapped = pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => <span
-		key={p} onClick={() => onPageChanged(p)}
-		className={currentPage === p ? s.selectedPage : ''}>{p}</span>)
+	const pagesMapped = pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+		.map(p => <PaginatorItem
+			key={p} onClick={() => onPageChanged(p)}
+			isActive={currentPage === p}>{p}</PaginatorItem>)
 
 	const incrementPortionNumberHandler = () => setPortionNumber(prevState => prevState + 1)
 	const decrementPortionNumberHandler = () => setPortionNumber(prevState => prevState - 1)
@@ -38,12 +41,52 @@ export const Paginator: FC<IPaginator> = (props) => {
 		setPortionNumber(Math.ceil(currentPage / portionSize))
 	}, [currentPage])
 
+	console.log(portionNumber)
+
 	return (
-		<div>
-			{portionNumber > 1 && <button onClick={decrementPortionNumberHandler}>back</button>}
+		<StyledPaginator>
+			{portionNumber > 1 && <Button onClick={decrementPortionNumberHandler}>back</Button>}
 			{pagesMapped}
 			{portionNumber < portionCount &&
-				<button onClick={incrementPortionNumberHandler}>next</button>}
-		</div>
+				<Button onClick={incrementPortionNumberHandler}>next</Button>}
+		</StyledPaginator>
 	)
 }
+
+
+const StyledPaginator = styled.div`
+    width: 100%;
+    max-height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 10px 0;
+`
+
+interface IPaginatorItem {
+	isActive: boolean
+}
+
+const PaginatorItem = styled.span<IPaginatorItem>`
+    min-height: 30px;
+    min-width: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+
+    border-radius: 5px;
+    border: 2px solid ${theme.colors.secondaryBgColor};
+    cursor: pointer;
+
+    ${props => props.isActive && css<IPaginatorItem>`
+        color: ${theme.colors.primaryAccentColor};
+        font-weight: bold;
+    `}
+`

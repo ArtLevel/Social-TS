@@ -8,10 +8,7 @@ interface IUsersPage {
 
 const UsersPage: FC<IUsersPage> = React.memo(({ pageTitle }) => {
 	return (
-		<>
-			<h2>{pageTitle}</h2>
-			<Users />
-		</>
+		<Users />
 	)
 })
 

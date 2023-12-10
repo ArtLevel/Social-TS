@@ -80,3 +80,26 @@ export const Icon = styled.img`
         background-color: ${theme.colors.fontColor};
     }
 `
+
+
+export const BlockTitle = styled.div`
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: ${theme.colors.secondaryBgColor};
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    font-size: 18px;
+
+    &:disabled {
+        &:hover {
+            background-color: red;
+        }
+    }
+`

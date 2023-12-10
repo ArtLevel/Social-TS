@@ -37,7 +37,7 @@ type ActionsT =
 
 const initialState: UsersPageT = {
 	users: [],
-	pageSize: 10,
+	pageSize: 18,
 	totalUsersCount: 0,
 	currentPage: 1,
 	isFetching: true,
@@ -103,7 +103,7 @@ export const requestUsers = (page: number, pageSize: number, filter: UsersSearch
 export const getMyFriends = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await usersAPI.getFriends()
-		
+
 		dispatch(actions.setUsers(data.items))
 	} catch (err) {
 		console.error(err)

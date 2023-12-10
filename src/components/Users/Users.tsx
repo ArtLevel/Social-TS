@@ -9,6 +9,9 @@ import { useHistory } from 'react-router-dom'
 import { Preloader } from '../common/Preloader/Preloader'
 import * as queryString from 'querystring'
 import preloaderGif from '../../assets/images/preloader.gif'
+import styled from 'styled-components'
+import { theme } from '../../styles/Theme'
+import { BlockTitle } from '../styled/Helpers.styled'
 
 interface IUsers {
 }
@@ -89,20 +92,77 @@ export const Users: FC<IUsers> = React.memo((props) => {
 		))
 
 		return (
-			<div>
-				{
-					isFetching
-						? <Preloader preloader={preloaderGif} />
-						: <>
-							<UsersSearchForm onFilterChanged={onFilterChanged} />
-							<Paginator
-								onPageChanged={onPageChanged} portionSize={10} />
-							<div>
-								{usersMapped}
-							</div>
-						</>
-				}
-			</div>
+			<StyledUsers>
+				<BlockTitle>
+					Admirals
+				</BlockTitle>
+				<StyledAdmiralsBlock>
+					<StyledSearchForm>
+						<UsersSearchForm onFilterChanged={onFilterChanged} />
+						{
+							usersMapped.length ? <Paginator
+									onPageChanged={onPageChanged} portionSize={10} />
+								: null
+						}
+					</StyledSearchForm>
+					<UsersBlock>
+						{
+							isFetching
+								? <Preloader preloader={preloaderGif} />
+								: usersMapped.length ? usersMapped :
+									<StyledNotFoundUsers>Sorry, but your search does not bring</StyledNotFoundUsers>
+						}
+					</UsersBlock>
+				</StyledAdmiralsBlock>
+			</StyledUsers>
 		)
 	}
 )
+
+const StyledNotFoundUsers = styled.div`
+    font-size: 25px;
+`
+
+const StyledSearchForm = styled.div`
+    margin: 20px 0;
+`
+
+const StyledAdmiralsBlock = styled.div`
+    min-width: 100%;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: ${theme.colors.primaryBgColor};
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+
+    margin-bottom: 50px;
+`
+
+const StyledUsers = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+`
+
+const UsersBlock = styled.div`
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin-bottom: 50px;
+`
