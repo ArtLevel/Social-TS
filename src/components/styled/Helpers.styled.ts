@@ -103,3 +103,19 @@ export const BlockTitle = styled.div`
         }
     }
 `
+
+export const Textarea = styled.textarea`
+    width: 300px;
+    height: 100px;
+
+    resize: none;
+
+    border-radius: 5px;
+
+    color: ${theme.colors.primaryBgColor};
+    outline: ${theme.colors.primaryAccentColor};
+
+    &:focus {
+        outline: 2px solid ${theme.colors.primaryAccentColor};
+    }
+`

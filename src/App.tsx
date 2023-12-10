@@ -19,6 +19,7 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
+
 interface IApp {
 
 }
@@ -70,7 +71,7 @@ const App: FC<IApp> = () => {
 					</Switch>
 				</Item>
 			</Grid>
-			
+
 		</Container>
 	)
 }

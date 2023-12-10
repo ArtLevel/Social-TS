@@ -36,8 +36,14 @@ const Form = styled.form`
 
         resize: none;
 
+        border-radius: 5px;
+
         color: ${theme.colors.primaryBgColor};
         outline: ${theme.colors.primaryAccentColor};
+
+        &:focus {
+            outline: 2px solid ${theme.colors.primaryAccentColor};
+        }
     }
 
     span {

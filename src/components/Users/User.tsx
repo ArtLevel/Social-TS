@@ -25,7 +25,7 @@ export const User: FC<IUser> = (props) => {
 	} = props
 
 	const UserButtons = followingInProgress.some(id => id === user.id)
-		? <Preloader preloader={preloaderGif} maxHeight='50px' maxWidth='50px' />
+		? <Preloader preloader={preloaderGif} maxHeightForPreloader='50px' maxWidthForPreloader='50px' />
 		: user.followed
 			? <Button onClick={() => unfollowHandler(user.id)}
 								disabled={followingInProgress.some(id => id === user.id)}
