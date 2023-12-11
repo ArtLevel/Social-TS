@@ -429,6 +429,9 @@ const MainImg = styled.img`
 `
 
 const AvatarOfProfile = styled.img`
+    max-width: 200px;
+    max-height: 200px;
+
     border: 5px solid ${theme.colors.primaryAccentColor};
     border-radius: 50%;
 

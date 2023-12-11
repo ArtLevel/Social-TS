@@ -43,7 +43,7 @@ export const AppHeader: FC<IHeader> = () => {
 					<Link to='/profile'>
 						<Logo src={logo} />
 					</Link>
-					<span>Samurai Network</span>
+					<span>Admirals Network</span>
 				</HeaderItem>
 
 				<HeaderItem>

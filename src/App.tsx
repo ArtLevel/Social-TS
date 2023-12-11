@@ -64,7 +64,7 @@ const App: FC<IApp> = () => {
 									 render={() => <SuspendDialogs />} />
 						<Route path='/profile/:userId?'
 									 render={() => <SuspendProfile />} />
-						<Route path='/users' render={() => <UsersPage pageTitle='Samuaii' />} />
+						<Route path='/users' render={() => <UsersPage pageTitle='Admirals' />} />
 						<Route path='/login' render={() => <Login />} />
 						<Route path='/chat' render={() => <SuspendChatPage />} />
 						<Route path='*' render={() => <div>Error 404 <button>Ok</button></div>} />
