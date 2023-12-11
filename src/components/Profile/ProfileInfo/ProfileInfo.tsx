@@ -176,7 +176,11 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 							<h2>My Social Link</h2>
 						</BlockTitle>
 						<StyledSocialLinks>
-							{socialLinks?.length || <span>You don't have social links</span>}
+							{
+								socialLinks?.length
+									? socialLinks
+									: <span>You don't have social links</span>
+							}
 						</StyledSocialLinks>
 					</div>
 
