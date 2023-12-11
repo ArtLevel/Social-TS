@@ -24,7 +24,6 @@ const Login: FC<ILogin> = () => {
 	const dispatch = useAppDispatch()
 
 	const onSubmit = (formData: LoginFormT) => {
-		console.log(formData)
 		dispatch(login(formData))
 	}
 
@@ -41,7 +40,6 @@ const Login: FC<ILogin> = () => {
 }
 const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = (props) => {
 	const { handleSubmit, error, captchaUrl } = props
-	console.log(111)
 
 	return <LoginFormBlockItem onSubmit={handleSubmit}>
 		{createField('Email', 'email', [required], Input)}
@@ -54,16 +52,15 @@ const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = (p
 		{captchaUrl && <img src={captchaUrl} />}
 
 		{captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
+
 		{
 			error && <div className={s.formSummaryError}>
 				{error}
 			</div>
 		}
-		<div>
-			<Button>
-				Login
-			</Button>
-		</div>
+		<Button>
+			Login
+		</Button>
 	</LoginFormBlockItem>
 }
 
@@ -92,7 +89,7 @@ const StyledLoginFormBlock = styled.div`
     width: 30%;
 `
 
-const LoginFormBlockItem = styled.div`
+const LoginFormBlockItem = styled.form`
     width: 100%;
 
     display: flex;

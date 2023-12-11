@@ -41,8 +41,6 @@ export const Paginator: FC<IPaginator> = (props) => {
 		setPortionNumber(Math.ceil(currentPage / portionSize))
 	}, [currentPage])
 
-	console.log(portionNumber)
-
 	return (
 		<StyledPaginator>
 			{portionNumber > 1 && <Button onClick={decrementPortionNumberHandler}>back</Button>}
