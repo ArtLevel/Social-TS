@@ -9,6 +9,7 @@ import { Avatar, BlockTitle, Button, Textarea } from '../../components/styled/He
 import { Link } from 'react-router-dom'
 import { Preloader } from '../../components/common/Preloader/Preloader'
 import preloaderGif from '../../assets/images/preloader.gif'
+import userPhoto from '../../assets/images/user.png'
 
 export type ChatMessageAPIType = {
 	message: string
@@ -86,7 +87,7 @@ interface IMessage {
 const Message: FC<IMessage> = React.memo(({ message }) => {
 	return <StyledMessage>
 		<Link to={`/profile/${message.userId}`}>
-			<Avatar src={message.photo} maxHeight='80px' maxWidth='80px' />
+			<Avatar src={message.photo || userPhoto} maxHeight='80px' maxWidth='80px' />
 		</Link>
 		<DescriptionOfUser>
 			<h2>{message.userName}</h2>
@@ -158,7 +159,7 @@ const StyledMessages = styled.div`
     height: 600px;
 
     display: flex;
-    
+
     flex-direction: column;
     gap: 25px;
 

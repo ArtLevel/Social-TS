@@ -2,9 +2,7 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { Preloader } from '../../common/Preloader/Preloader'
 import preloaderGif from '../../../assets/images/preloader.gif'
 import userPhoto from '../../../assets/images/user.png'
-import s from './ProfileInfo.module.css'
-import { ProfileData } from './ProfileData'
-import { ProfileDataFormValuesT, ProfileDataReduxForm } from './ProfileDataForm'
+import { ProfileDataFormValuesT } from './ProfileDataForm'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/reduxStore'
 import { savePhoto, saveProfile, updateUserStatus } from '../../../redux/reducers/profile/profileReducer'
 import { Avatar, BlockTitle, Icon } from '../../styled/Helpers.styled'
@@ -16,6 +14,7 @@ import { ProfileStatus } from './ProfileStatus'
 import { getMyFriends } from '../../../redux/reducers/users/usersReducer'
 import { useHistory } from 'react-router-dom'
 import { MyPosts } from '../MyPosts/MyPosts'
+import { ModalWindowBlock } from '../../common/ModalWindow/ModalWindow'
 
 interface IProfileInfo {
 	isOwner: boolean
@@ -44,6 +43,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 		if (e.currentTarget.files && e.currentTarget.files.length === 1) {
 			dispatch(savePhoto(e.currentTarget.files[0]))
 		}
+
 	}
 
 	const activateEditMode = () => {
@@ -75,7 +75,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 	return profile ? (
 		<div>
 			<Box>
-				<MainImg src={profile?.photos.large} />
+				<MainImg src={profile?.photos.large || userPhoto} />
 			</Box>
 			<DescriptionBlock>
 				<DescriptionBlockBox>
@@ -109,19 +109,14 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 
 					</Description>
 
-					<AvatarOfProfile src={profile?.photos.large || userPhoto} className={s.mainPhoto} />
+					<AvatarOfProfile src={profile?.photos.large || userPhoto} />
 				</DescriptionBlockBox>
 			</DescriptionBlock>
 			<GridBlock>
 				<Grid>
-					<div style={{ display: 'none' }}>
-						{
-							editMode
-								? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} />
-								: <ProfileData profile={profile} />
-						}
-					</div>
-
+					{
+						editMode && <ModalWindowBlock profile={profile} onSubmit={onSubmit} />
+					}
 					<AboutMeWrapper>
 						<BlockTitle>
 							<h2>About me</h2>
@@ -154,12 +149,14 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 						</BlockTitle>
 						<MyFriendsBlock>
 							{
-								maxFriends.map(friend =>
-									<MyFriend onClick={() => goToFriend(friend.id)}>
-										<Avatar src={friend.photos.large} maxHeight='60px' maxWidth='60px' />
-										<span>{friend.name.length > 7 ? friend.name.slice(0, 7) + '...' : friend.name}</span>
-									</MyFriend>
-								)
+								maxFriends.length
+									? maxFriends.map(friend =>
+										<MyFriend onClick={() => goToFriend(friend.id)}>
+											<Avatar src={friend.photos.large || userPhoto} maxHeight='60px' maxWidth='60px' />
+											<span>{friend.name.length > 7 ? friend.name.slice(0, 7) + '...' : friend.name}</span>
+										</MyFriend>
+									)
+									: <span>You don't have friends</span>
 							}
 						</MyFriendsBlock>
 					</div>
@@ -179,7 +176,7 @@ export const ProfileInfo: FC<IProfileInfo> = ({ isOwner }) => {
 							<h2>My Social Link</h2>
 						</BlockTitle>
 						<StyledSocialLinks>
-							{socialLinks}
+							{socialLinks?.length || <span>You don't have social links</span>}
 						</StyledSocialLinks>
 					</div>
 
@@ -246,6 +243,8 @@ const MyFriend = styled.div`
 
 const MyFriendsBlock = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
 
     padding: 20px;

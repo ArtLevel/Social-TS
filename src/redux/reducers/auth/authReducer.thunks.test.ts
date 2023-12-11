@@ -43,7 +43,11 @@ it('success getAuthUserData TC should be correct', async () => {
 		email: result.data.email,
 		userId: result.data.id,
 		isAuth: true,
-		captchaUrl: null
+		captchaUrl: null,
+		photos: {
+			small: null,
+			large: null
+		}
 	}))
 })
 it('success logout TC should be correct', async () => {
@@ -65,7 +69,11 @@ it('success logout TC should be correct', async () => {
 			email: null,
 			login: null,
 			isAuth: false,
-			captchaUrl: null
+			captchaUrl: null,
+			photos: {
+				small: null,
+				large: null
+			}
 		}
 	))
 })

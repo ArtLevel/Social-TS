@@ -2,8 +2,6 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/store/reduxStore'
 import { logout } from '../../redux/reducers/auth/authReducer'
-
-import logo from '../../assets/images/logo.jpeg'
 import styled from 'styled-components'
 import { Avatar, Button } from '../styled/Helpers.styled'
 import { theme } from '../../styles/Theme'
@@ -14,17 +12,19 @@ interface IHeader {
 
 export const AppHeader: FC<IHeader> = () => {
 	const { isAuth, login } = useAppSelector(state => state.auth)
-	const { profile } = useAppSelector(state => state.profilePage)
+	const { photos } = useAppSelector(state => state.auth)
 	const dispatch = useAppDispatch()
 
 	const logOutHandler = () => {
 		dispatch(logout())
 	}
 
+	const logo = isAuth && photos.large ? photos.large : ''
+
 	const content = isAuth
 		? <Box>
 			<Link to='/profile'>
-				<Avatar style={{ backgroundColor: '#87d068' }} src={isAuth && profile?.photos.large}
+				<Avatar style={{ backgroundColor: '#87d068' }} src={logo}
 								alt={login || ''} />
 			</Link>
 			<span>{login}</span>
@@ -69,7 +69,7 @@ const Header = styled.div`
     width: 100%;
     max-height: 150px;
 
-    padding: 0 20px;
+    padding: 10px;
     background-color: ${theme.colors.primaryBgColor};
 
     border-bottom-left-radius: 5px;

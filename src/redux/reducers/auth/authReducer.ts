@@ -7,7 +7,7 @@ import {
 	SetAuthUserDataAT
 } from '../../../types/types'
 import { AuthT } from '../../../types/AuthT'
-import { authAPI, securityAPI } from '../../../api/api'
+import { authAPI, profileAPI, securityAPI } from '../../../api/api'
 import { stopSubmit } from 'redux-form'
 import { AppThunkActionT } from '../../store/reduxStore'
 import { ResultCodes, ResultCodesForCaptcha } from '../../../types/API/APITypes'
@@ -21,7 +21,11 @@ const initialState: AuthT = {
 	email: null,
 	login: null,
 	isAuth: false,
-	captchaUrl: null // if null, then captcha isn't required
+	captchaUrl: null, // if null, then captcha isn't required
+	photos: {
+		large: null,
+		small: null
+	}
 }
 
 const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
@@ -45,10 +49,18 @@ const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
 export const getAuthUserData = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await authAPI.me()
+		const profile = await profileAPI.getUserProfile(data.data.id)
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
 			const { id, login, email } = data.data
-			dispatch(actions.setAuthUserData({ userId: id, login, email, isAuth: true, captchaUrl: null }))
+			dispatch(actions.setAuthUserData({
+				userId: id,
+				login,
+				email,
+				isAuth: true,
+				captchaUrl: null,
+				photos: profile.photos
+			}))
 		}
 	} catch (err) {
 		console.error(err)
@@ -78,7 +90,17 @@ export const logout = (): AppThunkActionT => async (dispatch) => {
 		const data = await authAPI.logout()
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
-			dispatch(actions.setAuthUserData({ userId: null, email: null, login: null, isAuth: false, captchaUrl: null }))
+			dispatch(actions.setAuthUserData({
+				userId: null,
+				email: null,
+				login: null,
+				isAuth: false,
+				captchaUrl: null,
+				photos: {
+					large: null,
+					small: null
+				}
+			}))
 		}
 	} catch (err) {
 		console.error(err)

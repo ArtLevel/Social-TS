@@ -4,4 +4,8 @@ export type AuthT = {
 	login: string | null
 	isAuth: boolean
 	captchaUrl: string | null
+	photos: {
+		large: string | null
+		small: string | null
+	}
 }

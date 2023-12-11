@@ -11,14 +11,23 @@ beforeEach(() => {
 		email: null,
 		login: null,
 		isAuth: false,
-		captchaUrl: null
+		captchaUrl: null,
+		photos: {
+			small: null,
+			large: null
+		}
 	}
 })
 
 it('userId should be correct', () => {
 	const action: SetAuthUserDataAT = {
 		type: SET_USER_DATA,
-		payload: { userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '' }
+		payload: {
+			userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '', photos: {
+				small: null,
+				large: null
+			}
+		}
 	}
 	const newState = authReducer(state, action)
 
@@ -27,7 +36,12 @@ it('userId should be correct', () => {
 it('email should be correct', () => {
 	const action: SetAuthUserDataAT = {
 		type: SET_USER_DATA,
-		payload: { userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '' }
+		payload: {
+			userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '', photos: {
+				small: null,
+				large: null
+			}
+		}
 	}
 	const newState = authReducer(state, action)
 
@@ -36,7 +50,12 @@ it('email should be correct', () => {
 it('isAuth should be correct', () => {
 	const action: SetAuthUserDataAT = {
 		type: SET_USER_DATA,
-		payload: { userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '' }
+		payload: {
+			userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '', photos: {
+				small: null,
+				large: null
+			}
+		}
 	}
 	const newState = authReducer(state, action)
 
@@ -45,7 +64,12 @@ it('isAuth should be correct', () => {
 it('login should be correct', () => {
 	const action: SetAuthUserDataAT = {
 		type: SET_USER_DATA,
-		payload: { userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '' }
+		payload: {
+			userId: 20, email: 'alena@gmail.com', isAuth: true, login: 'Alena', captchaUrl: '', photos: {
+				small: null,
+				large: null
+			}
+		}
 	}
 	const newState = authReducer(state, action)
 

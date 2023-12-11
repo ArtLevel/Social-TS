@@ -13,10 +13,10 @@ export const NavBar: FC<INavBar> = () => {
 				<NavLink to='/profile' activeClassName='activeLink'><MenuItem>Profile</MenuItem></NavLink>
 				<NavLink to='/users' activeClassName='activeLink'><MenuItem>Users</MenuItem></NavLink>
 				<NavLink to='/chat' activeClassName='activeLink'><MenuItem>Chat</MenuItem></NavLink>
-				<NavLink to='/dialogs' activeClassName='activeLink'><MenuItem>Dialogs</MenuItem></NavLink>
-				<NavLink to='/news' activeClassName='activeLink'><MenuItem>News</MenuItem></NavLink>
-				<NavLink to='/music' activeClassName='activeLink'><MenuItem>Music</MenuItem></NavLink>
-				<NavLink to='/friends' activeClassName='activeLink'><MenuItem>Friends</MenuItem></NavLink>
+				{/*<NavLink to='/friends' activeClassName='activeLink'><MenuItem>Friends</MenuItem></NavLink>*/}
+				{/*<NavLink to='/dialogs' activeClassName='activeLink'><MenuItem>Dialogs</MenuItem></NavLink>*/}
+				{/*<NavLink to='/news' activeClassName='activeLink'><MenuItem>News</MenuItem></NavLink>*/}
+				{/*<NavLink to='/music' activeClassName='activeLink'><MenuItem>Music</MenuItem></NavLink>*/}
 			</MenuList>
 		</Menu>
 	)

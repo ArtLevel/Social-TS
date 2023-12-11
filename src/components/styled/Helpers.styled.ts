@@ -112,8 +112,9 @@ export const Textarea = styled.textarea`
 
     border-radius: 5px;
 
+    border: none;
     color: ${theme.colors.primaryBgColor};
-    outline: ${theme.colors.primaryAccentColor};
+    outline: 2px solid ${theme.colors.secondaryBgColor};
 
     &:focus {
         outline: 2px solid ${theme.colors.primaryAccentColor};
