@@ -38,9 +38,9 @@ export const Input: FC<IForm> = ({ input, ...props }) => {
 export const createField = (placeholder: string | undefined, name: string, validators: Function[], component: FC<IForm>, props?: {
 	type?: string
 }, text?: string, styles?: any) =>
-	<div>
+	<>
 		<Field
 			placeholder={placeholder} component={component}
 			name={name} validate={validators} {...props} style={styles} />
 		{text}
-	</div>
+	</>

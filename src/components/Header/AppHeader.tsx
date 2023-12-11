@@ -5,9 +5,11 @@ import { logout } from '../../redux/reducers/auth/authReducer'
 import styled from 'styled-components'
 import { Avatar, Button } from '../styled/Helpers.styled'
 import { theme } from '../../styles/Theme'
+import logo from '../../assets/images/logo.jpeg'
+import user from '../../assets/images/user.png'
 
 interface IHeader {
-
+	
 }
 
 export const AppHeader: FC<IHeader> = () => {
@@ -19,12 +21,12 @@ export const AppHeader: FC<IHeader> = () => {
 		dispatch(logout())
 	}
 
-	const logo = isAuth && photos.large ? photos.large : ''
+	const avatar = isAuth && photos.large ? photos.large : user
 
 	const content = isAuth
 		? <Box>
 			<Link to='/profile'>
-				<Avatar style={{ backgroundColor: '#87d068' }} src={logo}
+				<Avatar style={{ backgroundColor: '#87d068' }} src={avatar}
 								alt={login || ''} />
 			</Link>
 			<span>{login}</span>

@@ -22,6 +22,7 @@ const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
 interface IApp {
 
+
 }
 
 const SuspendDialogs = WithSuspense(DialogsContainer)
@@ -46,7 +47,9 @@ const App: FC<IApp> = () => {
 
 	const dispatch = useAppDispatch()
 
-	if (!initialized) return <Preloader preloader={preloaderGif} />
+	if (!initialized) return <PreloaderBlock>
+		<Preloader preloader={preloaderGif} />
+	</PreloaderBlock>
 
 	return (
 		<Container>
@@ -83,6 +86,15 @@ const MainApp = () => {
 		</Provider>
 	</HashRouter>
 }
+
+const PreloaderBlock = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const Grid = styled.div`
     display: grid;

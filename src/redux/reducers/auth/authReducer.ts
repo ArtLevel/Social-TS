@@ -49,9 +49,10 @@ const authReducer = (state: AuthT = initialState, action: ActionsT): AuthT => {
 export const getAuthUserData = (): AppThunkActionT => async (dispatch) => {
 	try {
 		const data = await authAPI.me()
-		const profile = await profileAPI.getUserProfile(data.data.id)
 
 		if (data.resultCode === ResultCodes.SUCCESS) {
+			const profile = await profileAPI.getUserProfile(data.data.id)
+			
 			const { id, login, email } = data.data
 			dispatch(actions.setAuthUserData({
 				userId: id,
