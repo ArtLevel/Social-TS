@@ -22,7 +22,6 @@ const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
 interface IApp {
 
-
 }
 
 const SuspendDialogs = WithSuspense(DialogsContainer)
@@ -31,6 +30,7 @@ const SuspendChatPage = WithSuspense(ChatPage)
 
 const App: FC<IApp> = () => {
 	const { initialized } = useAppSelector(state => state.app)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		dispatch(initializeApp())
@@ -39,13 +39,12 @@ const App: FC<IApp> = () => {
 		return () => {
 			window.removeEventListener('unhandledrejection', catchAllUnhandledErrors)
 		}
-	}, [])
+	}, [dispatch])
+
 
 	const catchAllUnhandledErrors = (someError: PromiseRejectionEvent) => {
 		alert('some error' + someError)
 	}
-
-	const dispatch = useAppDispatch()
 
 	if (!initialized) return <PreloaderBlock>
 		<Preloader preloader={preloaderGif} />
@@ -101,7 +100,7 @@ const Grid = styled.div`
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 1fr;
     grid-column-gap: 50px;
-    grid-row-gap: 0px;
+    grid-row-gap: 0;
 
     margin: 30px 0 0 0;
 `

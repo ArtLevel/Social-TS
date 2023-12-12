@@ -24,6 +24,7 @@ export const SET_FILTER_OF_USERS_SEARCH_FORM = 'samurai_network/users/SET_FILTER
 export const MESSAGES_RECEIVED = 'samurai_network/chat/MESSAGES_RECEIVED'
 export const STATUS_CHANGED_OF_CHAT = 'samurai_network/chat/STATUS_CHANGED_OF_CHAT'
 export const STOP_MESSAGES_LISTENING_OF_CHAT = 'samurai_network/chat/STOP_MESSAGES_LISTENING_OF_CHAT'
+export const SET_APP_ERROR = 'samurai_network/app/SET_APP_ERROR'
 
 export const actions = {
 	followSuccess: (userId: number) => ({ type: FOLLOW, userId } as const),
@@ -80,5 +81,9 @@ export const actions = {
 	} as const),
 	stopMessagesListeningOfChat: () => ({
 		type: STOP_MESSAGES_LISTENING_OF_CHAT
+	} as const),
+	setAppError: (error: string | null) => ({
+		type: SET_APP_ERROR,
+		payload: { error }
 	} as const)
 }

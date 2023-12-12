@@ -1,11 +1,19 @@
-import { actions, AppPageT, InitializedSuccessAT, INIZIALIZED_SUCCESS } from '../../../types/types'
+import {
+	actions,
+	AppPageT,
+	InitializedSuccessAT,
+	INIZIALIZED_SUCCESS,
+	SET_APP_ERROR,
+	SetAppErrorAT
+} from '../../../types/types'
 import { getAuthUserData } from '../auth/authReducer'
 import { AppThunkActionT } from '../../store/reduxStore'
 
-type ActionsT = InitializedSuccessAT
+type ActionsT = InitializedSuccessAT | SetAppErrorAT
 
 const initialState: AppPageT = {
-	initialized: false
+	initialized: false,
+	error: null
 }
 
 const appReducer = (state: AppPageT = initialState, action: ActionsT): AppPageT => {
@@ -14,6 +22,11 @@ const appReducer = (state: AppPageT = initialState, action: ActionsT): AppPageT 
 			return {
 				...state,
 				initialized: true
+			}
+		case SET_APP_ERROR:
+			return {
+				...state,
+				error: action.payload.error
 			}
 		default:
 			return state

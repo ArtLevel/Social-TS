@@ -26,3 +26,4 @@ export type GetCaptchaUrlSuccessAT = ReturnType<typeof actions.getCaptchaUrlSucc
 export type MessagesReceivedAT = ReturnType<typeof actions.messagesReceived>
 export type SetStatusOfChatAT = ReturnType<typeof actions.setStatusOfChat>
 export type StopMessagesListeningOfChatAT = ReturnType<typeof actions.stopMessagesListeningOfChat>
+export type SetAppErrorAT = ReturnType<typeof actions.setAppError>

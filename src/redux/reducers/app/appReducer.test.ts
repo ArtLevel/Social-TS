@@ -7,7 +7,8 @@ let state: AppPageT
 
 beforeEach(() => {
 	state = {
-		initialized: false
+		initialized: false,
+		error: ''
 	}
 })
 
