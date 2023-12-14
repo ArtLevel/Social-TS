@@ -11,16 +11,14 @@ import styled from 'styled-components'
 import { BlockTitle, Button } from '../styled/Helpers.styled'
 import { theme } from '../../styles/Theme'
 
-interface ILogin {
-
-}
+interface ILogin {}
 
 interface ILoginForm {
 	captchaUrl: string | null
 }
 
 const Login: FC<ILogin> = () => {
-	const { isAuth, captchaUrl } = useAppSelector(state => state.auth)
+	const { isAuth, captchaUrl } = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
 
 	const onSubmit = (formData: LoginFormT) => {
@@ -29,39 +27,47 @@ const Login: FC<ILogin> = () => {
 
 	if (isAuth) return <Redirect to='/profile' />
 
-	return <StyledLoginForm>
-		<StyledLoginFormBlock>
-			<BlockTitle>
-				Login
-			</BlockTitle>
-			<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
-		</StyledLoginFormBlock>
-	</StyledLoginForm>
+	return (
+		<StyledLoginForm>
+			<StyledLoginFormBlock>
+				<BlockTitle>Login</BlockTitle>
+				<LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+			</StyledLoginFormBlock>
+		</StyledLoginForm>
+	)
 }
-const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = (props) => {
+const LoginForm: FC<InjectedFormProps<LoginFormT, ILoginForm> & ILoginForm> = (
+	props
+) => {
 	const { handleSubmit, error, captchaUrl } = props
 
-	return <LoginFormBlockItem onSubmit={handleSubmit}>
-		{createField('Email', 'email', [required], Input)}
-		{createField('Password', 'password', [required], Input, { type: 'password' })}
+	return (
+		<LoginFormBlockItem onSubmit={handleSubmit}>
+			{createField('Email', 'email', [required], Input)}
+			{createField('Password', 'password', [required], Input, {
+				type: 'password'
+			})}
 
-		<RememberMe>
-			{createField('Password', 'rememberMe', [], Input, { type: 'checkbox' }, 'Remember me')}
-		</RememberMe>
+			<RememberMe>
+				{createField(
+					'Password',
+					'rememberMe',
+					[],
+					Input,
+					{ type: 'checkbox' },
+					'Remember me'
+				)}
+			</RememberMe>
 
-		{captchaUrl && <img src={captchaUrl} />}
+			{captchaUrl && <img src={captchaUrl} />}
 
-		{captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
+			{captchaUrl &&
+				createField('Symbols from image', 'captcha', [required], Input)}
 
-		{
-			error && <div className={s.formSummaryError}>
-				{error}
-			</div>
-		}
-		<Button>
-			Login
-		</Button>
-	</LoginFormBlockItem>
+			{error && <div className={s.formSummaryError}>{error}</div>}
+			<Button>Login</Button>
+		</LoginFormBlockItem>
+	)
 }
 
 const LoginReduxForm = reduxForm<LoginFormT, ILoginForm>({
@@ -71,37 +77,39 @@ const LoginReduxForm = reduxForm<LoginFormT, ILoginForm>({
 export default Login
 
 const RememberMe = styled.div`
-    display: flex;
+	display: flex;
 
-    gap: 15px;
+	gap: 15px;
 `
 
 const StyledLoginForm = styled.div`
-    width: 100%;
+	width: 100%;
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+
+	color: ${theme.colors.fontColor};
 `
 
 const StyledLoginFormBlock = styled.div`
-    width: 30%;
+	width: 30%;
 `
 
 const LoginFormBlockItem = styled.form`
-    width: 100%;
+	width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-    gap: 15px;
-    padding: 15px 0;
+	gap: 15px;
+	padding: 15px 0;
 
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 
-    background-color: ${theme.colors.primaryBgColor};
+	background-color: ${theme.colors.primaryBgColor};
 `

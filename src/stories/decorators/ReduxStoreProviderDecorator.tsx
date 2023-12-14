@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { AppRootStateT } from '../../redux/store/reduxStore'
 import profileReducer from '../../redux/reducers/profile/profileReducer'
 import dialogsReducer from '../../redux/reducers/dialogs/dialogsReducer'
@@ -16,6 +16,7 @@ import { AuthT } from '../../types/AuthT'
 import { SidebarPageT } from '../../types/Pages/Sidebar/SidebarPageT'
 import { DialogsPageT } from '../../types/Pages/Dialogs/DialogsPageT'
 import { ProfilePageT } from '../../types/Pages/Profile/ProfilePageT'
+import thunkMiddleware from 'redux-thunk'
 
 const rootReducer = combineReducers({
 	profilePage: profileReducer,
@@ -130,7 +131,8 @@ const initialGlobalState = {
 
 export const storyBookStore = createStore(
 	rootReducer,
-	initialGlobalState as AppRootStateT
+	initialGlobalState as AppRootStateT,
+	applyMiddleware(thunkMiddleware)
 )
 
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
