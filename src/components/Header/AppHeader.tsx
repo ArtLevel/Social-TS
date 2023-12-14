@@ -8,13 +8,11 @@ import { theme } from '../../styles/Theme'
 import logo from '../../assets/images/logo.jpeg'
 import user from '../../assets/images/user.png'
 
-interface IHeader {
-	
-}
+interface IHeader {}
 
 export const AppHeader: FC<IHeader> = () => {
-	const { isAuth, login } = useAppSelector(state => state.auth)
-	const { photos } = useAppSelector(state => state.auth)
+	const { isAuth, login } = useAppSelector((state) => state.auth)
+	const { photos } = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
 
 	const logOutHandler = () => {
@@ -23,24 +21,27 @@ export const AppHeader: FC<IHeader> = () => {
 
 	const avatar = isAuth && photos.large ? photos.large : user
 
-	const content = isAuth
-		? <Box>
+	const content = isAuth ? (
+		<Box>
 			<Link to='/profile'>
-				<Avatar style={{ backgroundColor: '#87d068' }} src={avatar}
-								alt={login || ''} />
+				<Avatar
+					style={{ backgroundColor: '#87d068' }}
+					src={avatar}
+					alt={login || ''}
+				/>
 			</Link>
 			<span>{login}</span>
 			<Button onClick={logOutHandler}>Log out</Button>
 		</Box>
-		:
+	) : (
 		<Link to='/login'>
 			<Button>Login</Button>
 		</Link>
+	)
 
 	return (
 		<Header>
 			<HeaderMenu>
-
 				<HeaderItem>
 					<Link to='/profile'>
 						<Logo src={logo} />
@@ -48,59 +49,60 @@ export const AppHeader: FC<IHeader> = () => {
 					<span>Admirals Network</span>
 				</HeaderItem>
 
-				<HeaderItem>
-					{content}
-				</HeaderItem>
-
+				<HeaderItem>{content}</HeaderItem>
 			</HeaderMenu>
 		</Header>
 	)
 }
 
 const Box = styled.div`
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    gap: 20px;
+	gap: 20px;
 `
 
 const Header = styled.div`
-    width: 100%;
-    max-height: 150px;
+	width: 100%;
+	max-height: 150px;
 
-    padding: 10px;
-    background-color: ${theme.colors.primaryBgColor};
+	padding: 10px;
+	background-color: ${theme.colors.primaryBgColor};
 
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 `
 
 const HeaderMenu = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 `
 
 const HeaderItem = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    gap: 20px;
+	gap: 20px;
+
+	span {
+		color: ${theme.colors.fontColor};
+	}
 `
 
 const Logo = styled.img`
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 
-    max-width: 50px;
-    max-height: 50px;
+	max-width: 50px;
+	max-height: 50px;
 
-    border-radius: 10px;
+	border-radius: 10px;
 
-    object-fit: cover;
-    cursor: pointer;
+	object-fit: cover;
+	cursor: pointer;
 `
